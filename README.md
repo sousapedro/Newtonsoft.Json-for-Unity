@@ -1,6 +1,8 @@
 # ![Logo](Doc/icons/logo-with-unity.png) Newtonsoft.Json for Unity
 
-![npm](https://img.shields.io/npm/v/jillejr.newtonsoft.json-for-unity.svg?style=flat-square)
+[![Latest Version @ Cloudsmith](https://api-prd.cloudsmith.io/badges/version/jillejr/newtonsoft-json-for-unity/npm/jillejr.newtonsoft.json-for-unity/latest/x/?render=true&badge_token=gAAAAABd0U7AyWhLGu6xjEAHz70w9zWbSk6ogsTrw3xvVpa2NXe7HJg_ua7r-G2cbWECxfM51y4uYgOdFOquHNoTQti080JM6w%3D%3D)](https://cloudsmith.io/~jillejr/repos/newtonsoft-json-for-unity/packages/detail/npm/jillejr.newtonsoft.json-for-unity/latest/)
+[![CircleCI](https://img.shields.io/circleci/build/gh/jilleJr/Newtonsoft.Json-for-Unity/master?logo=circleci&style=flat-square)](https://circleci.com/gh/jilleJr/Newtonsoft.Json-for-Unity)
+[![Codacy grade](https://img.shields.io/codacy/grade/f91156e7066c484588f4dba263c8cf45?logo=codacy&style=flat-square)](https://www.codacy.com/manual/jilleJr/Newtonsoft.Json-for-Unity?utm_source=github.com&utm_medium=referral&utm_content=jilleJr/Newtonsoft.Json-for-Unity&utm_campaign=Badge_Grade)
 
 Json.NET is a popular high-performance JSON framework for .NET
 
@@ -14,7 +16,13 @@ Available for installation with
 - ~~Unity Asset packages~~ _(coming soon)_
 - ~~Unity Asset Store~~ _(coming soon)_
 
-[newtonsoft.json.git]: https://github.com/JamesNK/Newtonsoft.Json
+## Versioning format
+
+_Staying with JamesNK's version syntax, but with a twist :dizzy:_
+
+To allow deployment of patches of the package itself, and keep confusion to a low, I'm only appending a double digit for versioning of this repository. Deployment of Newtonsoft.Json version `12.0.1` will be deployed with the UPM version `12.0.100`, `12.0.101`, `12.0.102` etc. It's still `12.0.1` version of the assembly, but some other stuff around the package will have changed. See the [releases](https://github.com/jilleJr/Newtonsoft.Json-for-Unity/releases) tab for version-specific changelogs.
+
+![explanation of version](Doc/version-explanation.png)
 
 ## Installation via UPM
 
@@ -29,12 +37,12 @@ Open `<project>/Packages/manifest.json`, add scope for `jillejr`, then add the p
   "scopedRegistries": [
     {
       "name": "Packages from jillejr",
-      "url": "https://registry.npmjs.org/",
+      "url": "https://npm.cloudsmith.io/jillejr/newtonsoft-json-for-unity/",
       "scopes": ["jillejr"]
     }
   ],
   "dependencies": {
-    "jillejr.newtonsoft.json-for-unity": "12.0.1-patch-001",
+    "jillejr.newtonsoft.json-for-unity": "12.0.101",
 
     "com.unity.modules.ai": "1.0.0",
     "com.unity.modules.animation": "1.0.0",
@@ -70,7 +78,7 @@ Change the version field. You have to know the new version beforehand.
 > ```json
 > {
 >   "dependencies": {
->     "jillejr.newtonsoft.json-for-unity": "12.0.1"
+>     "jillejr.newtonsoft.json-for-unity": "12.0.100"
 >   }
 > }
 > ```
@@ -80,7 +88,7 @@ Change the version field. You have to know the new version beforehand.
 > ```json
 > {
 >   "dependencies": {
->     "jillejr.newtonsoft.json-for-unity": "12.0.1-patch-001"
+>     "jillejr.newtonsoft.json-for-unity": "12.0.101"
 >   }
 > }
 > ```
@@ -140,3 +148,4 @@ Copyright (c) 2019 Kalle Jillheden (jilleJr)
 See full copyrights in [LICENSE.md][license.md] inside repository
 
 [license.md]: https://github.com/jilleJr/Newtonsoft.Json-for-Unity/blob/master/LICENSE.md
+[newtonsoft.json.git]: https://github.com/JamesNK/Newtonsoft.Json
