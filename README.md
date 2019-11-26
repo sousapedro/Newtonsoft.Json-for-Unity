@@ -11,8 +11,9 @@ Available for installation with
 - **Unity Package Manager (UPM)** `new!`
 - ~~Unity Asset packages~~ _(coming soon)_
 - ~~Unity Asset Store~~ _(coming soon)_
+- ~~NuGet package~~ _(coming soon)_
 
-This repo is a **fork** of [Newtonsoft.Json][newtonsoft.json.git] containing custom builds
+This repo is a **fork** of [JamesNK/Newtonsoft.Json][newtonsoft.json.git] containing custom builds
 for regular standalone, but more importantly AOT targets such as all **IL2CPP builds**
 **(WebGL, iOS, Android, Windows, Mac OS X)** and portable .NET **(UWP, WP8)**.
 
