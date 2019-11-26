@@ -5,25 +5,31 @@ using NUnit.Framework;
 
 namespace Aot.Tests
 {
+    /// <summary>
+    /// Tests are only relevant for AOT builds, such as when using IL2CPP
+    /// </summary>
     [TestFixture]
     public class AotTests
     {
-#if ENABLE_IL2CPP
         static AotTests()
         {
-            var myAotEnsuredList = new List<MyAotEnsuredClass>();
+            // Ensure it's generated
+            _ = new List<MyAotEnsuredClass>();
         }
 
-        class MyNonAotClass
+        private class MyAotEnsuredClass
         {
-#pragma warning disable 649
-            public string a;
-        }
-
-        class MyAotEnsuredClass
-        {
+#pragma warning disable 649 // Field is never assigned to, and will always have its default value `null'
             public string b;
-#pragma warning restore 649
+#pragma warning restore 649 // Field is never assigned to, and will always have its default value `null'
+        }
+
+#if ENABLE_IL2CPP
+        private class MyNonAotClass
+        {
+#pragma warning disable 649 // Field is never assigned to, and will always have its default value `null'
+            public string a;
+#pragma warning restore 649 // Field is never assigned to, and will always have its default value `null'
         }
 
         [Test]
@@ -31,20 +37,20 @@ namespace Aot.Tests
         {
             var ex = Assert.Throws<TargetInvocationException>(delegate
             {
-                IList<MyNonAotClass> l = CreateListOfType<MyNonAotClass>();
+                _ = CreateListOfType<MyNonAotClass>();
             });
 
             Assert.IsInstanceOf<TypeInitializationException>(ex.InnerException);
         }
+#endif
 
         [Test]
         public void PassesOnAOTGenerated()
         {
-            IList<MyNonAotClass> l = CreateListOfType<MyNonAotClass>();
+            _ = CreateListOfType<MyAotEnsuredClass>();
 
             Assert.Pass();
         }
-#endif
 
         static object CreateListOfType(Type type)
         {

@@ -1,0 +1,462 @@
+version: 2.1
+
+preset-filter-test: &WORKFLOW_BUILD_TEST_FILTER
+  only:
+    - develop
+    - /^feature.*/
+    - /^hotfix.*/
+    - /^release.*/
+
+preset-filter-deploy: &WORKFLOW_BUILD_TEST_DEPLOY_FILTER
+  only:
+    - master
+
+preset-filter-check: &WORKFLOW_CHECK_DEPLOY_READY_FILTER
+  only:
+    - /^hotfix.*/
+    - /^release.*/
+
+orbs:
+  win: circleci/windows@1.0.0
+
+jobs:
+  build-package:
+    working_directory: ~/repo
+    
+    environment:
+      SCRIPTS: /root/repo/ci/scripts
+      BUILD_SOLUTION: /root/repo/Src/Newtonsoft.Json/Newtonsoft.Json.csproj
+      BUILD_DESTINATION_BASE: /root/repo/Src/Newtonsoft.Json-for-Unity/Plugins
+
+    docker:
+      - image: applejag/newtonsoft.json-for-unity.package-builder:v1
+
+    steps:
+      # Checkout repo -> ~/repo
+      - checkout
+
+      - restore_cache:
+          keys:
+            - build-package-nuget
+
+      - run:
+          name: Enable permissions on scripts
+          command: chmod +x $SCRIPTS/**.sh -v
+
+      - run:
+          name: Setup variables
+          command: |
+            env() {
+              echo "export '$1=$2'" >> $BASH_ENV
+              echo "$1='$2'"
+              export "$1=$2"
+            }
+            echo ">>> OBTAINING VERSION FROM $(pwd)/ci/version.json"
+            env VERSION "$($SCRIPTS/get_json_version.sh ./ci/version.json FULL)"
+            env VERSION_SUFFIX "$($SCRIPTS/get_json_version.sh ./ci/version.json SUFFIX)"
+            env VERSION_JSON_NET "$($SCRIPTS/get_json_version.sh ./ci/version.json JSON_NET)"
+            echo
+
+            echo ">>> UPDATING VERSION IN $(pwd)/Src/Newtonsoft.Json-for-Unity/package.json"
+            echo "BEFORE:"
+            echo ".version=$(jq ".version" Src/Newtonsoft.Json-for-Unity/package.json)"
+            echo ".displayName=$(jq ".displayName" Src/Newtonsoft.Json-for-Unity/package.json)"
+            echo "$(jq ".version=\"$VERSION\" | .displayName=\"Json.NET $VERSION_JSON_NET for Unity\"" Src/Newtonsoft.Json-for-Unity/package.json)" > Src/Newtonsoft.Json-for-Unity/package.json
+            echo "AFTER:"
+            echo ".version=$(jq ".version" Src/Newtonsoft.Json-for-Unity/package.json)"
+            echo ".displayName=$(jq ".displayName" Src/Newtonsoft.Json-for-Unity/package.json)"
+
+      - run:
+          name: NuGet restore
+          command: msbuild -t:restore "$BUILD_SOLUTION"
+
+      - save_cache:
+          key: build-package-nuget
+          paths:
+            - /root/.nuget/packages
+
+      - run:
+          name: Build Editor
+          command: $SCRIPTS/build.sh Editor
+
+      - run:
+          name: Build AOT
+          command: $SCRIPTS/build.sh AOT
+
+      - run:
+          name: Build Portable
+          command: $SCRIPTS/build.sh Portable
+
+      - run:
+          name: Build Testing library
+          command: BUILD_CONFIGURATION=Debug BUILD_DESTINATION=/workspace/testlib $SCRIPTS/build.sh Editor "$BUILD_SOLUTION"
+
+      - run:
+          name: Move resulting package into workspace
+          command: |
+            mkdir -pv /workspace/package
+            cp -rv Src/Newtonsoft.Json-for-Unity/. /workspace/package/
+
+      - run:
+          name: Fix meta files
+          command: |
+            $SCRIPTS/generate_metafiles.sh /workspace/package
+            echo
+            $SCRIPTS/generate_metafiles.sh /workspace/testlib
+
+      - persist_to_workspace:
+          root: /workspace
+          paths:
+            - testlib
+            - package
+
+  test-windows:
+    executor: win/vs2019
+
+    steps:
+      - run:
+          name: Dotnet installs
+          command: dotnet --info
+
+      - checkout
+
+      - restore_cache:
+          keys:
+            - test-windows-nuget
+
+      - run:
+          name: Install tools -> Temp/profile.ps1
+          command: ci/scripts/install_tools.ps1
+
+      - run:
+          name: NuGet restore
+          command: |
+            .'Temp/profile.ps1'
+            &$nuget restore Src/Newtonsoft.Json.Tests/Newtonsoft.Json.Tests.csproj
+
+      - run:
+          name: Run Build step
+          command: |
+            .'Temp/profile.ps1'
+            &$msbuild -t:build -restore -p:Configuration=Debug Src/Newtonsoft.Json.Tests/Newtonsoft.Json.Tests.csproj
+
+      - run:
+          name: Run tests (profile 1)
+          command: |
+            .'Temp/profile.ps1'
+            New-Item Tests/NUnit -ItemType Directory -ErrorAction SilentlyContinue
+            &$nunit3console Src/Newtonsoft.Json.Tests/bin/Debug/net46/Newtonsoft.Json.Tests.dll --framework=net-4.0 --result=Tests/NUnit/net46.xml
+
+      - run:
+          name: Run tests (profile 2, portable)
+          command: |
+            .'Temp/profile.ps1'
+            &$nunit3console Src/Newtonsoft.Json.Tests/bin/Debug/net452/Newtonsoft.Json.Tests.dll --framework=net-4.0 --result=Tests/NUnit/net452.xml
+
+      - run:
+          name: Convert NUnit to JUnit xml
+          when: always
+          command: ci/scripts/nunit2junit.ps1 Tests/NUnit/ Tests/JUnit/
+          
+      - store_test_results:
+          name: Store test results -> ~/Tests/JUnit
+          path: Tests/JUnit
+
+      - save_cache:
+          key: test-windows-nuget
+          paths:
+            - C:\Users\circleci\.nuget\packages
+
+  test-unity:
+    working_directory: ~/repo
+    
+    environment:
+      SCRIPTS: /root/repo/ci/scripts
+      PACKAGE_FOLDER: /root/repo/Src/Newtonsoft.Json-for-Unity
+      TEST_PROJECT: /root/repo/Src/Newtonsoft.Json-for-Unity.Tests
+      PLATFORMS: playmode
+
+    docker:
+      - image: applejag/newtonsoft.json-for-unity.package-unity-tester:v1
+
+    steps:
+      # Checkout repo -> ~/repo
+      - checkout
+
+      - restore_cache:
+          keys:
+            - test-unity-upm-manifest-{{ checksum "/root/repo/Src/Newtonsoft.Json-for-Unity.Tests/Packages/manifest.json" }}
+
+      - restore_cache:
+          keys:
+            - test-unity-upm-global
+
+      - run:
+          name: Enable permissions on scripts
+          command: chmod +x $SCRIPTS/**.sh -v
+
+      - run:
+          name: Setup Unity license
+          command: |
+            # Requires UNITY_LICENSE_CONTENT_B64 environment variable to be filled in inside CircleCI
+            $SCRIPTS/unity_login.sh
+
+      - attach_workspace:
+          at: /workspace
+
+      - run:
+          name: Copy Newtonsoft.Json.Tests into Unity testing project
+          command: |
+            rm -rfv Src/Newtonsoft.Json.Tests/obj
+            rm -rfv Src/Newtonsoft.Json.Tests/bin
+            cp -vur Src/Newtonsoft.Json.Tests/. $TEST_PROJECT/Assets/Newtonsoft.Json.Tests/
+
+      - run:
+          name: Copy Plugins into Unity testing project
+          command: cp -vfr /workspace/package/. $PACKAGE_FOLDER/
+
+      - run:
+          name: Overriding Editor dll's with testing dll's
+          command: cp -vfr /workspace/testlib/. "$PACKAGE_FOLDER/Plugins/Newtonsoft.Json Editor/"
+
+      - run:
+          name: Run tests
+          command: $SCRIPTS/unity_test.sh $TEST_PROJECT ~/tests/nunit
+
+      - run:
+          name: Convert NUnit to JUnit xml
+          when: always
+          command: $SCRIPTS/nunit2junit.sh ~/tests/nunit ~/tests/junit/
+
+      - store_test_results:
+          name: Store test results -> ~/tests/junit
+          path: ~/tests/junit
+
+      - save_cache:
+          key: test-unity-upm-manifest-{{ checksum "/root/repo/Src/Newtonsoft.Json-for-Unity.Tests/Packages/manifest.json" }}
+          paths:
+            - /root/repo/Src/Newtonsoft.Json-for-Unity.Tests/Library/PackageCache
+
+      - save_cache:
+          key: test-unity-upm-global
+          paths:
+            - /root/.config/unity3d/cache
+
+  deploy-cloudsmith:
+    working_directory: /root/repo
+    
+    docker:
+      - image: applejag/newtonsoft.json-for-unity.package-deploy-npm:v3
+
+    environment:
+      SCRIPTS: /root/repo/ci/scripts
+      NPM_REGISTRY: https://npm.cloudsmith.io/jillejr/newtonsoft-json-for-unity/
+
+    steps:
+      - checkout
+
+      - attach_workspace:
+          at: /workspace
+
+      - run:
+          name: Enable permissions on scripts
+          command: chmod +x $SCRIPTS/**.sh -v
+
+      - run:
+          name: Setup Variables
+          command: |
+            env() {
+              echo "export '$1=$2'" >> $BASH_ENV
+              echo "$1='$2'"
+              export "$1=$2"
+            }
+            echo ">>> OBTAINING VERSION FROM $(pwd)/ci/version.json"
+            env VERSION "$($SCRIPTS/get_json_version.sh ./ci/version.json FULL)"
+            echo
+
+      - run:
+          name: NPM Login
+          command: |
+            echo "//npm.cloudsmith.io/jillejr/newtonsoft-json-for-unity/:_authToken=$NPM_AUTH_TOKEN" >> ~/.npmrc
+            echo "registry=$NPM_REGISTRY" >> ~/.npmrc
+            echo "always-auth=true" >> ~/.npmrc
+
+      - run:
+          name: NPM Publish
+          command: |
+            if [ -z "$(npm view jillejr.newtonsoft.json-for-unity@$VERSION versions)" ]
+            then
+              cd /workspace/package
+              npm publish
+            else
+              echo "Package version $VERSION already existed. Skipping the publish"
+            fi
+
+  deploy-github:
+    working_directory: /root/repo
+    
+    environment:
+      SCRIPTS: /root/repo/ci/scripts
+    
+    docker:
+      - image: applejag/newtonsoft.json-for-unity.package-deploy-github:v4
+    
+    steps:
+      - checkout
+
+      - add_ssh_keys:
+          fingerprints:
+            - "8f:7d:da:4c:7e:a7:85:dc:ed:ef:9c:ba:3e:2b:2e:4a"
+
+      - run:
+          name: Enable permissions on scripts
+          command: chmod +x $SCRIPTS/**.sh -v
+
+      - run:
+          name: Git Login
+          command: $SCRIPTS/git_login.sh
+
+      - run:
+          name: Setup Variables
+          command: |
+            env() {
+              echo "export '$1=$2'" >> $BASH_ENV
+              echo "$1='$2'"
+              export "$1=$2"
+            }
+            echo ">>> OBTAINING VERSION FROM $(pwd)/ci/version.json"
+            env VERSION "$($SCRIPTS/get_json_version.sh ./ci/version.json FULL)"
+            env VERSION_RELEASE "$($SCRIPTS/get_json_version.sh ./ci/version.json RELEASE)"
+            env VERSION_JSON_NET "$($SCRIPTS/get_json_version.sh ./ci/version.json JSON_NET)"
+            echo
+
+      - run:
+          name: Ensure tag exists
+          command: |
+            if git tag --list | egrep -q "^$VERSION$"
+            then
+              echo "Tag $VERSION already existed. Skipping the tagging"
+            else
+              git tag $VERSION -m "Json.NET $VERSION_JSON_NET, release $VERSION_RELEASE"
+              echo "Created tag '$(git tag -l $VERSION -n1)'"
+              git push --tags
+              echo "Successfully pushed tag"
+            fi
+
+  check-deploy-ready:
+    working_directory: /root/repo
+    
+    docker:
+      - image: applejag/newtonsoft.json-for-unity.package-deploy-npm:v3
+
+    environment:
+      SCRIPTS: /root/repo/ci/scripts
+      NPM_REGISTRY: https://npm.cloudsmith.io/jillejr/newtonsoft-json-for-unity/
+
+    steps:
+      - checkout
+
+      - attach_workspace:
+          at: /workspace
+
+      - run:
+          name: Enable permissions on scripts
+          command: chmod +x $SCRIPTS/**.sh -v
+
+      - run:
+          name: Setup Variables
+          command: |
+            env() {
+              echo "export '$1=$2'" >> $BASH_ENV
+              echo "$1='$2'"
+              export "$1=$2"
+            }
+            echo ">>> OBTAINING VERSION FROM $(pwd)/ci/version.json"
+            env VERSION "$($SCRIPTS/get_json_version.sh ./ci/version.json FULL)"
+            echo
+            
+            echo ">>> SETTING UP NPM"
+            echo "registry='$NPM_REGISTRY' >> ~/.npmrc"
+            echo "registry=$NPM_REGISTRY" >> ~/.npmrc
+
+      - run:
+          name: Check if release is ready for deploy
+          command: |
+            if [ "$(npm search jillejr.newtonsoft.json-for-unity)" == 'No matches found for "jillejr.newtonsoft.json-for-unity"' ]
+            then
+              echo "> Package jillejr.newtonsoft.json-for-unity does not exist on the registry and is available for publishing, all ok!"
+            elif [ -z "$(npm view jillejr.newtonsoft.json-for-unity@$VERSION versions)" ]
+            then
+              echo "> Package jillejr.newtonsoft.json-for-unity version $VERSION does not exist on the registry and is available for publishing, all ok!"
+            else
+              echo
+              echo "[!] Package version $VERSION already existed on $NPM_REGISTRY"
+              echo "[!] Make sure to update the /ci/version.json"
+              exit 1
+            fi
+
+            if git tag --list | egrep -q "^$VERSION$"
+            then
+              echo
+              echo "[!] Tag $VERSION already existed."
+              echo "[!] Make sure to update the /ci/version.json"
+              exit 2
+            else
+              echo "> Tag $VERSION is available for publishing, all ok!"
+            fi
+            
+            if cat Src/Newtonsoft.Json-for-Unity/CHANGELOG.md | egrep -q "^## $VERSION$"
+            then
+              echo "> Changelog has been updated, all ok!"
+            else
+              echo
+              echo "[!] Changelog in Src/Newtonsoft.Json-for-Unity/CHANGELOG.md is missing line '## $VERSION'."
+              echo "[!] Make sure to update the Src/Newtonsoft.Json-for-Unity/CHANGELOG.md"
+              exit 3
+            fi
+
+            echo "Nice work! Happy deploying!"
+
+workflows:
+  version: 2
+  build-test:
+    jobs:
+      - build-package:
+          filters:
+            branches:
+              <<: *WORKFLOW_BUILD_TEST_FILTER
+      - test-windows:
+          requires:
+            - build-package
+      - test-unity:
+          requires:
+            - build-package
+  check-deploy-ready:
+    jobs:
+      - check-deploy-ready:
+          filters:
+            branches:
+              <<: *WORKFLOW_CHECK_DEPLOY_READY_FILTER
+  build-test-deploy:
+    jobs:
+      - build-package:
+          filters:
+            branches:
+              <<: *WORKFLOW_BUILD_TEST_DEPLOY_FILTER
+      - test-windows:
+          requires:
+            - build-package
+      - test-unity:
+          requires:
+            - build-package
+      - hold:
+          type: approval
+          requires:
+            - test-windows
+            - test-unity
+      - deploy-cloudsmith:
+          requires:
+            - hold
+      - deploy-github:
+          requires:
+            - hold
