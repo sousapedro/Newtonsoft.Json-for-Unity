@@ -6,15 +6,15 @@
 
 Json.NET is a popular high-performance JSON framework for .NET
 
-This repo is a **fork** of [Newtonsoft.Json][newtonsoft.json.git] containing custom builds
-for regular standalone, but more importantly AOT targets such as all **IL2CPP builds**
-**(WebGL, iOS, Android, Windows, Mac OS X)** and portable .NET **(UWP, WP8)**.
-
 Available for installation with
 
 - **Unity Package Manager (UPM)** `new!`
 - ~~Unity Asset packages~~ _(coming soon)_
 - ~~Unity Asset Store~~ _(coming soon)_
+
+This repo is a **fork** of [Newtonsoft.Json][newtonsoft.json.git] containing custom builds
+for regular standalone, but more importantly AOT targets such as all **IL2CPP builds**
+**(WebGL, iOS, Android, Windows, Mac OS X)** and portable .NET **(UWP, WP8)**.
 
 ## Versioning format
 
@@ -71,29 +71,29 @@ Followed by pressing the update button on the `jillejr.newtonsoft.json-for-unity
 
 > _(This is an alternative for updating. Following the guide above will suffice if your Package Manager is functional)_
 
-Change the version field. You have to know the new version beforehand.
+Change the version field. You will have to know the new version beforehand.
 
-> Example, with this as old:
->
-> ```json
-> {
->   "dependencies": {
->     "jillejr.newtonsoft.json-for-unity": "12.0.100"
->   }
-> }
-> ```
->
-> New, updated:
->
-> ```json
-> {
->   "dependencies": {
->     "jillejr.newtonsoft.json-for-unity": "12.0.101"
->   }
-> }
-> ```
->
-> _Omitted `scopedRegistries` and Unity packages for readability_
+Example, with this as old:
+
+```json
+{
+  "dependencies": {
+    "jillejr.newtonsoft.json-for-unity": "12.0.101"
+  }
+}
+```
+
+New, updated:
+
+```json
+{
+  "dependencies": {
+    "jillejr.newtonsoft.json-for-unity": "12.0.201"
+  }
+}
+```
+
+_Omitted `scopedRegistries` and Unity packages for readability_
 
 ## Official Json.NET links
 
@@ -117,32 +117,32 @@ Using `2017.*` or below? Here are some alternative projects that may suffice for
 
 ## But why another solution
 
-> SaladLab and ParentElement, among other unmentioned coders,
-> have done great work in making Json.NET work in Unity. _So why do we need mine?_
->
-> Both mentioned projects are discontinued, and outdated by some margin in result.
-> SaladLab's latest release targets Json.NET 9, and ParentElement's Json.NET 8.
-> We're at Json.NET 12 now! _(at time of writing)_
->
-> Changeset, compared to SaladLabs and ParentElements solutions:
->
-> - Json.NET version 12 _(let's see how long I can keep up with James repo)_
-> - Release available via Unity Package Manager
-> - Unit testing in Unity Editor
-> - Unit testing in IL2CPP built platforms _(ex: StandaloneWindows)_
->
-> A rework is in this case easier than jumping into SaladLabs project to update it. Sorry Salad champ.
->
-> _Although, in the future this may also be old stuff too,
-> with the upcoming new [System.Text.Json](https://devblogs.microsoft.com/dotnet/try-the-new-system-text-json-apis/)
-> namespace and need to keep the project up-to-date with Newtonsoft.Json.
-> But not for now!_
+SaladLab and ParentElement, among other unmentioned coders,
+have done great work in making Json.NET work in Unity. _So why do we need mine?_
+
+Both mentioned projects are discontinued, and outdated by some margin in result.
+SaladLab's latest release targets Json.NET 9, and ParentElement's Json.NET 8.
+We're at Json.NET 12 now! _(at time of writing)_
+
+Changeset, compared to SaladLabs and ParentElements solutions:
+
+- Json.NET version 12 _(let's see how long I can keep up with James repo)_
+- Release available via Unity Package Manager
+- Unit testing in Unity Editor
+- Unit testing in IL2CPP built platforms _(ex: StandaloneWindows)_
+
+A rework is in this case easier than jumping into SaladLabs project to update it. Sorry Salad champ.
+
+<sub>_Although, in the future this may also be old stuff too,
+with the upcoming new [System.Text.Json](https://devblogs.microsoft.com/dotnet/try-the-new-system-text-json-apis/)
+namespace and need to keep the project up-to-date with Newtonsoft.Json.
+But not for now!_</sub>
 
 ---
 
 This package is licensed under The MIT License (MIT)
 
-Copyright (c) 2019 Kalle Jillheden (jilleJr)  
+Copyright &copy; 2019 Kalle Jillheden (jilleJr)  
 <https://github.com/jilleJr/Newtonsoft.Json>
 
 See full copyrights in [LICENSE.md][license.md] inside repository
