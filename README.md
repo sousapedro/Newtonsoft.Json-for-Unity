@@ -8,7 +8,7 @@ Json.NET is a popular high-performance JSON framework for .NET
 
 Available for installation with
 
-- **Unity Package Manager (UPM)** `new!`
+- **Unity Package Manager (UPM)** `recommended!` ([Installation guide](https://github.com/jilleJr/Newtonsoft.Json-for-Unity/wiki/Installation-Using-UPM))
 - ~~Unity Asset packages~~ _(coming soon)_
 - ~~Unity Asset Store~~ _(coming soon)_
 - ~~NuGet package~~ _(coming soon)_
@@ -25,96 +25,19 @@ To allow deployment of patches of the package itself, and keep confusion to a lo
 
 ![explanation of version](Doc/version-explanation.png)
 
-## Installation via UPM
+## Newtonsoft.Json-for-Unity specific links
 
-> Requires Unity Editor `2018.1` or above, as UPM was first shipped with `2018.1`.
-
-Open `<project>/Packages/manifest.json`, add scope for `jillejr`, then add the package in the list of dependencies.
-
-À la:
-
-```json
-{
-  "scopedRegistries": [
-    {
-      "name": "Packages from jillejr",
-      "url": "https://npm.cloudsmith.io/jillejr/newtonsoft-json-for-unity/",
-      "scopes": ["jillejr"]
-    }
-  ],
-  "dependencies": {
-    "jillejr.newtonsoft.json-for-unity": "12.0.101",
-
-    "com.unity.modules.ai": "1.0.0",
-    "com.unity.modules.animation": "1.0.0",
-    "com.unity.modules.assetbundle": "1.0.0",
-    "com.unity.modules.audio": "1.0.0",
-    "com.unity.modules.cloth": "1.0.0",
-    "com.unity.modules.director": "1.0.0",
-    "com.unity.modules.imageconversion": "1.0.0"
-  }
-}
-```
-
-## Updating the package
-
-### Updating via the UI
-
-Open the Package Manager UI `Window > Package Manager`
-
-![preview of where window button is](https://i.imgur.com/0FvA5W6.png)
-
-Followed by pressing the update button on the `jillejr.newtonsoft.json-for-unity` package
-
-![preview of update button](https://i.imgur.com/H6LhK2n.png)
-
-### Updating manually via the manifest file
-
-> _(This is an alternative for updating. Following the guide above will suffice if your Package Manager is functional)_
-
-Change the version field. You will have to know the new version beforehand.
-
-Example, with this as old:
-
-```json
-{
-  "dependencies": {
-    "jillejr.newtonsoft.json-for-unity": "12.0.101"
-  }
-}
-```
-
-New, updated:
-
-```json
-{
-  "dependencies": {
-    "jillejr.newtonsoft.json-for-unity": "12.0.201"
-  }
-}
-```
-
-_Omitted `scopedRegistries` and Unity packages for readability_
+- [GitHub Wiki (github.com/jilleJr/Newtonsoft.Json-for-Unity/wiki)](https://github.com/jilleJr/Newtonsoft.Json-for-Unity/wiki)
+- [CloudSmith release (cloudsmith.io/~jillejr/repos/newtonsoft-json-for-unity)](https://cloudsmith.io/~jillejr/repos/newtonsoft-json-for-unity/packages/detail/npm/jillejr.newtonsoft.json-for-unity/latest/)
+- [Release Notes (github.com/jilleJr/Newtonsoft.Json-for-Unity/releases)](https://github.com/jilleJr/Newtonsoft.Json-for-Unity/releases)
 
 ## Official Json.NET links
 
-- [Homepage](https://www.newtonsoft.com/json)
-- [Documentation](https://www.newtonsoft.com/json/help)
-- [Release Notes](https://github.com/JamesNK/Newtonsoft.Json/releases)
-- [Contributing Guidelines](CONTRIBUTING.md)
-- [License](LICENSE.md)
-- [Stack Overflow](https://stackoverflow.com/questions/tagged/json.net)
-
-## Alternative solutions
-
-Using `2017.*` or below? Here are some alternative projects that may suffice for your Unity project:
-
-- **Newtonsoft Json.NET for Unity3D** by SaladLab  
-  [github.com/SaladLab/Json.Net.Unity3D](https://github.com/SaladLab/Json.Net.Unity3D#readme)
-
-- **JSON .NET for Unity** by ParentElement  
-  [parentelement.com/assets/json_net_unity](https://www.parentelement.com/assets/json_net_unity)  
-  [assetstore.unity.com/packages/tools/input-management/json-net-for-unity](https://assetstore.unity.com/packages/tools/input-management/json-net-for-unity-11347)
+- [Source repository (github.com/JamesNK/Newtonsoft.Json)](https://github.com/JamesNK/Newtonsoft.Json)
+- [Homepage (www.newtonsoft.com/json)](https://www.newtonsoft.com/json)
+- [Documentation (www.newtonsoft.com/json/help)](https://www.newtonsoft.com/json/help)
+- [Release Notes (github.com/JamesNK/Newtonsoft.Json/releases)](https://github.com/JamesNK/Newtonsoft.Json/releases)
+- [Stack Overflow (stackoverflow.com/questions/tagged/json.net)](https://stackoverflow.com/questions/tagged/json.net)
 
 ## But why another solution
 
