@@ -8,7 +8,7 @@ Json.NET is a popular high-performance JSON framework for .NET
 
 Available for installation with
 
-- **Unity Package Manager (UPM)** `recommended!` ([Installation guide](https://github.com/jilleJr/Newtonsoft.Json-for-Unity/wiki/Installation-Using-UPM))
+- **Unity Package Manager (UPM)** `recommended!`
 - ~~Unity Asset packages~~ _(coming soon)_
 - ~~Unity Asset Store~~ _(coming soon)_
 - ~~NuGet package~~ _(coming soon)_
@@ -16,6 +16,12 @@ Available for installation with
 This repo is a **fork** of [JamesNK/Newtonsoft.Json][newtonsoft.json.git] containing custom builds
 for regular standalone, but more importantly AOT targets such as all **IL2CPP builds**
 **(WebGL, iOS, Android, Windows, Mac OS X)** and portable .NET **(UWP, WP8)**.
+
+## [Installation guide](https://github.com/jilleJr/Newtonsoft.Json-for-Unity/wiki/Installation-Using-UPM)
+
+Click the header. It goes to the Wiki where the guide is now located. For reference, this is the url:
+
+<https://github.com/jilleJr/Newtonsoft.Json-for-Unity/wiki/Installation-Using-UPM>
 
 ## Versioning format
 
