@@ -24,21 +24,13 @@ Click the header. It goes to the Wiki where the guide is now located. For refere
 
 <https://github.com/jilleJr/Newtonsoft.Json-for-Unity/wiki/Installation-Using-UPM>
 
-## Versioning format
-
-_Staying with JamesNK's version syntax, but with a twist :dizzy:_
-
-To allow deployment of patches of the package itself, and keep confusion to a low, I'm only appending a double digit for versioning of this repository. Deployment of Newtonsoft.Json version `12.0.1` will be deployed with the UPM version `12.0.100`, `12.0.101`, `12.0.102` etc. It's still `12.0.1` version of the assembly, but some other stuff around the package will have changed. See the [releases](https://github.com/jilleJr/Newtonsoft.Json-for-Unity/releases) tab for version-specific changelogs.
-
-![explanation of version](Doc/version-explanation.png)
-
 ## Newtonsoft.Json-for-Unity specific links
 
 - [GitHub Wiki (github.com/jilleJr/Newtonsoft.Json-for-Unity/wiki)](https://github.com/jilleJr/Newtonsoft.Json-for-Unity/wiki)
-- [CloudSmith release (cloudsmith.io/~jillejr/repos/newtonsoft-json-for-unity)](https://cloudsmith.io/~jillejr/repos/newtonsoft-json-for-unity/packages/detail/npm/jillejr.newtonsoft.json-for-unity/latest/)
+- [Cloudsmith release (cloudsmith.io/~jillejr/repos/newtonsoft-json-for-unity)](https://cloudsmith.io/~jillejr/repos/newtonsoft-json-for-unity/packages/detail/npm/jillejr.newtonsoft.json-for-unity/latest/)
 - [Release Notes (github.com/jilleJr/Newtonsoft.Json-for-Unity/releases)](https://github.com/jilleJr/Newtonsoft.Json-for-Unity/releases)
 
-## Official Json.NET links
+## Official Json.<i></i>NET links
 
 - [Source repository (github.com/JamesNK/Newtonsoft.Json)](https://github.com/JamesNK/Newtonsoft.Json)
 - [Homepage (www.newtonsoft.com/json)](https://www.newtonsoft.com/json)
@@ -62,26 +54,45 @@ guidelines. It contains info about
 - Our level of usage of "git-flow".
 - Keep the repo clean, both code & branches.
 
-SaladLab and ParentElement, among other unmentioned coders,
-have done great work in making Json.NET work in Unity. _So why do we need mine?_
+## Development
 
-Both mentioned projects are discontinued, and outdated by some margin in result.
-SaladLab's latest release targets Json.NET 9, and ParentElement's Json.NET 8.
-We're at Json.NET 12 now! _(at time of writing)_
+### Merging changes from JamesNK/Newtonsoft.Json
 
-Changeset, compared to SaladLabs and ParentElements solutions:
+As an example, this is how to make a release for Json.NET 12.0.3, resulting in
+Newtonsoft.Json-for-Unity (this project) version 12.0.301. Check the
+[About the versioning](https://github.com/jilleJr/Newtonsoft.Json-for-Unity/wiki/About-the-versioning)
+guide on the Wiki about the version format.
 
-- Json.NET version 12 _(let's see how long I can keep up with James repo)_
-- Release available via Unity Package Manager
-- Unit testing in Unity Editor
-- Unit testing in IL2CPP built platforms _(ex: StandaloneWindows)_
+1. If not yet done, create the release branch `release/12.0.301` based off of
+   the `master` branch.
 
-A rework is in this case easier than jumping into SaladLabs project to update it. Sorry Salad champ.
+2. Checkout a new feature branch `feature/merge-12.0.3` based off of the
+   `release/12.0.301` branch.
 
-<sub>_Although, in the future this may also be old stuff too,
-with the upcoming new [System.Text.Json](https://devblogs.microsoft.com/dotnet/try-the-new-system-text-json-apis/)
-namespace and need to keep the project up-to-date with Newtonsoft.Json.
-But not for now!_</sub>
+3. Merge the changes from the release tag of JamesNK repo.
+   For some files the changes are too grand and the auto merging fails.
+   Make sure then to compare said files with the actual changeset on JamesNKs
+   repo, like so: <https://github.com/JamesNK/Newtonsoft.Json/compare/12.0.2...12.0.3>
+
+    ```bash
+    git checkout feature/merge-12.0.3
+    git pull https://github.com/JamesNK/Newtonsoft.Json.git 12.0.3
+    # Resolve merge conflicts
+    # Only proceed when fully done
+    git commit -m "Merge from JamesNK/Newtonsoft.Json 12.0.3 into feature/merge-12.0.3"
+    git push
+    ```
+
+4. Create a merge request from `feature/merge-12.0.3` to `release/12.0.301`  
+   <https://github.com/jilleJr/Newtonsoft.Json-for-Unity/compare/release/12.0.301...feature/merge-12.0.3>
+
+### Run tests
+
+Run the Newtonsoft.Json.Tests normally via the Test Runner inside Visual Studio.
+
+For testing inside Unity locally, look inside the
+[Src/Newtonsoft.Json-for-Unity.Tests/README.md](/Src/Newtonsoft.Json-for-Unity.Tests/README.md)
+for more information.
 
 ---
 
