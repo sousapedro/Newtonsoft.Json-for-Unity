@@ -57,11 +57,37 @@ guidelines. It contains info about
 
 ## Development
 
+### Edit code
+
+Open the `Src/Newtonsoft.Json.sln` solution file in Visual Studio and start
+hacking.
+
+Rule of thumb: Don't commit edits of the `Src/Newtonsoft.Json/`,
+`Src/Newtonsoft.Json.Tests/`, or `Src/Newtonsoft.Json.TestConsole/` folders
+for forking reasons. Exception is when doing a new release, as explained in
+a section little further down below.
+
+### Build
+
+When using Visual Studio, open the `Src/Newtonsoft.Json.sln` solution and just
+<kbd>Ctrl+Shift+B</kbd> 😜.
+
+When using command line, recommended to use MSBuild.exe for building and not the
+dotnet CLI.
+
+### Run tests
+
+Run the Newtonsoft.Json.Tests normally via the Test Runner inside Visual Studio.
+
+For testing inside Unity locally, look inside the
+[Src/Newtonsoft.Json-for-Unity.Tests/README.md](/Src/Newtonsoft.Json-for-Unity.Tests/README.md)
+for more information.
+
 ### Merging changes from JamesNK/Newtonsoft.Json
 
-As an example, this is how to make a release for Json.<i></i>NET 12.0.3, resulting in
-Newtonsoft.Json-for-Unity (this project) version 12.0.301. Check the
-[About the versioning](https://github.com/jilleJr/Newtonsoft.Json-for-Unity/wiki/About-the-versioning)
+As an example, this is how to make a release for Json.<i></i>NET 12.0.3,
+resulting in Newtonsoft.Json-for-Unity (this project) version 12.0.301. Check
+the [About the versioning](https://github.com/jilleJr/Newtonsoft.Json-for-Unity/wiki/About-the-versioning)
 guide on the Wiki about the version format.
 
 1. If not yet done, create the release branch `release/12.0.301` based off of
@@ -86,14 +112,6 @@ guide on the Wiki about the version format.
 
 4. Create a merge request from `feature/merge-12.0.3` to `release/12.0.301`  
    <https://github.com/jilleJr/Newtonsoft.Json-for-Unity/compare/release/12.0.301...feature/merge-12.0.3>
-
-### Run tests
-
-Run the Newtonsoft.Json.Tests normally via the Test Runner inside Visual Studio.
-
-For testing inside Unity locally, look inside the
-[Src/Newtonsoft.Json-for-Unity.Tests/README.md](/Src/Newtonsoft.Json-for-Unity.Tests/README.md)
-for more information.
 
 ---
 
