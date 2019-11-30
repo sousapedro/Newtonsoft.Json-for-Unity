@@ -3,6 +3,7 @@
 [![Latest Version @ Cloudsmith](https://api-prd.cloudsmith.io/badges/version/jillejr/newtonsoft-json-for-unity/npm/jillejr.newtonsoft.json-for-unity/latest/x/?render=true&badge_token=gAAAAABd0U7AyWhLGu6xjEAHz70w9zWbSk6ogsTrw3xvVpa2NXe7HJg_ua7r-G2cbWECxfM51y4uYgOdFOquHNoTQti080JM6w%3D%3D)](https://cloudsmith.io/~jillejr/repos/newtonsoft-json-for-unity/packages/detail/npm/jillejr.newtonsoft.json-for-unity/latest/)
 [![CircleCI](https://img.shields.io/circleci/build/gh/jilleJr/Newtonsoft.Json-for-Unity/master?logo=circleci&style=flat-square)](https://circleci.com/gh/jilleJr/Newtonsoft.Json-for-Unity)
 [![Codacy grade](https://img.shields.io/codacy/grade/f91156e7066c484588f4dba263c8cf45?logo=codacy&style=flat-square)](https://www.codacy.com/manual/jilleJr/Newtonsoft.Json-for-Unity?utm_source=github.com&utm_medium=referral&utm_content=jilleJr/Newtonsoft.Json-for-Unity&utm_campaign=Badge_Grade)
+[![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-v2.0%20adopted-ff69b4.svg?style=flat-square)](/CODE_OF_CONDUCT.md)
 
 Json.NET is a popular high-performance JSON framework for .NET
 
@@ -45,7 +46,21 @@ To allow deployment of patches of the package itself, and keep confusion to a lo
 - [Release Notes (github.com/JamesNK/Newtonsoft.Json/releases)](https://github.com/JamesNK/Newtonsoft.Json/releases)
 - [Stack Overflow (stackoverflow.com/questions/tagged/json.net)](https://stackoverflow.com/questions/tagged/json.net)
 
-## But why another solution
+## Contributing
+
+> ⚠ Please note that this project is released with a Contributor Code of Conduct.
+> By participating in this project you agree to abide by its terms.
+> Read more: [CODE_OF_CONDUCT.md](/CODE_OF_CONDUCT.md)
+
+To contribute first you must read the [CONTRIBUTING.md](/CONTRIBUTING.md)
+guidelines. It contains info about
+
+- How to edit the Src/Newtonsoft.Json projects to remain the ability to merge
+  from JamesNKs repository without difficulties.
+- Coding style.
+- Naming style.
+- Our level of usage of "git-flow".
+- Keep the repo clean, both code & branches.
 
 SaladLab and ParentElement, among other unmentioned coders,
 have done great work in making Json.NET work in Unity. _So why do we need mine?_
