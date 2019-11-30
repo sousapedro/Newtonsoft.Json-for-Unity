@@ -62,7 +62,7 @@ void Start() {
 <!-- Windows/Mac/Linux? What dialect and version? -->
 Host machine OS running Unity Editor 👉 SPECIFY
 
-<!-- Unity build target. Windows/Mac/Linux/Android/iOS/WebGL/et.al -->
+<!-- Unity build target. Windows/Mac/Linux/Android/iOS/WebGL/etc. -->
 Target platform running build 👉 SPECIFY
 
 <!-- Found in manifest.json & Package Manager window. -->
