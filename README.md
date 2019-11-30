@@ -9,10 +9,10 @@ Json.<i></i>NET is a popular high-performance JSON framework for .NET
 
 Available for installation with
 
-- **Unity Package Manager (UPM)** `recommended!`
-- ~~Unity Asset packages~~ _(coming soon)_
-- ~~Unity Asset Store~~ _(coming soon)_
-- ~~NuGet package~~ _(coming soon)_
+- **Unity Package Manager (UPM)** `new!`
+- ~~Unity Asset packages~~ <sub>_(Coming soon<sup>tm</sup>)_</sub>
+- ~~Unity Asset Store~~ <sub>_(Coming soon<sup>tm</sup>)_</sub>
+- ~~NuGet package~~ <sub>_(Coming soon<sup>tm</sup>)_</sub>
 
 This repo is a **fork** of [JamesNK/Newtonsoft.Json][newtonsoft.json.git] containing custom builds
 for regular standalone, but more importantly AOT targets such as all **IL2CPP builds**
