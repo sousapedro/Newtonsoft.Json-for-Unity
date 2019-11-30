@@ -10,6 +10,7 @@ Json.<i></i>NET is a popular high-performance JSON framework for .NET
 Available for installation with
 
 - **Unity Package Manager (UPM)** `new!`
+- ~~UniGet~~ <sub>_(Coming soon<sup>tm</sup>)_</sub>
 - ~~Unity Asset packages~~ <sub>_(Coming soon<sup>tm</sup>)_</sub>
 - ~~Unity Asset Store~~ <sub>_(Coming soon<sup>tm</sup>)_</sub>
 - ~~NuGet package~~ <sub>_(Coming soon<sup>tm</sup>)_</sub>
