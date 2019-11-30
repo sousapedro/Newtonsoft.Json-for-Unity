@@ -20,6 +20,10 @@ There are thousands of Json.NET questions on Stack Overflow with the json.net ta
 These GitHub issues are only for reporting issues with the package itself. Try evaluate if the problem relates to Newtonsoft.Json or this fork that delivers it for Unity. If it is, report it at JamesNK's repository:
 https://github.com/JamesNK/Newtonsoft.Json/issues
 
+⚠ Please note that this project is released with a Contributor Code of Conduct.
+By participating in this project you agree to abide by its terms.
+Read more: https://github.com/jilleJr/Newtonsoft.Json-for-Unity/blob/master/CODE_OF_CONDUCT.md
+
 -->
 
 ### Source/destination types

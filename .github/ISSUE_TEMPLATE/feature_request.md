@@ -6,6 +6,14 @@ labels: enhancement
 assignees: ""
 ---
 
+<!--
+
+⚠ Please note that this project is released with a Contributor Code of Conduct.
+By participating in this project you agree to abide by its terms.
+Read more: https://github.com/jilleJr/Newtonsoft.Json-for-Unity/blob/master/CODE_OF_CONDUCT.md
+
+-->
+
 ### Description
 
 <!--
