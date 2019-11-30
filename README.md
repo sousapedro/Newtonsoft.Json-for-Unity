@@ -5,7 +5,7 @@
 [![Codacy grade](https://img.shields.io/codacy/grade/f91156e7066c484588f4dba263c8cf45?logo=codacy&style=flat-square)](https://www.codacy.com/manual/jilleJr/Newtonsoft.Json-for-Unity?utm_source=github.com&utm_medium=referral&utm_content=jilleJr/Newtonsoft.Json-for-Unity&utm_campaign=Badge_Grade)
 [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-v2.0%20adopted-ff69b4.svg?style=flat-square)](/CODE_OF_CONDUCT.md)
 
-Json.NET is a popular high-performance JSON framework for .NET
+Json.<i></i>NET is a popular high-performance JSON framework for .NET
 
 Available for installation with
 
@@ -18,25 +18,25 @@ This repo is a **fork** of [JamesNK/Newtonsoft.Json][newtonsoft.json.git] contai
 for regular standalone, but more importantly AOT targets such as all **IL2CPP builds**
 **(WebGL, iOS, Android, Windows, Mac OS X)** and portable .NET **(UWP, WP8)**.
 
-## [Installation guide](https://github.com/jilleJr/Newtonsoft.Json-for-Unity/wiki/Installation-Using-UPM)
+## [Installation guide](https://github.com/jilleJr/Newtonsoft.Json-for-Unity/wiki/Installation-via-UPM)
 
 Click the header. It goes to the Wiki where the guide is now located. For reference, this is the url:
 
-<https://github.com/jilleJr/Newtonsoft.Json-for-Unity/wiki/Installation-Using-UPM>
+<https://github.com/jilleJr/Newtonsoft.Json-for-Unity/wiki/Installation-via-UPM>
 
 ## Newtonsoft.Json-for-Unity specific links
 
-- [GitHub Wiki (github.com/jilleJr/Newtonsoft.Json-for-Unity/wiki)](https://github.com/jilleJr/Newtonsoft.Json-for-Unity/wiki)
-- [Cloudsmith release (cloudsmith.io/~jillejr/repos/newtonsoft-json-for-unity)](https://cloudsmith.io/~jillejr/repos/newtonsoft-json-for-unity/packages/detail/npm/jillejr.newtonsoft.json-for-unity/latest/)
-- [Release Notes (github.com/jilleJr/Newtonsoft.Json-for-Unity/releases)](https://github.com/jilleJr/Newtonsoft.Json-for-Unity/releases)
+- [Wiki about this project](https://github.com/jilleJr/Newtonsoft.Json-for-Unity/wiki)
+- [Release Notes on GitHub from this repository](https://github.com/jilleJr/Newtonsoft.Json-for-Unity/releases)
+- [Cloudsmith package](https://cloudsmith.io/~jillejr/repos/newtonsoft-json-for-unity/packages/detail/npm/jillejr.newtonsoft.json-for-unity/latest/)
 
 ## Official Json.<i></i>NET links
 
 - [Source repository (github.com/JamesNK/Newtonsoft.Json)](https://github.com/JamesNK/Newtonsoft.Json)
 - [Homepage (www.newtonsoft.com/json)](https://www.newtonsoft.com/json)
 - [Documentation (www.newtonsoft.com/json/help)](https://www.newtonsoft.com/json/help)
-- [Release Notes (github.com/JamesNK/Newtonsoft.Json/releases)](https://github.com/JamesNK/Newtonsoft.Json/releases)
-- [Stack Overflow (stackoverflow.com/questions/tagged/json.net)](https://stackoverflow.com/questions/tagged/json.net)
+- [Release Notes on GitHub from source repository](https://github.com/JamesNK/Newtonsoft.Json/releases)
+- [Stack Overflow posts tagged with `json.net`](https://stackoverflow.com/questions/tagged/json.net)
 
 ## Contributing
 
@@ -58,7 +58,7 @@ guidelines. It contains info about
 
 ### Merging changes from JamesNK/Newtonsoft.Json
 
-As an example, this is how to make a release for Json.NET 12.0.3, resulting in
+As an example, this is how to make a release for Json.<i></i>NET 12.0.3, resulting in
 Newtonsoft.Json-for-Unity (this project) version 12.0.301. Check the
 [About the versioning](https://github.com/jilleJr/Newtonsoft.Json-for-Unity/wiki/About-the-versioning)
 guide on the Wiki about the version format.
