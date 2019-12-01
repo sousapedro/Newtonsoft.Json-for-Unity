@@ -23,27 +23,27 @@ Read more: https://github.com/jilleJr/Newtonsoft.Json-for-Unity/blob/master/CODE
 
 -->
 
-### Source/destination types
+## Source/destination types
 
 ```csharp
 // Put the types you are serializing or deserializing here, if applicable
 ```
 
-### Source/destination JSON
+## Source/destination JSON
 
 ```javascript
 {"message":"Place your serialized or deserialized JSON here, if applicable"}
 ```
 
-### Expected behavior
+## Expected behavior
 
 <!-- What did you expect to happen? -->
 
-### Actual behavior
+## Actual behavior
 
 <!-- What happened instead? -->
 
-### Steps to reproduce
+## Steps to reproduce
 
 - New project
 - Import `jillejr.newtonsoft.json-for-unity` via UPM
@@ -57,7 +57,7 @@ void Start() {
 
 - Run the game
 
-### Details
+## Details
 
 <!-- Windows/Mac/Linux? What dialect and version? -->
 Host machine OS running Unity Editor 👉 SPECIFY
@@ -74,7 +74,7 @@ Newtonsoft.Json-for-Unity package version 👉 SPECIFY
 <!-- Version of Unity where bug cannot be reproduced. Specify multiple if applicable -->
 ❕ Problem not found in Unity versions 👉 -
 
-### Checklist
+## Checklist
 
 <!--
 Fill in with "x" between the brackets to confirm you've completed the task. Like so:
