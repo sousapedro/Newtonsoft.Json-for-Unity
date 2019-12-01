@@ -1,5 +1,18 @@
 # Newtonsoft.Json for Unity changelog
 
+## 12.0.201
+
+- Merge changes from [Newtonsoft.Json 12.0.2][json-net-12.0.2]
+  - New feature - Added MissingMemberHandling to JsonObjectAttribute and JsonObjectContract
+  - New feature - Added constructor to JTokenReader to specify initial path
+  - New feature - Added JsonProperty.IsRequiredSpecified
+  - New feature - Added JsonContract.InternalConverter
+  - Fix - Fixed deserializing nullable struct collections
+  - Fix - Fixed memory link when serializing enums to named values
+  - Fix - Fixed error when setting JsonLoadSettings.DuplicatePropertyNameHandling to Replace
+
+- Based off of `12.0.102`
+
 ## 12.0.102
 
 - Fixed to use only major version in assembly version (ex: `12.0.0.0`, instead of `12.0.1.0`)
@@ -15,3 +28,4 @@
 [readme-url]: https://github.com/jilleJr/Newtonsoft.Json-for-Unity#readme
 [cloudsmith-url]: https://cloudsmith.io/~jillejr/repos/newtonsoft-json-for-unity
 [issue3]: https://github.com/jilleJr/Newtonsoft.Json-for-Unity/issues/3
+[json-net-12.0.2]: https://github.com/JamesNK/Newtonsoft.Json/releases/tag/12.0.2
