@@ -90,7 +90,7 @@ jobs:
 
       - run:
           name: Build Testing library
-          command: BUILD_CONFIGURATION=Debug BUILD_DESTINATION=/workspace/testlib $SCRIPTS/build.sh Editor "$BUILD_SOLUTION"
+          command: BUILD_CONFIGURATION=Debug BUILD_DESTINATION=/workspace/testlib $SCRIPTS/build.sh Tests "$BUILD_SOLUTION"
 
       - run:
           name: Move resulting package into workspace
