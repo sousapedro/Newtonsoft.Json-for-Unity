@@ -173,7 +173,7 @@ jobs:
     
     environment:
       SCRIPTS: /root/repo/ci/scripts
-      PACKAGE_FOLDER: /root/repo/Src/Newtonsoft.Json-for-Unity
+      PACKAGE_FOLDER: /root/repo/Src/Newtonsoft.Json-for-Unity.Tests/Packages/Newtonsoft.Json-for-Unity.Tests/
       TEST_PROJECT: /root/repo/Src/Newtonsoft.Json-for-Unity.Tests
       PLATFORMS: playmode
 
