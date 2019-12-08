@@ -33,7 +33,10 @@ if (!$SkipPackageRebuild) {
     Write-Host ""
     Write-Host ">>> BUILDING DEBUG BUILD OF PACKAGE USING local_build_into_package.ps1 " -BackgroundColor DarkCyan -ForegroundColor White
     Write-Host ""
-    &$PSScriptRoot\local_build_into_package.ps1 -Configuration Debug -UnityBuilds @('Tests')
+    &$PSScriptRoot\local_build_into_package.ps1 `
+        -Configuration Debug `
+        -UnityBuilds @('Tests') `
+        -RelativeBuildDestinationBase "Src/Newtonsoft.Json-for-Unity.Tests/Packages/Newtonsoft.Json-for-Unity.Tests/Plugins/"
     if ($LASTEXITCODE -ne 0) {
         throw "Failed to complete debug build"
     }
