@@ -12,6 +12,7 @@ param (
         ,'AOT'
         ,'Portable'
         ,'Editor'
+        ,'Tests'
     ),
 
     [string] $VolumeSource = "/c/Projekt/Newtonsoft.Json-for-Unity",
