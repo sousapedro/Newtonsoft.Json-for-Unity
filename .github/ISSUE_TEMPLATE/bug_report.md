@@ -23,25 +23,13 @@ Read more: https://github.com/jilleJr/Newtonsoft.Json-for-Unity/blob/master/CODE
 
 -->
 
-## Source/destination types
-
-```csharp
-// Put the types you are serializing or deserializing here, if applicable
-```
-
-## Source/destination JSON
-
-```javascript
-{"message":"Place your serialized or deserialized JSON here, if applicable"}
-```
-
 ## Expected behavior
 
-<!-- What did you expect to happen? -->
+<!-- Ex: To read this json on iOS: /followed by code block/ -->
 
 ## Actual behavior
 
-<!-- What happened instead? -->
+<!-- Crash at runtime? Did it work in the Editor? Fails to compile? -->
 
 ## Steps to reproduce
 
@@ -62,27 +50,21 @@ void Start() {
 <!-- Windows/Mac/Linux? What dialect and version? -->
 Host machine OS running Unity Editor 👉 SPECIFY
 
-<!-- Unity build target. Windows/Mac/Linux/Android/iOS/WebGL/etc. -->
-Target platform running build 👉 SPECIFY
+<!-- Windows/Mac/Linux/Android/iOS/WebGL/etc. -->
+Unity build target 👉 SPECIFY
 
-<!-- Found in manifest.json & Package Manager window. -->
+<!-- Found in manifest.json & Package Manager window. Ex: 12.0.101 -->
 Newtonsoft.Json-for-Unity package version 👉 SPECIFY
 
-<!-- Version of Unity where bug is found. Specify multiple if applicable -->
-❗️ Problem found in Unity versions 👉 SPECIFY
-
-<!-- Version of Unity where bug cannot be reproduced. Specify multiple if applicable -->
-❕ Problem not found in Unity versions 👉 -
+<!-- Ex: 2019.1.11f1. Specify multiple if applicable. -->
+I was using Unity version 👉 SPECIFY
 
 ## Checklist
 
 <!--
-Fill in with "x" between the brackets to confirm you've completed the task. Like so:
+Replace the space between the brackets with "x" to mark it as acknowledged. Like so:
 - [x] Completed task
 -->
 
 - [ ] Shutdown Unity, deleted the /Library folder, opened project again in Unity, and problem still remains.
-- [ ] Checked to be using latest minor Unity version, ex: 2019.1, 2019.2, 2019.3.
-- [ ] Reproduced in new project with minimal required code and assets.
-- [ ] Tested IL2CPP vs Mono on same platform, on example: Windows.
-- [ ] Tested .NET 4.x Equivalent vs .NET Standard 2.x Equivalent on same platform, on example: Windows.
+- [ ] Checked to be using latest version of the package.

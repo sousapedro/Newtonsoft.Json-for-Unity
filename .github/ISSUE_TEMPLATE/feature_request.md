@@ -12,40 +12,38 @@ assignees: ""
 By participating in this project you agree to abide by its terms.
 Read more: https://github.com/jilleJr/Newtonsoft.Json-for-Unity/blob/master/CODE_OF_CONDUCT.md
 
+All sections are just template. Remove if they don't help your case.
+
 -->
 
 ## Description
 
 <!--
 Is your feature request related to a problem? Please describe.
-A clear and concise description of what the problem is. Ex. I'm always frustrated when [...]
+Ex. I'm always frustrated when [...]
 -->
 
-## Why we need this
+## Motivation
 
 <!--
-Why should we put in time and effort for this?
-Do we gain time, style, or ease of use from this?
+Why do we need this?
+Ex: Would make builds faster.
 -->
 
 ## Suggested solution
 
 <!--
-Describe the solution you'd like
-A clear and concise description of what you want to happen.
+How do you think this could be solved?
 -->
 
 ## Possible alternatives
 
 <!--
-Describe alternatives you've considered
-A clear and concise description of any alternative solutions or features you've considered.
+Describe alternatives you've considered, such as workarounds.
 -->
 
 ## Media
 
 <!--
-Additional context
 Add any other context or screenshots about the feature request here.
-Remove this section if it's not applicable
 -->
