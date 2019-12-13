@@ -36,10 +36,11 @@ Ex: Would make builds faster.
 How do you think this could be solved?
 -->
 
-## Possible alternatives
+## Inspiration sources
 
 <!--
-Describe alternatives you've considered, such as workarounds.
+Describe alternatives you've considered, such as other projects solving the same
+or a similar issue.
 -->
 
 ## Media
