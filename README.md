@@ -13,7 +13,6 @@ Available for installation with
 - ~~UniGet~~ <sub>_(Coming soon<sup>tm</sup>)_</sub>
 - ~~Unity Asset packages~~ <sub>_(Coming soon<sup>tm</sup>)_</sub>
 - ~~Unity Asset Store~~ <sub>_(Coming soon<sup>tm</sup>)_</sub>
-- ~~NuGet package~~ <sub>_(Coming soon<sup>tm</sup>)_</sub>
 
 This repo is a **fork** of [JamesNK/Newtonsoft.Json][newtonsoft.json.git] containing custom builds
 for regular standalone, but more importantly AOT targets such as all **IL2CPP builds**
