@@ -97,6 +97,7 @@ jobs:
           command: |
             mkdir -pv /workspace/package
             cp -rv Src/Newtonsoft.Json-for-Unity/. /workspace/package/
+            cp -vf CHANGELOG.md /workspace/package/
 
       - run:
           name: Fix meta files
