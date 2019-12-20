@@ -15,3 +15,4 @@
 [readme-url]: https://github.com/jilleJr/Newtonsoft.Json-for-Unity#readme
 [cloudsmith-url]: https://cloudsmith.io/~jillejr/repos/newtonsoft-json-for-unity
 [issue3]: https://github.com/jilleJr/Newtonsoft.Json-for-Unity/issues/3
+[json.net-12.0.3]: https://github.com/JamesNK/Newtonsoft.Json/releases/12.0.3
