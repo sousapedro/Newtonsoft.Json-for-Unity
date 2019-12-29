@@ -33,7 +33,7 @@ using System.Security;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 #if NET20
-[assembly: AllowPartiallyTrustedCallers)]
+[assembly: AllowPartiallyTrustedCallers]
 #elif NET35
 [assembly: AllowPartiallyTrustedCallers]
 #elif NET40
