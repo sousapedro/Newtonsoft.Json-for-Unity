@@ -23,18 +23,18 @@ Remove-Item -Recurse -Force Src\Newtonsoft.Json-for-Unity.Tests\Assets\Newtonsof
 
 ```ps1
 # Powershell
-> ci\local_build_into_package.ps1 -VolumeSource $(pwd)
+ci\local_build_into_package.ps1 -VolumeSource $(pwd)
 ```
 
 ## Run tests
 
 ### Alt. 1: Using docker image
 
-Runs the tests on a Linux machine.
+Runs the tests in a Linux container using [Docker](https://www.docker.com/).
 
 ```ps1
 # Powershell
-> ci\local_test_in_unity_container.ps1 -VolumeSource $(pwd)
+ci\local_test_in_unity_container.ps1 -VolumeSource $(pwd)
 ```
 
 ### Alt. 2: Running using Unity Editor

@@ -121,7 +121,7 @@ guide on the Wiki about the version format.
     git push
     ```
 
-4. Create a merge request from `feature/12.0.301/merge-12.0.3` to `release/12.0.301`  
+5. Create a merge request from `feature/12.0.301/merge-12.0.3` to `release/12.0.301`  
    <https://github.com/jilleJr/Newtonsoft.Json-for-Unity/compare/release/12.0.301...feature/12.0.301/merge-12.0.3>
 
 ---

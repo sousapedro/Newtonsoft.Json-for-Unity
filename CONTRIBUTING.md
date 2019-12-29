@@ -1,3 +1,5 @@
+<sup>_Yes, this is the same content as the [How to contribute][wiki-contributing] page on the wiki._</sup>
+
 # How to contribute
 Any help given on this project is massively appreciated! ❤
 
@@ -101,10 +103,9 @@ requests.
 [github-feature-request]: https://github.com/jilleJr/Newtonsoft.Json-for-Unity/issues/new?assignees=&labels=enhancement&template=feature_request.md&title=Suggestion%3A+
 [github-help-request]: https://github.com/jilleJr/Newtonsoft.Json-for-Unity/issues/new?assignees=&labels=&template=not-working-as-expected.md&title=Help%3A+
 [github-tests-docs]: https://github.com/jilleJr/Newtonsoft.Json-for-Unity/blob/master/Src/Newtonsoft.Json-for-Unity.Tests/README.md
-[gitflowguide]: https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow
 [wiki]: https://github.com/jilleJr/Newtonsoft.Json-for-Unity/wiki
-[wiki-workingwithbranches]: https://github.com/jilleJr/Newtonsoft.Json-for-Unity/wiki/Working-with-branches
 [wiki-codestyle]: https://github.com/jilleJr/Newtonsoft.Json-for-Unity/wiki/Code-style
+[wiki-contributing]: https://github.com/jilleJr/Newtonsoft.Json-for-Unity/wiki/How-to-contribute
 [documentation]: https://www.newtonsoft.com/json/help
 [stackoverflow]: https://stackoverflow.com/questions/tagged/json.net
 [dropbox]: https://www.dropbox.com
