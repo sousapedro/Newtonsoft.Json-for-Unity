@@ -68,7 +68,7 @@
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <OutputPath>bin\$(Configuration)\unity-aot</OutputPath>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(UnityBuild)'=='Portable'">
+  <PropertyGroup Condition="'$(UnityBuild)'=='Portable' OR '$(TargetFramework)'=='portable-net45+win8+wpa81+wp8'">
     <!-- Unity portable (WP8, UWP, ...) build -->
     <TargetFramework>portable-net45+win8+wpa81+wp8</TargetFramework>
     <AssemblyTitle>Json.NET for Unity portable (wp8)</AssemblyTitle>
