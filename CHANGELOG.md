@@ -14,8 +14,9 @@
 - 🔄 Change: Switched to [cloudsmith.com][cloudsmith-url] as registry provider
   instead of [npmjs.com][npmjs-url]
 
-- 🔄 Change: Better versioning format. For more info see [the wiki page][wiki-versioning].
-  Changes are based of off `12.0.1-patch-001` version _(in previous format)._
+- 🔄 Change: Better versioning format. For more info see
+  [the wiki page][wiki-versioning]. Changes are based of off `12.0.1-patch-001`
+  version _(in previous format)._
 
 - 🐛 Fix: Building on standalone causes plugin collision ([#3][#3])
 

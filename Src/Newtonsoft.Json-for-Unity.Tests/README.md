@@ -1,10 +1,12 @@
 # How to run tests
 
-This folder, `Newtonsoft.Json-for-Unity.Tests`, contains the folder structure of a Unity project (`v2019.2.11f1`).
+This folder, `Newtonsoft.Json-for-Unity.Tests`, contains the folder structure of
+a Unity project (`v2019.2.11f1`).
 
 ## Setup
 
-**Copy** all files, except the `bin` and `obj` folders, from `Newtonsoft.Json.Tests` into its folder inside the Assets folder. À la:
+**Copy** all files, except the `bin` and `obj` folders, from `Newtonsoft.Json.Tests`
+into its folder inside the Assets folder. À la:
 
 ```ps1
 # Powershell
@@ -37,9 +39,11 @@ Runs the tests on a Linux machine.
 
 ### Alt. 2: Running using Unity Editor
 
-- Open the folder `Src\Newtonsoft.Json-for-Unity.Tests` using your installed Unity Editor.
+- Open the folder `Src\Newtonsoft.Json-for-Unity.Tests` using your installed
+  Unity Editor.
 
-- Then open the Test Runner panel, via menu **Window** > **General** > **Test Runner**.
+- Then open the Test Runner panel, via menu
+  **Window** > **General** > **Test Runner**.
 
 - Enter the **PlayMode** tab
 

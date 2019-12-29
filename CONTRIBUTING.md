@@ -16,9 +16,9 @@ The [Newtonsoft.Json-for-Unity wiki][wiki] is a great place to start looking for
 information.
 
 If you have questions about how to use Json.NET, please read the
-[Json.NET documentation][documentation] or ask on [Stack Overflow][stackoverflow].
-There are thousands of Json.NET questions on Stack Overflow with the
-[`json.net`][stackoverflow] tag.
+[Json.NET documentation][documentation] or ask on
+[Stack Overflow][stackoverflow]. There are thousands of Json.NET questions on
+Stack Overflow with the [`json.net`][stackoverflow] tag.
 
 GitHub issues are only for [reporting bugs](#found-an-issue) and
 [feature requests](#want-a-feature), not questions or help.
@@ -49,15 +49,19 @@ When submitting an issue please include the following information:
   [submit a pull request](#submitting-a-pull-request) with the issue reproduced
   in a new test.
 
-- **When creating an issue use the [Bug Report issue template][github-bug-report].**
+- **When creating an issue use the
+  [Bug Report issue template][github-bug-report].**
 
-The more information you include about the issue, the more likely it is to be fixed!
+The more information you include about the issue, the more likely it is to be
+fixed!
 
 ## Want a Feature?
 
-You can request a new feature by submitting an issue to the [GitHub Repository][github].
+You can request a new feature by submitting an issue to the
+[GitHub Repository][github].
 
-- **When suggesting a feature use the [Feature Request issue template][github-feature-request].**
+- **When suggesting a feature use the
+  [Feature Request issue template][github-feature-request].**
 
 ## Submitting a Pull Request
 
@@ -73,14 +77,16 @@ do the following:
 - Write new unit tests to test your changes. All features and fixed bugs must
   have tests to verify they work
 
-Read [GitHub Help][pullrequesthelp] for more details about creating pull requests.
+Read [GitHub Help][pullrequesthelp] for more details about creating pull
+requests.
 
 ## Working with branches
 
 Here at Newtonsoft.Json-for-Unity, we're following a modified git-flow pattern.
 You can read more about git-flow at [Atlassians guide][gitflowguide].
 
-This guide has been moved to it's own section in the wiki: [Working with branches][wiki-workingwithbranches]
+This guide has been moved to it's own section in the wiki:
+[Working with branches][wiki-workingwithbranches]
 
 ## Contributor License Agreement
 

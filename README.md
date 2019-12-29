@@ -14,13 +14,15 @@ Available for installation with
 - ~~Unity Asset packages~~ <sub>_(Coming soon<sup>tm</sup>)_</sub>
 - ~~Unity Asset Store~~ <sub>_(Coming soon<sup>tm</sup>)_</sub>
 
-This repo is a **fork** of [JamesNK/Newtonsoft.Json][newtonsoft.json.git] containing custom builds
-for regular standalone, but more importantly AOT targets such as all **IL2CPP builds**
-**(WebGL, iOS, Android, Windows, Mac OS X)** and portable .NET **(UWP, WP8)**.
+This repo is a **fork** of [JamesNK/Newtonsoft.Json][newtonsoft.json.git]
+containing custom builds for regular standalone, but more importantly AOT
+targets such as all **IL2CPP builds (WebGL, iOS, Android, Windows, Mac OS X)**
+and portable .NET **(UWP, WP8)**.
 
 ## [Installation guide](https://github.com/jilleJr/Newtonsoft.Json-for-Unity/wiki/Installation-via-UPM)
 
-Click the header. It goes to the Wiki where the guide is now located. For reference, this is the url:
+Click the header. It goes to the Wiki where the guide is now located. For
+reference, this is the url:
 
 <https://github.com/jilleJr/Newtonsoft.Json-for-Unity/wiki/Installation-via-UPM>
 
@@ -40,8 +42,8 @@ Click the header. It goes to the Wiki where the guide is now located. For refere
 
 ## Contributing
 
-> ⚠ Please note that this project is released with a Contributor Code of Conduct.
-> By participating in this project you agree to abide by its terms.
+> ⚠ Please note that this project is released with a Contributor Code of
+> Conduct. By participating in this project you agree to abide by its terms.
 > Read more: [CODE_OF_CONDUCT.md](/CODE_OF_CONDUCT.md)
 
 To contribute first you must read the [CONTRIBUTING.md](/CONTRIBUTING.md)
@@ -49,9 +51,13 @@ guidelines. It contains info about
 
 - How to edit the Src/Newtonsoft.Json projects to remain the ability to merge
   from JamesNKs repository without difficulties.
+
 - Coding style.
+
 - Naming style.
+
 - Our level of usage of "git-flow".
+
 - Keep the repo clean, both code & branches.
 
 ## Development
