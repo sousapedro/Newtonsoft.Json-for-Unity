@@ -1,27 +1,40 @@
 # How to contribute
+Any help given on this project is massively appreciated! ❤
 
-Please read these guidelines before contributing to Newtonsoft.Json-for-Unity:
+Contributing can be done by writing docs and code, or simply by asking a
+question! If you find something questionable, then so will probably many others
+as well. If you find something not working as expected, telling us or publish a
+pull request that fixes it is the best way around this.
+
+Before starting, please read the guidelines on the subject on which you wish to
+dig into before contributing to Newtonsoft.Json-for-Unity.
+
+## Table of content
 
 - [How to contribute](#how-to-contribute)
+  - [Table of content](#table-of-content)
   - [Got a Question or Problem?](#got-a-question-or-problem)
   - [Found an Issue?](#found-an-issue)
   - [Want a Feature?](#want-a-feature)
   - [Submitting a Pull Request](#submitting-a-pull-request)
-  - [Working with branches](#working-with-branches)
-  - [Contributor License Agreement](#contributor-license-agreement)
 
 ## Got a Question or Problem?
 
 The [Newtonsoft.Json-for-Unity wiki][wiki] is a great place to start looking for
 information.
 
+If you have questions about this package, Newtonsoft.Json-for-Unity, you can
+try out the [help request][github-help-request] issue template on this repo.
+GitHub issues are the optimal way to get in contact with the maintainers of this
+repository, and we're all happy to help.
+
 If you have questions about how to use Json.NET, please read the
 [Json.NET documentation][documentation] or ask on
 [Stack Overflow][stackoverflow]. There are thousands of Json.NET questions on
 Stack Overflow with the [`json.net`][stackoverflow] tag.
 
-GitHub issues are only for [reporting bugs](#found-an-issue) and
-[feature requests](#want-a-feature), not questions or help.
+See the below sections for [reporting bugs](#found-an-issue) and
+[feature requests](#want-a-feature) if that more suits your case.
 
 ## Found an Issue?
 
@@ -44,7 +57,7 @@ When submitting an issue please include the following information:
 - Does your issue only appear on certain build targets? (ex: Windows Standalone,
   Android, WebGL, even the Editor?)
 
-- If possible, please include code that reproduces the issue. [DropBox][dropbox]
+- If possible, please include code that reproduces the issue. [Dropbox][dropbox]
   or GitHub's [Gist][gist] can be used to share large code samples, or you could
   [submit a pull request](#submitting-a-pull-request) with the issue reproduced
   in a new test.
@@ -69,10 +82,13 @@ When submitting a pull request to the [GitHub Repository][github] make sure to
 do the following:
 
 - Check that new and updated code follows Newtonsoft.Json-for-Unity's existing
-  code formatting and naming standard
+  code formatting and naming standard at the [Code style][wiki-codestyle] wiki
+  page.
 
 - Run Newtonsoft.Json-for-Unity's unit tests to ensure no existing functionality
-  has been affected
+  has been affected. See the
+  [Src/Newtonsoft.Json-for-Unity.Tests/README.md][github-tests-docs] for more
+  info.
 
 - Write new unit tests to test your changes. All features and fixed bugs must
   have tests to verify they work
@@ -80,52 +96,15 @@ do the following:
 Read [GitHub Help][pullrequesthelp] for more details about creating pull
 requests.
 
-## Working with branches
-
-Here at Newtonsoft.Json-for-Unity, we're following a modified git-flow pattern.
-You can read more about git-flow at [Atlassians guide][gitflowguide].
-
-This guide has been moved to it's own section in the wiki:
-[Working with branches][wiki-workingwithbranches]
-
-## Contributor License Agreement
-
-```none
-By contributing your code to Newtonsoft.Json-for-Unity you grant Kalle Jillheden
-a non-exclusive, irrevocable, worldwide, royalty-free, sublicenseable,
-transferable license under all of Your relevant intellectual property rights
-(including copyright, patent, and any other rights), to use, copy, prepare
-derivative works of, distribute and publicly perform and display the
-Contributions on any licensing terms, including without limitation:
-(a) open source licenses like the MIT license; and (b) binary, proprietary, or
-commercial licenses. Except for the licenses granted herein, You reserve all
-right, title, and interest in and to the Contribution.
-
-You confirm that you are able to grant us these rights. You represent that You
-are legally entitled to grant the above license. If Your employer has rights to
-intellectual property that You create, You represent that You have received
-permission to make the Contributions on behalf of that employer, or that Your
-employer has waived such rights for the Contributions.
-
-You represent that the Contributions are Your original works of authorship, and
-to Your knowledge, no other person claims, or has the right to claim, any right
-in any invention or patent related to the Contributions. You also represent that
-You are not legally obligated, whether by entering into an agreement or
-otherwise, in any way that conflicts with the terms of this license.
-
-Kalle Jillheden acknowledges that, except as explicitly described in this
-Agreement, any Contribution which you provide is on an "AS IS" BASIS, WITHOUT
-WARRANTIES OR CONDITIONS OF ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING,
-WITHOUT LIMITATION, ANY WARRANTIES OR CONDITIONS OF TITLE, NON-INFRINGEMENT,
-MERCHANTABILITY, OR FITNESS FOR A PARTICULAR PURPOSE.
-```
-
 [github]: https://github.com/jilleJr/Newtonsoft.Json-for-Unity
 [github-bug-report]: https://github.com/jilleJr/Newtonsoft.Json-for-Unity/issues/new?assignees=&labels=bug&template=bug_report.md&title=Bug%3A+
 [github-feature-request]: https://github.com/jilleJr/Newtonsoft.Json-for-Unity/issues/new?assignees=&labels=enhancement&template=feature_request.md&title=Suggestion%3A+
+[github-help-request]: https://github.com/jilleJr/Newtonsoft.Json-for-Unity/issues/new?assignees=&labels=&template=not-working-as-expected.md&title=Help%3A+
+[github-tests-docs]: https://github.com/jilleJr/Newtonsoft.Json-for-Unity/blob/master/Src/Newtonsoft.Json-for-Unity.Tests/README.md
 [gitflowguide]: https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow
 [wiki]: https://github.com/jilleJr/Newtonsoft.Json-for-Unity/wiki
 [wiki-workingwithbranches]: https://github.com/jilleJr/Newtonsoft.Json-for-Unity/wiki/Working-with-branches
+[wiki-codestyle]: https://github.com/jilleJr/Newtonsoft.Json-for-Unity/wiki/Code-style
 [documentation]: https://www.newtonsoft.com/json/help
 [stackoverflow]: https://stackoverflow.com/questions/tagged/json.net
 [dropbox]: https://www.dropbox.com

@@ -75,10 +75,14 @@ a section little further down below.
 ### Build
 
 When using Visual Studio, open the `Src/Newtonsoft.Json.sln` solution and just
-<kbd>Ctrl+Shift+B</kbd> 😜.
+<kbd>Ctrl+Shift+B</kbd> 😜
 
 When using command line, recommended to use MSBuild.exe for building and not the
 dotnet CLI.
+
+```powershell
+PS> MSBuild.exe -t:build -restore .\Src\Newtonsoft.Json -p:Configuration=Debug
+```
 
 ### Run tests
 
@@ -95,28 +99,30 @@ resulting in Newtonsoft.Json-for-Unity (this project) version 12.0.301. Check
 the [About the versioning](https://github.com/jilleJr/Newtonsoft.Json-for-Unity/wiki/About-the-versioning)
 guide on the Wiki about the version format.
 
-1. If not yet done, create the release branch `release/12.0.301` based off of
+1. First, read the [Working with branches][wiki-workingwithbranches] wiki page.
+
+2. If not yet done, create the release branch `release/12.0.301` based off of
    the `master` branch.
 
-2. Checkout a new feature branch `feature/merge-12.0.3` based off of the
+3. Checkout a new feature branch `feature/merge-12.0.3` based off of the
    `release/12.0.301` branch.
 
-3. Merge the changes from the release tag of JamesNK repo.
+4. Merge the changes from the release tag of JamesNK repo.
    For some files the changes are too grand and the auto merging fails.
    Make sure then to compare said files with the actual changeset on JamesNKs
    repo, like so: <https://github.com/JamesNK/Newtonsoft.Json/compare/12.0.2...12.0.3>
 
     ```bash
-    git checkout feature/merge-12.0.3
+    git checkout -b feature/12.0.301/merge-12.0.3
     git pull https://github.com/JamesNK/Newtonsoft.Json.git 12.0.3
     # Resolve merge conflicts
     # Only proceed when fully done
-    git commit -m "Merge from JamesNK/Newtonsoft.Json 12.0.3 into feature/merge-12.0.3"
+    git commit -m "Merge JamesNK/Newtonsoft.Json:12.0.3 into feature/12.0.301/merge-12.0.3"
     git push
     ```
 
-4. Create a merge request from `feature/merge-12.0.3` to `release/12.0.301`  
-   <https://github.com/jilleJr/Newtonsoft.Json-for-Unity/compare/release/12.0.301...feature/merge-12.0.3>
+4. Create a merge request from `feature/12.0.301/merge-12.0.3` to `release/12.0.301`  
+   <https://github.com/jilleJr/Newtonsoft.Json-for-Unity/compare/release/12.0.301...feature/12.0.301/merge-12.0.3>
 
 ---
 
@@ -129,3 +135,4 @@ See full copyrights in [LICENSE.md][license.md] inside repository
 
 [license.md]: https://github.com/jilleJr/Newtonsoft.Json-for-Unity/blob/master/LICENSE.md
 [newtonsoft.json.git]: https://github.com/JamesNK/Newtonsoft.Json
+[wiki-workingwithbranches]: https://github.com/jilleJr/Newtonsoft.Json-for-Unity/wiki/Working-with-branches
