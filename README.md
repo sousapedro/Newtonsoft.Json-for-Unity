@@ -3,149 +3,136 @@
 [![Latest Version @ Cloudsmith](https://api-prd.cloudsmith.io/badges/version/jillejr/newtonsoft-json-for-unity/npm/jillejr.newtonsoft.json-for-unity/latest/x/?render=true&badge_token=gAAAAABd0U7AyWhLGu6xjEAHz70w9zWbSk6ogsTrw3xvVpa2NXe7HJg_ua7r-G2cbWECxfM51y4uYgOdFOquHNoTQti080JM6w%3D%3D)](https://cloudsmith.io/~jillejr/repos/newtonsoft-json-for-unity/packages/detail/npm/jillejr.newtonsoft.json-for-unity/latest/)
 [![CircleCI](https://img.shields.io/circleci/build/gh/jilleJr/Newtonsoft.Json-for-Unity/master?logo=circleci&style=flat-square)](https://circleci.com/gh/jilleJr/Newtonsoft.Json-for-Unity)
 [![Codacy grade](https://img.shields.io/codacy/grade/f91156e7066c484588f4dba263c8cf45?logo=codacy&style=flat-square)](https://www.codacy.com/manual/jilleJr/Newtonsoft.Json-for-Unity?utm_source=github.com&utm_medium=referral&utm_content=jilleJr/Newtonsoft.Json-for-Unity&utm_campaign=Badge_Grade)
+[![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-v2.0%20adopted-ff69b4.svg?style=flat-square)](/CODE_OF_CONDUCT.md)
 
-Json.NET is a popular high-performance JSON framework for .NET
-
-This repo is a **fork** of [Newtonsoft.Json][newtonsoft.json.git] containing custom builds
-for regular standalone, but more importantly AOT targets such as all **IL2CPP builds**
-**(WebGL, iOS, Android, Windows, Mac OS X)** and portable .NET **(UWP, WP8)**.
+Json.<i></i>NET is a popular high-performance JSON framework for .NET
 
 Available for installation with
 
 - **Unity Package Manager (UPM)** `new!`
-- ~~Unity Asset packages~~ _(coming soon)_
-- ~~Unity Asset Store~~ _(coming soon)_
+- ~~UniGet~~ <sub>_(Coming soon<sup>tm</sup>)_</sub>
+- ~~Unity Asset packages~~ <sub>_(Coming soon<sup>tm</sup>)_</sub>
+- ~~Unity Asset Store~~ <sub>_(Coming soon<sup>tm</sup>)_</sub>
 
-## Versioning format
+This repo is a **fork** of [JamesNK/Newtonsoft.Json][newtonsoft.json.git]
+containing custom builds for regular standalone, but more importantly AOT
+targets such as all **IL2CPP builds (WebGL, iOS, Android, Windows, Mac OS X)**
+and portable .NET **(UWP, WP8)**.
 
-_Staying with JamesNK's version syntax, but with a twist :dizzy:_
+## [Installation guide](https://github.com/jilleJr/Newtonsoft.Json-for-Unity/wiki/Installation-via-UPM)
 
-To allow deployment of patches of the package itself, and keep confusion to a low, I'm only appending a double digit for versioning of this repository. Deployment of Newtonsoft.Json version `12.0.1` will be deployed with the UPM version `12.0.100`, `12.0.101`, `12.0.102` etc. It's still `12.0.1` version of the assembly, but some other stuff around the package will have changed. See the [releases](https://github.com/jilleJr/Newtonsoft.Json-for-Unity/releases) tab for version-specific changelogs.
+Click the header. It goes to the Wiki where the guide is now located. For
+reference, this is the url:
 
-![explanation of version](Doc/version-explanation.png)
+<https://github.com/jilleJr/Newtonsoft.Json-for-Unity/wiki/Installation-via-UPM>
 
-## Installation via UPM
+## Newtonsoft.Json-for-Unity specific links
 
-> Requires Unity Editor `2018.1` or above, as UPM was first shipped with `2018.1`.
+- [Wiki about this project](https://github.com/jilleJr/Newtonsoft.Json-for-Unity/wiki)
+- [Release Notes on GitHub from this repository](https://github.com/jilleJr/Newtonsoft.Json-for-Unity/releases)
+- [Cloudsmith package](https://cloudsmith.io/~jillejr/repos/newtonsoft-json-for-unity/packages/detail/npm/jillejr.newtonsoft.json-for-unity/latest/)
 
-Open `<project>/Packages/manifest.json`, add scope for `jillejr`, then add the package in the list of dependencies.
+## Official Json.<i></i>NET links
 
-À la:
+- [Source repository (github.com/JamesNK/Newtonsoft.Json)](https://github.com/JamesNK/Newtonsoft.Json)
+- [Homepage (www.newtonsoft.com/json)](https://www.newtonsoft.com/json)
+- [Documentation (www.newtonsoft.com/json/help)](https://www.newtonsoft.com/json/help)
+- [Release Notes on GitHub from source repository](https://github.com/JamesNK/Newtonsoft.Json/releases)
+- [Stack Overflow posts tagged with `json.net`](https://stackoverflow.com/questions/tagged/json.net)
 
-```json
-{
-  "scopedRegistries": [
-    {
-      "name": "Packages from jillejr",
-      "url": "https://npm.cloudsmith.io/jillejr/newtonsoft-json-for-unity/",
-      "scopes": ["jillejr"]
-    }
-  ],
-  "dependencies": {
-    "jillejr.newtonsoft.json-for-unity": "12.0.101",
+## Contributing
 
-    "com.unity.modules.ai": "1.0.0",
-    "com.unity.modules.animation": "1.0.0",
-    "com.unity.modules.assetbundle": "1.0.0",
-    "com.unity.modules.audio": "1.0.0",
-    "com.unity.modules.cloth": "1.0.0",
-    "com.unity.modules.director": "1.0.0",
-    "com.unity.modules.imageconversion": "1.0.0"
-  }
-}
+> ⚠ Please note that this project is released with a Contributor Code of
+> Conduct. By participating in this project you agree to abide by its terms.
+> Read more: [CODE_OF_CONDUCT.md](/CODE_OF_CONDUCT.md)
+
+To contribute first you must read the [CONTRIBUTING.md](/CONTRIBUTING.md)
+guidelines. It contains info about
+
+- How to edit the Src/Newtonsoft.Json projects to remain the ability to merge
+  from JamesNKs repository without difficulties.
+
+- Coding style.
+
+- Naming style.
+
+- Our level of usage of "git-flow".
+
+- Keep the repo clean, both code & branches.
+
+## Development
+
+### Edit code
+
+Open the `Src/Newtonsoft.Json.sln` solution file in Visual Studio and start
+hacking.
+
+Rule of thumb: Don't commit edits of the `Src/Newtonsoft.Json/`,
+`Src/Newtonsoft.Json.Tests/`, or `Src/Newtonsoft.Json.TestConsole/` folders
+for forking reasons. Exception is when doing a new release, as explained in
+a section little further down below.
+
+### Build
+
+When using Visual Studio, open the `Src/Newtonsoft.Json.sln` solution and just
+<kbd>Ctrl+Shift+B</kbd> 😜
+
+When using command line, recommended to use MSBuild.exe for building and not the
+dotnet CLI.
+
+```powershell
+PS> MSBuild.exe -t:build -restore .\Src\Newtonsoft.Json -p:Configuration=Debug
 ```
 
-## Updating the package
+### Run tests
 
-### Updating via the UI
+Run the Newtonsoft.Json.Tests normally via the Test Runner inside Visual Studio.
 
-Open the Package Manager UI `Window > Package Manager`
+For testing inside Unity locally, look inside the
+[Src/Newtonsoft.Json-for-Unity.Tests/README.md](/Src/Newtonsoft.Json-for-Unity.Tests/README.md)
+for more information.
 
-![preview of where window button is](https://i.imgur.com/0FvA5W6.png)
+### Merging changes from JamesNK/Newtonsoft.Json
 
-Followed by pressing the update button on the `jillejr.newtonsoft.json-for-unity` package
+As an example, this is how to make a release for Json.<i></i>NET 12.0.3,
+resulting in Newtonsoft.Json-for-Unity (this project) version 12.0.301. Check
+the [About the versioning](https://github.com/jilleJr/Newtonsoft.Json-for-Unity/wiki/About-the-versioning)
+guide on the Wiki about the version format.
 
-![preview of update button](https://i.imgur.com/H6LhK2n.png)
+1. First, read the [Working with branches][wiki-workingwithbranches] wiki page.
 
-### Updating manually via the manifest file
+2. If not yet done, create the release branch `release/12.0.301` based off of
+   the `master` branch.
 
-> _(This is an alternative for updating. Following the guide above will suffice if your Package Manager is functional)_
+3. Checkout a new feature branch `feature/merge-12.0.3` based off of the
+   `release/12.0.301` branch.
 
-Change the version field. You have to know the new version beforehand.
+4. Merge the changes from the release tag of JamesNK repo.
+   For some files the changes are too grand and the auto merging fails.
+   Make sure then to compare said files with the actual changeset on JamesNKs
+   repo, like so: <https://github.com/JamesNK/Newtonsoft.Json/compare/12.0.2...12.0.3>
 
-> Example, with this as old:
->
-> ```json
-> {
->   "dependencies": {
->     "jillejr.newtonsoft.json-for-unity": "12.0.100"
->   }
-> }
-> ```
->
-> New, updated:
->
-> ```json
-> {
->   "dependencies": {
->     "jillejr.newtonsoft.json-for-unity": "12.0.101"
->   }
-> }
-> ```
->
-> _Omitted `scopedRegistries` and Unity packages for readability_
+    ```bash
+    git checkout -b feature/12.0.301/merge-12.0.3
+    git pull https://github.com/JamesNK/Newtonsoft.Json.git 12.0.3
+    # Resolve merge conflicts
+    # Only proceed when fully done
+    git commit -m "Merge JamesNK/Newtonsoft.Json:12.0.3 into feature/12.0.301/merge-12.0.3"
+    git push
+    ```
 
-## Official Json.NET links
-
-- [Homepage](https://www.newtonsoft.com/json)
-- [Documentation](https://www.newtonsoft.com/json/help)
-- [Release Notes](https://github.com/JamesNK/Newtonsoft.Json/releases)
-- [Contributing Guidelines](CONTRIBUTING.md)
-- [License](LICENSE.md)
-- [Stack Overflow](https://stackoverflow.com/questions/tagged/json.net)
-
-## Alternative solutions
-
-Using `2017.*` or below? Here are some alternative projects that may suffice for your Unity project:
-
-- **Newtonsoft Json.NET for Unity3D** by SaladLab  
-  [github.com/SaladLab/Json.Net.Unity3D](https://github.com/SaladLab/Json.Net.Unity3D#readme)
-
-- **JSON .NET for Unity** by ParentElement  
-  [parentelement.com/assets/json_net_unity](https://www.parentelement.com/assets/json_net_unity)  
-  [assetstore.unity.com/packages/tools/input-management/json-net-for-unity](https://assetstore.unity.com/packages/tools/input-management/json-net-for-unity-11347)
-
-## But why another solution
-
-> SaladLab and ParentElement, among other unmentioned coders,
-> have done great work in making Json.NET work in Unity. _So why do we need mine?_
->
-> Both mentioned projects are discontinued, and outdated by some margin in result.
-> SaladLab's latest release targets Json.NET 9, and ParentElement's Json.NET 8.
-> We're at Json.NET 12 now! _(at time of writing)_
->
-> Changeset, compared to SaladLabs and ParentElements solutions:
->
-> - Json.NET version 12 _(let's see how long I can keep up with James repo)_
-> - Release available via Unity Package Manager
-> - Unit testing in Unity Editor
-> - Unit testing in IL2CPP built platforms _(ex: StandaloneWindows)_
->
-> A rework is in this case easier than jumping into SaladLabs project to update it. Sorry Salad champ.
->
-> _Although, in the future this may also be old stuff too,
-> with the upcoming new [System.Text.Json](https://devblogs.microsoft.com/dotnet/try-the-new-system-text-json-apis/)
-> namespace and need to keep the project up-to-date with Newtonsoft.Json.
-> But not for now!_
+5. Create a merge request from `feature/12.0.301/merge-12.0.3` to `release/12.0.301`  
+   <https://github.com/jilleJr/Newtonsoft.Json-for-Unity/compare/release/12.0.301...feature/12.0.301/merge-12.0.3>
 
 ---
 
 This package is licensed under The MIT License (MIT)
 
-Copyright (c) 2019 Kalle Jillheden (jilleJr)  
+Copyright &copy; 2019 Kalle Jillheden (jilleJr)  
 <https://github.com/jilleJr/Newtonsoft.Json>
 
 See full copyrights in [LICENSE.md][license.md] inside repository
 
 [license.md]: https://github.com/jilleJr/Newtonsoft.Json-for-Unity/blob/master/LICENSE.md
 [newtonsoft.json.git]: https://github.com/JamesNK/Newtonsoft.Json
+[wiki-workingwithbranches]: https://github.com/jilleJr/Newtonsoft.Json-for-Unity/wiki/Working-with-branches
