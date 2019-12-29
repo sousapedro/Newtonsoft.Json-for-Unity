@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFrameworks Condition="'$(LibraryFrameworks)'==''">netstandard2.0;net45;portable-net45+win8+wpa81+wp8</TargetFrameworks>
     <TargetFrameworks Condition="'$(LibraryFrameworks)'!=''">$(LibraryFrameworks)</TargetFrameworks>
@@ -39,7 +39,7 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0-beta2-19367-01" PrivateAssets="All" />
   </ItemGroup>
-  <PropertyGroup Condition="'$(UnityBuild)'=='Tests' OR '$(UnityBuild)'==''">
+  <PropertyGroup Condition="'$(UnityBuild)'=='Tests' OR ('$(UnityBuild)'=='' AND '$(TargetFramework)'=='net45')">
     <!-- Only used in Unity Tests & Newtonsoft.Json.Tests -->
     <TargetFramework>net45</TargetFramework>
     <AssemblyTitle>Json.NET for Unity tests (NOT FOR PRODUCTION)</AssemblyTitle>
