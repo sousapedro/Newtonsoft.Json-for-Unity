@@ -39,11 +39,7 @@ using System.Security;
 [assembly: AssemblyCulture("")]
 
 [assembly: AssemblyDelaySign(true)]
-
-// TRY Dynamic.snk, SEE WHAT IT RESULTS IN
-[assembly: AssemblyKeyFile("Dynamic.snk")]
-// ELSE USE THIS
-//[assembly: AssemblyKeyFile("../IdentityPublicKey.snk")]
+[assembly: AssemblyKeyFile("../IdentityPublicKey.snk")]
 
 // Setting ComVisible to false makes the types in this assembly not visible 
 // to COM components.  If you need to access a type in this assembly from 
