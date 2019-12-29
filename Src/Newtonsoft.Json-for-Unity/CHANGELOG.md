@@ -5,8 +5,8 @@
 - Fixed: Only use major version in assembly version (ex: `12.0.0.0`, instead of
   `12.0.1.0`) ([#18][#18])
 - Fixed: Package now targets .NET Standard 2.0 (compared to previously
-  targeting .NET 4.5 & .NET 4.6.1). Portable still targets the [PCL profile
-  259 (`portable-net45+win8+wpa81+wp8`)][portable-class-library].
+  targeting .NET 4.5 & .NET 4.6.1). Portable still targets the [PCL profile 259
+  (`portable-net45+win8+wpa81+wp8`)][portable-class-library].
 
 ## 12.0.101
 
