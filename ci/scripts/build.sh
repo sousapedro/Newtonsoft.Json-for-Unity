@@ -5,7 +5,7 @@ set -o nounset
 set -o errexit
 set -o pipefail
 
-BUILD_UNITY=${1:-${BUILD_UNITY:?"Build name required. Possible values: 'Standalone', 'AOT', 'Portable', 'Editor'."}}
+BUILD_UNITY=${1:-${BUILD_UNITY:?"Build name required. Possible values: 'Standalone', 'AOT', 'Portable', 'Editor', 'Tests'."}}
 BUILD_SOLUTION=${2:-${BUILD_SOLUTION:?"Build solution required. Example: .csproj or .sln file."}}
 BUILD_DESTINATION=${3:-${BUILD_DESTINATION:-"${BUILD_DESTINATION_BASE:?"Build output path required."}/Newtonsoft.Json $BUILD_UNITY"}}
 

@@ -62,21 +62,25 @@ else
     Write-Output "Using volume $VolumePath at /root/repo"
     
     $UnityID = Get-Credential -Message "Enter UnityID login"
+    $UnityUserName = $UnityID.UserName
+    $UnityPassword = $UnityID.GetNetworkCredential().Password
     $Args += @(
-        , "-e", "UNITY_USERNAME=$($UnityID.UserName)"
-        , "-e", "UNITY_PASSWORD=$($UnityID.GetNetworkCredential().Password)"
+        , "-e", "UNITY_USERNAME=$UnityUserName"
+        , "-e", "UNITY_PASSWORD=$UnityPassword"
     )
-    $Command = "xvfb-run --auto-servernum --server-args='-screen 0 640x480x24' `
-     /opt/Unity/Editor/Unity `
-     -logFile `
-     -batchmode `
-     -username `"$UNITY_USERNAME`" -password `"$UNITY_PASSWORD`" `
-    && cat /root/.config/unity3d/Unity/Editor.log"
+    $Command = @"
+    xvfb-run -as '-screen 0 640x480x24' \
+        /opt/Unity/Editor/Unity \
+        -logFile /dev/stdout \
+        -batchmode \
+        -username '$UnityUserName' -password '$UnityPassword'
+    echo 
+"@
 }
 
 Write-Output ""
 
-docker run -it --rm $Args $DockerImage $Command
+$Command | docker run -i --rm $Args $DockerImage
 
 # To generate the .alf file run this:
 #
