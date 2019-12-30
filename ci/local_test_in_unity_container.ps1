@@ -36,7 +36,8 @@ if (!$SkipPackageRebuild) {
     &$PSScriptRoot\local_build_into_package.ps1 `
         -Configuration Debug `
         -UnityBuilds @('Tests') `
-        -RelativeBuildDestinationBase "Src/Newtonsoft.Json-for-Unity.Tests/Packages/Newtonsoft.Json-for-Unity.Tests/Plugins/"
+        -RelativeBuildDestinationBase "Src/Newtonsoft.Json-for-Unity.Tests/Packages/Newtonsoft.Json-for-Unity.Tests/Plugins/" `
+        -DontSign
     if ($LASTEXITCODE -ne 0) {
         throw "Failed to complete debug build"
     }
@@ -94,6 +95,7 @@ try {
         rm -rfv $TEST_PROJECT/Assets/Newtonsoft.Json.Tests/obj
         rm -rfv $TEST_PROJECT/Assets/Newtonsoft.Json.Tests/bin
         cp -vur Src/Newtonsoft.Json.Tests/. $TEST_PROJECT/Assets/Newtonsoft.Json.Tests/
+        cp -v Src/IdentityPublicKey.snk $TEST_PROJECT/Assets/
 '@
 
     Invoke-DockerCommand "Run tests" `
