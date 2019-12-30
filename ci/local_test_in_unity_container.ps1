@@ -10,13 +10,6 @@ param(
     [string]
     $UnityLicenseULF = (Join-Path $PSScriptRoot Unity_v2019.2.11f1.ulf),
 
-    [ValidateSet('Release', 'Debug', IgnoreCase = $false)]
-    [string] $Configuration = "Debug",
-
-    [string[]] $UnityBuilds = @(
-        ,'Editor'
-    ),
-
     [string] $VolumeSource = "/c/Projekt/Newtonsoft.Json-for-Unity",
 
     [string] $DockerImage = "applejag/newtonsoft.json-for-unity.package-unity-tester:v1",
@@ -40,7 +33,10 @@ if (!$SkipPackageRebuild) {
     Write-Host ""
     Write-Host ">>> BUILDING DEBUG BUILD OF PACKAGE USING local_build_into_package.ps1 " -BackgroundColor DarkCyan -ForegroundColor White
     Write-Host ""
-    &$PSScriptRoot\local_build_into_package.ps1 -Configuration Debug -UnityBuilds @('Editor')
+    &$PSScriptRoot\local_build_into_package.ps1 `
+        -Configuration Debug `
+        -UnityBuilds @('Tests') `
+        -RelativeBuildDestinationBase "Src/Newtonsoft.Json-for-Unity.Tests/Packages/Newtonsoft.Json-for-Unity.Tests/Plugins/"
     if ($LASTEXITCODE -ne 0) {
         throw "Failed to complete debug build"
     }

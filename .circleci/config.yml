@@ -90,13 +90,14 @@ jobs:
 
       - run:
           name: Build Testing library
-          command: BUILD_CONFIGURATION=Debug BUILD_DESTINATION=/workspace/testlib $SCRIPTS/build.sh Editor "$BUILD_SOLUTION"
+          command: BUILD_CONFIGURATION=Debug BUILD_DESTINATION=/workspace/testlib $SCRIPTS/build.sh Tests "$BUILD_SOLUTION"
 
       - run:
           name: Move resulting package into workspace
           command: |
             mkdir -pv /workspace/package
             cp -rv Src/Newtonsoft.Json-for-Unity/. /workspace/package/
+            cp -vf CHANGELOG.md /workspace/package/
 
       - run:
           name: Fix meta files
@@ -142,14 +143,14 @@ jobs:
             &$msbuild -t:build -restore -p:Configuration=Debug Src/Newtonsoft.Json.Tests/Newtonsoft.Json.Tests.csproj
 
       - run:
-          name: Run tests (profile 1)
+          name: Run tests (#1, .NET 4.6)
           command: |
             .'Temp/profile.ps1'
             New-Item Tests/NUnit -ItemType Directory -ErrorAction SilentlyContinue
             &$nunit3console Src/Newtonsoft.Json.Tests/bin/Debug/net46/Newtonsoft.Json.Tests.dll --framework=net-4.0 --result=Tests/NUnit/net46.xml
 
       - run:
-          name: Run tests (profile 2, portable)
+          name: Run tests (#2, portable, Profile259)
           command: |
             .'Temp/profile.ps1'
             &$nunit3console Src/Newtonsoft.Json.Tests/bin/Debug/net452/Newtonsoft.Json.Tests.dll --framework=net-4.0 --result=Tests/NUnit/net452.xml
@@ -173,7 +174,7 @@ jobs:
     
     environment:
       SCRIPTS: /root/repo/ci/scripts
-      PACKAGE_FOLDER: /root/repo/Src/Newtonsoft.Json-for-Unity
+      PACKAGE_FOLDER: /root/repo/Src/Newtonsoft.Json-for-Unity.Tests/Packages/Newtonsoft.Json-for-Unity.Tests/
       TEST_PROJECT: /root/repo/Src/Newtonsoft.Json-for-Unity.Tests
       PLATFORMS: playmode
 

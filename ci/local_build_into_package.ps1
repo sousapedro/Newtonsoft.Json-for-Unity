@@ -18,7 +18,10 @@ param (
 
     [string] $DockerImage = "applejag/newtonsoft.json-for-unity.package-builder:v1",
 
-    [string] $WorkingDirectory = "/root/repo"
+    [string] $WorkingDirectory = "/root/repo",
+
+    [string] $RelativeBuildSolution = "Src/Newtonsoft.Json/Newtonsoft.Json.csproj",
+    [string] $RelativeBuildDestinationBase = "Src/Newtonsoft.Json-for-Unity/Plugins/"
 )
 
 $ErrorActionPreference = "Stop"
@@ -29,8 +32,8 @@ $watch = [System.Diagnostics.Stopwatch]::StartNew()
 $container = docker run -dit `
     -v "${VolumeSource}:/root/repo" `
     -e SCRIPTS=/root/repo/ci/scripts `
-    -e BUILD_SOLUTION=/root/repo/Src/Newtonsoft.Json/Newtonsoft.Json.csproj `
-    -e BUILD_DESTINATION_BASE=/root/repo/Src/Newtonsoft.Json-for-Unity/Plugins `
+    -e BUILD_SOLUTION=/root/repo/$RelativeBuildSolution `
+    -e BUILD_DESTINATION_BASE=/root/repo/$RelativeBuildDestinationBase `
     -e BUILD_CONFIGURATION=$Configuration `
     -e BASH_ENV=/.bash_env `
     $DockerImage
