@@ -12,6 +12,10 @@
   .NET Standard 2.0. Portable should still target the [PCL profile 259
   (`portable-net45+win8+wpa81+wp8`)][portable-class-library]. [#29][#29]
 
+- 🐛 Fix: Assembly not found due to unsigned and not strong named assembly.
+  The packaged DLL's are now signed with the public key of Newtonsoft.Json.
+  [#7][#7], [#10][#10]
+
 ## 12.0.101
 
 - ✨ New: Setup CircleCI integration for build automation
@@ -40,9 +44,11 @@
 
 - ✨ Based on [JamesNK/Newtonsoft.Json version `12.0.1`][json.net-12.0.1]
 
+[#3]: https://github.com/jilleJr/Newtonsoft.Json-for-Unity/issues/3
+[#7]: https://github.com/jilleJr/Newtonsoft.Json-for-Unity/issues/7
+[#10]: https://github.com/jilleJr/Newtonsoft.Json-for-Unity/issues/10
 [#18]: https://github.com/jilleJr/Newtonsoft.Json-for-Unity/issues/18
 [#29]: https://github.com/jilleJr/Newtonsoft.Json-for-Unity/pull/29
-[#3]: https://github.com/jilleJr/Newtonsoft.Json-for-Unity/issues/3
 [circleci-badge]: https://img.shields.io/circleci/build/gh/jilleJr/Newtonsoft.Json-for-Unity/master?logo=circleci&style=flat-square
 [circleci-url]: https://circleci.com/gh/jilleJr/Newtonsoft.Json-for-Unity
 [cloudsmith-badge]: https://api-prd.cloudsmith.io/badges/version/jillejr/newtonsoft-json-for-unity/npm/jillejr.newtonsoft.json-for-unity/latest/x/?render=true&badge_token=gAAAAABd0U7AyWhLGu6xjEAHz70w9zWbSk6ogsTrw3xvVpa2NXe7HJg_ua7r-G2cbWECxfM51y4uYgOdFOquHNoTQti080JM6w%3D%3D
