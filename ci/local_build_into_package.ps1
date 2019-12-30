@@ -8,6 +8,7 @@ param (
     [ValidateSet('Release', 'Debug', IgnoreCase = $false)]
     [string] $Configuration = "Release",
 
+    [ValidateSet('Standalone','AOT','Portable','Editor','Tests')]
     [string[]] $UnityBuilds = @(
         ,'AOT'
         ,'Portable'
@@ -21,6 +22,7 @@ param (
     [string] $WorkingDirectory = "/root/repo",
 
     [string] $RelativeBuildSolution = "Src/Newtonsoft.Json/Newtonsoft.Json.csproj",
+    [string] $RelativeBuildDestination = "",
     [string] $RelativeBuildDestinationBase = "Src/Newtonsoft.Json-for-Unity/Plugins/",
 
     [switch] $DontSign
@@ -36,11 +38,26 @@ if (-not $DontSign) {
     $AdditionalConstants += ";SIGNING"
 }
 
+if ($null -eq $UnityBuilds -or $UnityBuilds.Count -eq 0) {
+    throw "At least 1 build must be specified."
+}
+
+$BuildDestination = ""
+
+if (-not [string]::IsNullOrEmpty($RelativeBuildDestination)) {
+    if ($UnityBuilds.Count -gt 1) {
+        throw "Specifying RelativeBuildDestination cannot be used when targeting multiple UnityBuilds."
+    } else {
+        $BuildDestination = "/root/repo/$RelativeBuildDestination"
+    }
+}
+
 $container = docker run -dit `
     -v "${VolumeSource}:/root/repo" `
     -e SCRIPTS=/root/repo/ci/scripts `
     -e BUILD_SOLUTION=/root/repo/$RelativeBuildSolution `
     -e BUILD_DESTINATION_BASE=/root/repo/$RelativeBuildDestinationBase `
+    -e BUILD_DESTINATION=$BuildDestination `
     -e BUILD_CONFIGURATION=$Configuration `
     -e BUILD_ADDITIONAL_CONSTANTS=$AdditionalConstants `
     -e BASH_ENV=/root/.bashrc `
