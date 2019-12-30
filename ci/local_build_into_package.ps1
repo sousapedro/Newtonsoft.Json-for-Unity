@@ -18,7 +18,12 @@ param (
 
     [string] $DockerImage = "applejag/newtonsoft.json-for-unity.package-builder:v1",
 
-    [string] $WorkingDirectory = "/root/repo"
+    [string] $WorkingDirectory = "/root/repo",
+
+    [string] $RelativeBuildSolution = "Src/Newtonsoft.Json/Newtonsoft.Json.csproj",
+    [string] $RelativeBuildDestinationBase = "Src/Newtonsoft.Json-for-Unity/Plugins/",
+
+    [switch] $DontSign
 )
 
 $ErrorActionPreference = "Stop"
@@ -26,13 +31,19 @@ $ErrorActionPreference = "Stop"
 Write-Host ">> Starting $DockerImage" -BackgroundColor DarkRed
 $watch = [System.Diagnostics.Stopwatch]::StartNew()
 
+$AdditionalConstants = ""
+if (-not $DontSign) {
+    $AdditionalConstants += ";SIGNING"
+}
+
 $container = docker run -dit `
     -v "${VolumeSource}:/root/repo" `
     -e SCRIPTS=/root/repo/ci/scripts `
-    -e BUILD_SOLUTION=/root/repo/Src/Newtonsoft.Json/Newtonsoft.Json.csproj `
-    -e BUILD_DESTINATION_BASE=/root/repo/Src/Newtonsoft.Json-for-Unity/Plugins `
+    -e BUILD_SOLUTION=/root/repo/$RelativeBuildSolution `
+    -e BUILD_DESTINATION_BASE=/root/repo/$RelativeBuildDestinationBase `
     -e BUILD_CONFIGURATION=$Configuration `
-    -e BASH_ENV=/.bash_env `
+    -e BUILD_ADDITIONAL_CONSTANTS=$AdditionalConstants `
+    -e BASH_ENV=/root/.bashrc `
     $DockerImage
 
 if ($LASTEXITCODE -ne 0) {

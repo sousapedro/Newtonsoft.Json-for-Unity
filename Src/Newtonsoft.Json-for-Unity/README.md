@@ -2,15 +2,18 @@
 
 Json.NET is a popular high-performance JSON framework for .NET
 
-This package is a fork of Newtonsoft.Json containing custom builds targeting standalone, portable (UWP, WP8), and AOT targets such as all IL2CPP builds (iOS, WebGL, Android, Windows, Mac OS X, et.al).
+This package is a fork of Newtonsoft.Json containing custom builds targeting
+standalone, portable (UWP, WP8), and AOT targets such as all IL2CPP builds
+(iOS, WebGL, Android, Windows, Mac OS X, et.al).
 
 ## Versioning format
 
 _Staying with JamesNK's version syntax, but with a twist :dizzy:_
 
-Based off JamesNK's versioning, but with the addition of two digits on the last segment.
-This is for Newtonsoft.Json-for-Unity to be able to have independent releases,
-at the same time still being easy to see which version of Json.NET it's based of.
+Based off JamesNK's versioning, but with the addition of two digits on the last
+segment. This is for Newtonsoft.Json-for-Unity to be able to have independent
+releases, at the same time still being easy to see which version of Json.NET
+it's based of.
 
 ![explanation of version][version-explanation.png]
 
@@ -22,7 +25,8 @@ Please see the [CHANGELOG.md][changelog.md] file inside this package.
 
 ## Installation via Unity Package Manager
 
-Open `<project>/Packages/manifest.json`, add scope for `jillejr`, then add the package in the list of dependencies.
+Open `<project>/Packages/manifest.json`, add scope for `jillejr`, then add the
+package in the list of dependencies.
 
 À la:
 
@@ -57,7 +61,8 @@ Open the Package Manager UI `Window > Package Manager`
 
 ![preview of where window button is](https://i.imgur.com/0FvA5W6.png)
 
-Followed by pressing the update button on the `jillejr.newtonsoft.json-for-unity` package
+Followed by pressing the update button on the `jillejr.newtonsoft.json-for-unity`
+package
 
 ![preview of update button](https://i.imgur.com/H6LhK2n.png)
 

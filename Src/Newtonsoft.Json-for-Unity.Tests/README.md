@@ -1,10 +1,12 @@
 # How to run tests
 
-This folder, `Newtonsoft.Json-for-Unity.Tests`, contains the folder structure of a Unity project (`v2019.2.11f1`).
+This folder, `Newtonsoft.Json-for-Unity.Tests`, contains the folder structure of
+a Unity project (`v2019.2.11f1`).
 
 ## Setup
 
-**Copy** all files, except the `bin` and `obj` folders, from `Newtonsoft.Json.Tests` into its folder inside the Assets folder. À la:
+**Copy** all files, except the `bin` and `obj` folders, from `Newtonsoft.Json.Tests`
+into its folder inside the Assets folder. À la:
 
 ```ps1
 # Powershell
@@ -21,25 +23,27 @@ Remove-Item -Recurse -Force Src\Newtonsoft.Json-for-Unity.Tests\Assets\Newtonsof
 
 ```ps1
 # Powershell
-> ci\local_build_into_package.ps1 -VolumeSource $(pwd)
+ci\local_build_into_package.ps1 -VolumeSource $(pwd)
 ```
 
 ## Run tests
 
 ### Alt. 1: Using docker image
 
-Runs the tests on a Linux machine.
+Runs the tests in a Linux container using [Docker](https://www.docker.com/).
 
 ```ps1
 # Powershell
-> ci\local_test_in_unity_container.ps1 -VolumeSource $(pwd)
+ci\local_test_in_unity_container.ps1 -VolumeSource $(pwd)
 ```
 
 ### Alt. 2: Running using Unity Editor
 
-- Open the folder `Src\Newtonsoft.Json-for-Unity.Tests` using your installed Unity Editor.
+- Open the folder `Src\Newtonsoft.Json-for-Unity.Tests` using your installed
+  Unity Editor.
 
-- Then open the Test Runner panel, via menu **Window** > **General** > **Test Runner**.
+- Then open the Test Runner panel, via menu
+  **Window** > **General** > **Test Runner**.
 
 - Enter the **PlayMode** tab
 

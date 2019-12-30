@@ -1,31 +1,4 @@
-# Newtonsoft.Json for Unity changelog
+Content of this file should be copied from the CHANGELOG.md
+from the repository root by the build script.
 
-## 12.0.201
-
-- Merge changes from [Newtonsoft.Json 12.0.2][json-net-12.0.2]
-  - New feature - Added MissingMemberHandling to JsonObjectAttribute and JsonObjectContract
-  - New feature - Added constructor to JTokenReader to specify initial path
-  - New feature - Added JsonProperty.IsRequiredSpecified
-  - New feature - Added JsonContract.InternalConverter
-  - Fix - Fixed deserializing nullable struct collections
-  - Fix - Fixed memory link when serializing enums to named values
-  - Fix - Fixed error when setting JsonLoadSettings.DuplicatePropertyNameHandling to Replace
-
-- Based off of `12.0.102`
-
-## 12.0.102
-
-- Fixed to use only major version in assembly version (ex: `12.0.0.0`, instead of `12.0.1.0`)
-
-## 12.0.101
-
-- Setup CircleCI integration
-- Setup Codacy integration
-- Switched to [cloudsmith.com][cloudsmith-url] as registry provider
-- New versioning format. For more info see [the readme in the repository][readme-url]. Changes are based of off `12.0.1-patch-001` version _(in previous format)._
-- Fixed building on standalone ([Issue #3][issue3])
-
-[readme-url]: https://github.com/jilleJr/Newtonsoft.Json-for-Unity#readme
-[cloudsmith-url]: https://cloudsmith.io/~jillejr/repos/newtonsoft-json-for-unity
-[issue3]: https://github.com/jilleJr/Newtonsoft.Json-for-Unity/issues/3
-[json-net-12.0.2]: https://github.com/JamesNK/Newtonsoft.Json/releases/tag/12.0.2
+If you're seeing this, that means that script failed. :)
