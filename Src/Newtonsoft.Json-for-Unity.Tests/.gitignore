@@ -3,6 +3,10 @@
 *.ulf
 *.alf
 
+# Signing key added by local build script
+Assets/IdentityPublicKey.snk
+Assets/IdentityPublicKey.snk.meta
+
 # Unity generated
 /[Ll]ibrary/
 /[Ll]ogs/
