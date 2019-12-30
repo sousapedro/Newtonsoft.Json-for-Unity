@@ -7,7 +7,7 @@
   "targets": {
     ".NETStandard,Version=v2.0": {},
     ".NETStandard,Version=v2.0/": {
-      "Newtonsoft.Json/12.0.102": {
+      "Newtonsoft.Json/12.0.201": {
         "dependencies": {
           "Microsoft.SourceLink.GitHub": "1.0.0-beta2-19367-01",
           "NETStandard.Library": "2.0.3"
@@ -33,7 +33,7 @@
     }
   },
   "libraries": {
-    "Newtonsoft.Json/12.0.102": {
+    "Newtonsoft.Json/12.0.201": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
