@@ -21,8 +21,8 @@ and portable .NET **(UWP, WP8)**.
 
 ## [Installation guide](https://github.com/jilleJr/Newtonsoft.Json-for-Unity/wiki/Installation-via-UPM)
 
-Click the header. It goes to the Wiki where the guide is now located. For
-reference, this is the url:
+Click the header. It goes to the Wiki where the guide is now located. Here is
+the raw url:
 
 <https://github.com/jilleJr/Newtonsoft.Json-for-Unity/wiki/Installation-via-UPM>
 
