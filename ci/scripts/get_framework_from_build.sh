@@ -5,7 +5,7 @@ set -o nounset
 set -o errexit
 set -o pipefail
 
-build="${1?"Build name required. Possible values: 'Standalone', 'AOT', 'Portable', 'Editor'."}"
+build="${1?"Build name required. Possible values: 'Standalone', 'AOT', 'Portable', 'Editor', 'Tests'."}"
 
 error() {
     >&2 echo "$0: $@"
@@ -14,20 +14,23 @@ error() {
 
 case "$build" in
 Standalone)
-    framework="net462"
+    framework="netstandard2.0"
     ;;
 AOT)
-    framework="net462"
+    framework="netstandard2.0"
     ;;
 Portable)
     framework="portable-net45+win8+wpa81+wp8"
     ;;
 Editor)
+    framework="netstandard2.0"
+    ;;
+Tests)
     framework="net45"
     ;;
 *)
     error "Invalid build name.
-    Possible values: 'Standalone', 'AOT', 'Portable', 'Editor'."
+    Possible values: 'Standalone', 'AOT', 'Portable', 'Editor', 'Tests'."
     ;;
 esac
 
