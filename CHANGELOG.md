@@ -15,11 +15,13 @@
 ## 12.0.101
 
 - ✨ New: Setup CircleCI integration for build automation
+  [![CircleCI badge][circleci-badge]][circleci-url]
 
 - ✨ New: Setup Codacy integration for automated code reviews
+  [![Codacy badge][codacy-badge]][codacy-url]
 
 - 🔄 Change: Switched to [cloudsmith.com][cloudsmith-url] as registry provider
-  instead of [npmjs.com][npmjs-url]  
+  instead of [npmjs.com][npmjs-url]
   [![Latest Version @ Cloudsmith][cloudsmith-badge]][cloudsmith-url]
 
 - 🔄 Change: Better versioning format. For more info see
@@ -31,16 +33,23 @@
 ## 12.0.1
 
 - ✨ New: Package published as an Unity Package Manager package on
-  [npmjs.com][npmjs-url].  
+  [npmjs.com][npmjs-url].
   ![npm badge][npmjs-badge]
 
 - ✨ Initial release
 
+- ✨ Based on [JamesNK/Newtonsoft.Json version `12.0.1`][json.net-12.0.1]
+
 [#18]: https://github.com/jilleJr/Newtonsoft.Json-for-Unity/issues/18
 [#29]: https://github.com/jilleJr/Newtonsoft.Json-for-Unity/pull/29
 [#3]: https://github.com/jilleJr/Newtonsoft.Json-for-Unity/issues/3
+[circleci-badge]: https://img.shields.io/circleci/build/gh/jilleJr/Newtonsoft.Json-for-Unity/master?logo=circleci&style=flat-square
+[circleci-url]: https://circleci.com/gh/jilleJr/Newtonsoft.Json-for-Unity
 [cloudsmith-badge]: https://api-prd.cloudsmith.io/badges/version/jillejr/newtonsoft-json-for-unity/npm/jillejr.newtonsoft.json-for-unity/latest/x/?render=true&badge_token=gAAAAABd0U7AyWhLGu6xjEAHz70w9zWbSk6ogsTrw3xvVpa2NXe7HJg_ua7r-G2cbWECxfM51y4uYgOdFOquHNoTQti080JM6w%3D%3D
 [cloudsmith-url]: https://cloudsmith.io/~jillejr/repos/newtonsoft-json-for-unity/packages/detail/npm/jillejr.newtonsoft.json-for-unity/latest/#readme
+[codacy-badge]: https://img.shields.io/codacy/grade/f91156e7066c484588f4dba263c8cf45?logo=codacy&style=flat-square
+[codacy-url]: https://www.codacy.com/manual/jilleJr/Newtonsoft.Json-for-Unity?utm_source=github.com&utm_medium=referral&utm_content=jilleJr/Newtonsoft.Json-for-Unity&utm_campaign=Badge_Grade
+[json.net-12.0.1]: https://github.com/JamesNK/Newtonsoft.Json/releases/12.0.1
 [npmjs-badge]: https://img.shields.io/npm/v/jillejr.newtonsoft.json-for-unity?logo=npm&style=flat-square
 [npmjs-url]: https://www.npmjs.com/package/jillejr.newtonsoft.json-for-unity
 [portable-class-library]: https://docs.microsoft.com/en-us/dotnet/standard/net-standard#pcl-compatibility
