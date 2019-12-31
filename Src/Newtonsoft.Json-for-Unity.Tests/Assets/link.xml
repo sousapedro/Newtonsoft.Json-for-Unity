@@ -1,4 +1,10 @@
 <linker>
+	<assembly fullname="Newtonsoft.Json">
+		<!-- They're referenced in the tests but the constructors are not -->
+		<type fullname="Newtonsoft.Json.Serialization.SnakeCaseNamingStrategy" preserve="all" />
+		<type fullname="Newtonsoft.Json.Serialization.CamelCaseNamingStrategy" preserve="all" />
+	</assembly>
+
 	<assembly fullname="System">
 		<!-- To not strip Version.MinorRevision & Version.MajorRevision -->
 		<type fullname="System.Version" preserve="all" />
