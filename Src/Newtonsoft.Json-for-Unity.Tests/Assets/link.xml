@@ -6,9 +6,6 @@
 	</assembly>
 
 	<assembly fullname="System">
-		<!-- To not strip Version.MinorRevision & Version.MajorRevision -->
-		<type fullname="System.Version" preserve="all" />
-
 		<type fullname="System.ComponentModel.TypeConverter" preserve="all"/>
 		<type fullname="System.ComponentModel.ArrayConverter" preserve="all"/>
 		<type fullname="System.ComponentModel.BaseNumberConverter" preserve="all"/>

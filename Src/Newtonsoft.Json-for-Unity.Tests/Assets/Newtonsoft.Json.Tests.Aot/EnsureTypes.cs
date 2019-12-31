@@ -33,6 +33,14 @@ namespace Newtonsoft.Json.Tests.Aot
             AotHelper.EnsureDictionary<string, decimal>(); // used in JsonSerializerTest.DeserializeDecimalDictionaryExact
             AotHelper.EnsureDictionary<string, int>(); // used in JsonSerializerCollectionsTests.SerializeCustomReadOnlyDictionary
             AotHelper.EnsureDictionary<string, object>(); // used in combination with JsonExtensionDataAttribute, for example in SerializeExtensionData.CustomerInvoice
+
+            // used in Newtonsoft.Json.Tests.Serialization.TraceWriterTests.DeserializeMissingMemberConstructor
+            AotHelper.Ensure(() => {
+                // to not strip MajorRevision & MinorRevision
+                var version = new Version(1, 2, 3, 4);
+                var majorRev = version.MajorRevision;
+                var minorRev = version.MinorRevision;
+            });
         }
     }
 }
