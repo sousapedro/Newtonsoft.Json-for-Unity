@@ -556,7 +556,9 @@ namespace Newtonsoft.Json.Serialization
             if (extensionDataAttribute.WriteData)
             {
                 Type enumerableWrapper = typeof(EnumerableDictionaryWrapper<,>).MakeGenericType(keyType, valueType);
-                ConstructorInfo constructors = enumerableWrapper.GetConstructors().First();
+                ConstructorInfo constructors = enumerableWrapper.GetConstructors().FirstOrDefault()
+                    ?? throw new MissingMethodException(enumerableWrapper.FullName, ".ctor");
+
                 ObjectConstructor<object> createEnumerableWrapper = JsonTypeReflector.ReflectionDelegateFactory.CreateParameterizedConstructor(constructors);
 
                 ExtensionDataGetter extensionDataGetter = o =>
