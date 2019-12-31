@@ -25,6 +25,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Newtonsoft.Json.Serialization;
 
 namespace Newtonsoft.Json.Utilities
 {
@@ -86,6 +87,7 @@ namespace Newtonsoft.Json.Utilities
                 var a = new Dictionary<TKey, TValue>();
                 var b = new DictionaryWrapper<TKey, TValue>((IDictionary)null);
                 var c = new DictionaryWrapper<TKey, TValue>((IDictionary<TKey, TValue>)null);
+				var d = new DefaultContractResolver.EnumerableDictionaryWrapper<TKey, TValue>((IDictionary<TKey, TValue>)null);
             });
         }
 
