@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Reflection;
 using NUnit.Framework;
@@ -40,7 +40,7 @@ namespace Aot.Tests
                 _ = CreateListOfType<MyNonAotClass>();
             });
 
-            Assert.IsInstanceOf<TypeInitializationException>(ex.InnerException);
+            Assert.IsInstanceOf<TypeInitializationException>(ex.InnerException, ex.Message);
         }
 #endif
 
