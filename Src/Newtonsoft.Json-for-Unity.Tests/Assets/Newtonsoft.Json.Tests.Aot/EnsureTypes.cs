@@ -32,6 +32,7 @@ namespace Newtonsoft.Json.Tests.Aot
             AotHelper.EnsureList<KeyValuePair<string, string>>(); // used in Issue1322
             AotHelper.EnsureDictionary<string, decimal>(); // used in JsonSerializerTest.DeserializeDecimalDictionaryExact
             AotHelper.EnsureDictionary<string, int>(); // used in JsonSerializerCollectionsTests.SerializeCustomReadOnlyDictionary
+            AotHelper.EnsureDictionary<string, object>(); // used in combination with JsonExtensionDataAttribute, for example in SerializeExtensionData.CustomerInvoice
         }
     }
 }
