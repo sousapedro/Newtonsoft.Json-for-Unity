@@ -188,11 +188,11 @@ jobs:
 
       - restore_cache:
           keys:
-            - test-unity-upm-manifest-{{ checksum "/root/repo/Src/Newtonsoft.Json-for-Unity.Tests/Packages/manifest.json" }}
+            - test-unity-upm-manifest-2018
 
       - restore_cache:
           keys:
-            - test-unity-upm-global
+            - test-unity-upm-global-2018
 
       - run:
           name: Enable permissions on scripts
@@ -244,12 +244,12 @@ jobs:
           path: ~/tests/junit
 
       - save_cache:
-          key: test-unity-upm-manifest-{{ checksum "/root/repo/Src/Newtonsoft.Json-for-Unity.Tests/Packages/manifest.json" }}
+          key: test-unity-upm-manifest-2018
           paths:
             - /root/repo/Src/Newtonsoft.Json-for-Unity.Tests/Library/PackageCache
 
       - save_cache:
-          key: test-unity-upm-global
+          key: test-unity-upm-global-2018
           paths:
             - /root/.config/unity3d/cache
 
@@ -275,7 +275,7 @@ jobs:
 
       - restore_cache:
           keys:
-            - test-unity-upm-global
+            - test-unity-upm-global-2019
 
       - run:
           name: Enable permissions on scripts
@@ -322,7 +322,7 @@ jobs:
             - /root/repo/Src/Newtonsoft.Json-for-Unity.Tests/Library/PackageCache
 
       - save_cache:
-          key: test-unity-upm-global
+          key: test-unity-upm-global-2019
           paths:
             - /root/.config/unity3d/cache
 
