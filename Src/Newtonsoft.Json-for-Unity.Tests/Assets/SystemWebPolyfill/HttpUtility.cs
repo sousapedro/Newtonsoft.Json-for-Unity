@@ -114,7 +114,7 @@ namespace System.Web
         {
             if (ch > 255)
             {
-                foreach (byte b in e.GetBytes(new { ch }))
+                foreach (byte b in e.GetBytes(new[] { ch }))
                 {
                     buf.Add(b);
                 }
