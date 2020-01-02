@@ -170,7 +170,7 @@ jobs:
           paths:
             - C:\Users\circleci\.nuget\packages
 
-  test-unity-2018:
+  test-unity-2018-4-14f1:
     working_directory: ~/repo
     
     environment:
@@ -253,7 +253,7 @@ jobs:
           paths:
             - /root/.config/unity3d/cache
 
-  test-unity-2019:
+  test-unity-2019-2-11f1:
     working_directory: ~/repo
     
     environment:
@@ -512,10 +512,10 @@ workflows:
       - test-windows:
           requires:
             - build-package
-      - test-unity-2018:
+      - test-unity-2018-4-14f1:
           requires:
             - build-package
-      - test-unity-2019:
+      - test-unity-2019-2-11f1:
           requires:
             - build-package
   check-deploy-ready:
@@ -533,18 +533,18 @@ workflows:
       - test-windows:
           requires:
             - build-package
-      - test-unity-2018:
+      - test-unity-2018-4-14f1:
           requires:
             - build-package
-      - test-unity-2019:
+      - test-unity-2019-2-11f1:
           requires:
             - build-package
       - hold:
           type: approval
           requires:
             - test-windows
-            - test-unity-2018
-            - test-unity-2019
+            - test-unity-2018-4-14f1
+            - test-unity-2019-2-11f1
       - deploy-cloudsmith:
           requires:
             - hold
