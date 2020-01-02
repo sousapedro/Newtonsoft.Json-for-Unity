@@ -114,7 +114,7 @@ namespace System.Web
         {
             if (ch > 255)
             {
-                foreach (byte b in e.GetBytes(new char[] { ch }))
+                foreach (byte b in e.GetBytes(new { ch }))
                 {
                     buf.Add(b);
                 }
@@ -189,7 +189,6 @@ namespace System.Web
             }
 
             byte[] buf = bytes.ToArray();
-            bytes = null;
             return e.GetString(buf);
 
         }
