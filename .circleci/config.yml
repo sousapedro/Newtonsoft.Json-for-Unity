@@ -225,10 +225,6 @@ jobs:
       - run:
           name: Downgrade Unity project to 2018.x
           command: |
-            echo "Removing $TEST_PROJECT/Library folder"
-            rm -rf "$TEST_PROJECT/Library"
-            echo "Removing $TEST_PROJECT/Temp folder"
-            rm -rf "$TEST_PROJECT/Temp"
             echo "Moving $TEST_PROJECT/Packages/manifest.json file"
             mv -v "$TEST_PROJECT/Packages/manifest.json" "$TEST_PROJECT/Packages/.manifest.json.old"
             echo
