@@ -34,9 +34,8 @@
 	</assembly>
 
 	<assembly fullname="System.Xml.Linq">
-		<type fullname="System.Xml.Linq.XElement" preserve="all"/>
-		<type fullname="System.Xml.Linq.XAttribute" preserve="all"/>
+		<type fullname="MS.Internal.Xml.Linq.ComponentModel.XTypeDescriptionProvider`1" preserve="all"/>
 	</assembly>
 
-  <assembly fullname="System.Runtime.Serialization" preserve="all"/>
+	<assembly fullname="System.Runtime.Serialization" preserve="all"/>
 </linker>
