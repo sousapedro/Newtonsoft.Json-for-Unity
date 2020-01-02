@@ -2,7 +2,8 @@
     "name": "Newtonsoft.Json.Tests",
     "references": [
         "UnityEngine.TestRunner",
-        "UnityEditor.TestRunner"
+        "UnityEditor.TestRunner",
+        "SystemWebPolyfill"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
