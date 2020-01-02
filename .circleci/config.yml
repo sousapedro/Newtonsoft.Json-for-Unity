@@ -170,7 +170,7 @@ jobs:
           paths:
             - C:\Users\circleci\.nuget\packages
 
-  test-unity:
+  test-unity-2018:
     working_directory: ~/repo
     
     environment:
@@ -180,7 +180,96 @@ jobs:
       PLATFORMS: playmode
 
     docker:
-      - image: applejag/newtonsoft.json-for-unity.package-unity-tester:v1
+      - image: applejag/newtonsoft.json-for-unity.package-unity-tester:v1-2018.4.14f1
+
+    steps:
+      # Checkout repo -> ~/repo
+      - checkout
+
+      - restore_cache:
+          keys:
+            - test-unity-upm-manifest-{{ checksum "/root/repo/Src/Newtonsoft.Json-for-Unity.Tests/Packages/manifest.json" }}
+
+      - restore_cache:
+          keys:
+            - test-unity-upm-global
+
+      - run:
+          name: Enable permissions on scripts
+          command: chmod +x $SCRIPTS/**.sh -v
+
+      - run:
+          name: Setup Unity license
+          command: |
+            # Requires UNITY_LICENSE_CONTENT_B64 environment variable to be filled in inside CircleCI
+            $SCRIPTS/unity_login.sh
+
+      - attach_workspace:
+          at: /workspace
+
+      - run:
+          name: Copy Newtonsoft.Json.Tests into Unity testing project
+          command: |
+            rm -rfv Src/Newtonsoft.Json.Tests/obj
+            rm -rfv Src/Newtonsoft.Json.Tests/bin
+            cp -vur Src/Newtonsoft.Json.Tests/. $TEST_PROJECT/Assets/Newtonsoft.Json.Tests/
+
+      - run:
+          name: Copy Plugins into Unity testing project
+          command: cp -vfr /workspace/package/. $PACKAGE_FOLDER/
+
+      - run:
+          name: Overriding Editor dll's with testing dll's
+          command: cp -vfr /workspace/testlib/. "$PACKAGE_FOLDER/Plugins/Newtonsoft.Json Editor/"
+
+      - run:
+          name: Downgrade Unity project to 2018.x
+          command: |
+            echo "Removing $TEST_PROJECT/Library folder"
+            rm -rf "$TEST_PROJECT/Library"
+            echo "Removing $TEST_PROJECT/Temp folder"
+            rm -rf "$TEST_PROJECT/Temp"
+            echo "Moving $TEST_PROJECT/Packages/manifest.json file"
+            mv -v "$TEST_PROJECT/Packages/manifest.json" "$TEST_PROJECT/Packages/.manifest.json.old"
+            echo
+            find "$TEST_PROJECT/Assets" -name '.*.asmdef.old' -exec rm -v {} +
+            echo
+            find "$TEST_PROJECT/Assets" -name '*.asmdef' -exec $SCRIPTS/unity_downgrade_asmdef.sh --backup "{}" \;
+
+      - run:
+          name: Run tests
+          command: $SCRIPTS/unity_test.sh $TEST_PROJECT ~/tests/nunit
+
+      - run:
+          name: Convert NUnit to JUnit xml
+          when: always
+          command: $SCRIPTS/nunit2junit.sh ~/tests/nunit ~/tests/junit/
+
+      - store_test_results:
+          name: Store test results -> ~/tests/junit
+          path: ~/tests/junit
+
+      - save_cache:
+          key: test-unity-upm-manifest-{{ checksum "/root/repo/Src/Newtonsoft.Json-for-Unity.Tests/Packages/manifest.json" }}
+          paths:
+            - /root/repo/Src/Newtonsoft.Json-for-Unity.Tests/Library/PackageCache
+
+      - save_cache:
+          key: test-unity-upm-global
+          paths:
+            - /root/.config/unity3d/cache
+
+  test-unity-2019:
+    working_directory: ~/repo
+    
+    environment:
+      SCRIPTS: /root/repo/ci/scripts
+      PACKAGE_FOLDER: /root/repo/Src/Newtonsoft.Json-for-Unity.Tests/Packages/Newtonsoft.Json-for-Unity.Tests/
+      TEST_PROJECT: /root/repo/Src/Newtonsoft.Json-for-Unity.Tests
+      PLATFORMS: playmode
+
+    docker:
+      - image: applejag/newtonsoft.json-for-unity.package-unity-tester:v1-2019.2.11f1
 
     steps:
       # Checkout repo -> ~/repo
@@ -431,7 +520,10 @@ workflows:
       - test-windows:
           requires:
             - build-package
-      - test-unity:
+      - test-unity-2018:
+          requires:
+            - build-package
+      - test-unity-2019:
           requires:
             - build-package
   check-deploy-ready:
@@ -449,14 +541,18 @@ workflows:
       - test-windows:
           requires:
             - build-package
-      - test-unity:
+      - test-unity-2018:
+          requires:
+            - build-package
+      - test-unity-2019:
           requires:
             - build-package
       - hold:
           type: approval
           requires:
             - test-windows
-            - test-unity
+            - test-unity-2018
+            - test-unity-2019
       - deploy-cloudsmith:
           requires:
             - hold
