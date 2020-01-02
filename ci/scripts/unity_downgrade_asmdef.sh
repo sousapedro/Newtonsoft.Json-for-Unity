@@ -105,7 +105,7 @@ else
     fi
 
     echo "$(jq '
-        .references=[] |
+        .references-=["UnityEngine.TestRunner", "UnityEditor.TestRunner"] |
         .precompiledReferences=[] |
         .optionalUnityReferences=["TestAssemblies"] |
         .overrideReferences=false |
