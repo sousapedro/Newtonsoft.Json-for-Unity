@@ -202,7 +202,7 @@ jobs:
           name: Setup Unity license
           command: |
             # Requires UNITY_2018_4_14f1_LICENSE_CONTENT_B64 environment variable to be filled in inside CircleCI
-            UNITY_LICENSE_CONTENT_B64=UNITY_2018_4_14f1_LICENSE_CONTENT_B64 $SCRIPTS/unity_login.sh
+            UNITY_LICENSE_CONTENT_B64="$UNITY_2018_4_14f1_LICENSE_CONTENT_B64" $SCRIPTS/unity_login.sh
 
       - attach_workspace:
           at: /workspace
@@ -285,7 +285,7 @@ jobs:
           name: Setup Unity license
           command: |
             # Requires UNITY_2019_2_11f1_LICENSE_CONTENT_B64 environment variable to be filled in inside CircleCI
-            UNITY_LICENSE_CONTENT_B64=UNITY_2019_2_11f1_LICENSE_CONTENT_B64 $SCRIPTS/unity_login.sh
+            UNITY_LICENSE_CONTENT_B64="$UNITY_2019_2_11f1_LICENSE_CONTENT_B64" $SCRIPTS/unity_login.sh
 
       - attach_workspace:
           at: /workspace
