@@ -102,10 +102,6 @@ namespace System.Web.Util
             currentEncoderLazy = new Lazy<HttpEncoder>(new Func<HttpEncoder>(GetCustomEncoderFromConfig));
         }
 
-        public HttpEncoder()
-        {
-        }
-
         protected internal virtual void HeaderNameValueEncode(
             string headerName,
             string headerValue,
@@ -152,7 +148,9 @@ namespace System.Web.Util
                 char ch = input[i];
 
                 if ((ch < 32 && ch != 9) || ch == 127)
+                {
                     StringBuilderAppend(String.Format("%{0:x2}", (int)ch), ref sb);
+                }
             }
 
             if (sb != null)
@@ -527,7 +525,7 @@ namespace System.Web.Util
                     {
                         if (number == 0)
                         {
-                            output.Append(rawEntity.ToString() + ";");
+                            output.Append(rawEntity + ";");
                         }
                         else if (number > 65535)
                         {
@@ -598,9 +596,6 @@ namespace System.Web.Util
         {
             if (c > 255)
             {
-                //FIXME: what happens when there is an internal error?
-                //if (!isUnicode)
-                //	throw new ArgumentOutOfRangeException ("c", c, "c must be less than 256");
                 int idx;
                 int i = (int)c;
 

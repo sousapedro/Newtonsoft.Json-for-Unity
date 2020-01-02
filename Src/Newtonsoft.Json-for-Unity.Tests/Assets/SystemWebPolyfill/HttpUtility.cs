@@ -74,14 +74,6 @@ namespace System.Web
             }
         }
 
-        #region Constructors
-
-        public HttpUtility()
-        {
-        }
-
-        #endregion // Constructors
-
         #region Methods
 
         public static void HtmlAttributeEncode(string s, TextWriter output)
@@ -288,11 +280,6 @@ namespace System.Web
                 return string.Empty;
             }
 
-            if (bytes == null)
-            {
-                throw new ArgumentNullException(nameof(bytes));
-            }
-
             if (offset < 0 || offset > bytes.Length)
             {
                 throw new ArgumentOutOfRangeException(nameof(offset));
@@ -358,7 +345,6 @@ namespace System.Web
                 output.Append(GetChars(acc, e));
             }
 
-            acc = null;
             return output.ToString();
         }
 
@@ -493,7 +479,9 @@ namespace System.Web
             }
 
             if (bytes.Length == 0)
+            {
                 return string.Empty;
+            }
 
             return Encoding.ASCII.GetString(UrlEncodeToBytes(bytes, 0, bytes.Length));
         }

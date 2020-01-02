@@ -31,7 +31,7 @@ using System.Globalization;
 
 namespace System.Web.Util
 {
-    class Helpers
+    internal class Helpers
     {
         public static readonly CultureInfo InvariantCulture = CultureInfo.InvariantCulture;
     }
