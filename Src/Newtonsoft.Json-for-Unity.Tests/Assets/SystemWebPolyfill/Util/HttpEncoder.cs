@@ -18,10 +18,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -61,7 +61,7 @@ namespace System.Web.Util
                 }
             }
         }
-        
+
         public static HttpEncoder Current {
             get {
                 if (currentEncoder == null)
@@ -86,7 +86,7 @@ namespace System.Web.Util
             defaultEncoder = new Lazy <HttpEncoder> (() => new HttpEncoder ());
             currentEncoderLazy = new Lazy <HttpEncoder> (new Func <HttpEncoder> (GetCustomEncoderFromConfig));
         }
-        
+
         public HttpEncoder ()
         {
         }
@@ -111,11 +111,11 @@ namespace System.Web.Util
             else
                 sb.Append (s);
         }
-        
+
         static string EncodeHeaderString (string input)
         {
             StringBuilder sb = null;
-            
+
             for (int i = 0; i < input.Length; i++) {
                 char ch = input [i];
 
@@ -171,11 +171,11 @@ namespace System.Web.Util
 
             if (String.Compare (typeName, "System.Web.Util.HttpEncoder", StringComparison.OrdinalIgnoreCase) == 0)
                 return Default;
-            
+
             Type t = Type.GetType (typeName, false);
             if (t == null)
                 throw new ConfigurationErrorsException (String.Format ("Could not load type '{0}'.", typeName));
-            
+
             if (!typeof (HttpEncoder).IsAssignableFrom (t))
                 throw new ConfigurationErrorsException (
                     String.Format ("'{0}' is not allowed here because it does not extend class 'System.Web.Util.HttpEncoder'.", typeName)
@@ -194,19 +194,19 @@ namespace System.Web.Util
             int length = value.Length;
             for (int i = 0; i < length; i++)
                 UrlPathEncodeChar (value [i], result);
-            
+
             return Encoding.ASCII.GetString (result.ToArray ());
         }
-        
+
         internal static byte[] UrlEncodeToBytes (byte[] bytes, int offset, int count)
         {
             if (bytes == null)
                 throw new ArgumentNullException ("bytes");
-            
+
             int blen = bytes.Length;
             if (blen == 0)
                 return new byte [0];
-            
+
             if (offset < 0 || offset >= blen)
                 throw new ArgumentOutOfRangeException("offset");
 
@@ -220,15 +220,15 @@ namespace System.Web.Util
 
             return result.ToArray();
         }
-        
-        internal static string HtmlEncode (string s) 
+
+        internal static string HtmlEncode (string s)
         {
             if (s == null)
                 return null;
 
             if (s.Length == 0)
                 return String.Empty;
-            
+
             bool needEncode = false;
             for (int i = 0; i < s.Length; i++) {
                 char c = s [i];
@@ -245,14 +245,14 @@ namespace System.Web.Util
 
             StringBuilder output = new StringBuilder ();
             int len = s.Length;
-            
+
             for (int i = 0; i < len; i++) {
                 char ch = s [i];
                 switch (ch) {
                     case '&' :
                         output.Append ("&amp;");
                         break;
-                    case '>' : 
+                    case '>' :
                         output.Append ("&gt;");
                         break;
                     case '<' :
@@ -271,7 +271,7 @@ namespace System.Web.Util
                     case '\uff1e':
                         output.Append ("&#65310;");
                         break;
-                        
+
                     default:
                         if (ch > 159 && ch < 256) {
                             output.Append ("&#");
@@ -280,13 +280,13 @@ namespace System.Web.Util
                         } else
                             output.Append (ch);
                         break;
-                }	
+                }
             }
-            
-            return output.ToString ();			
+
+            return output.ToString ();
         }
-        
-        internal static string HtmlAttributeEncode (string s) 
+
+        internal static string HtmlAttributeEncode (string s)
         {
             if (String.IsNullOrEmpty (s))
                 return String.Empty;
@@ -310,7 +310,7 @@ namespace System.Web.Util
             for (int i = 0; i < len; i++) {
                 char ch = s [i];
                 switch (ch) {
-                    case '&' : 
+                    case '&' :
                         output.Append ("&amp;");
                         break;
                     case '"' :
@@ -330,7 +330,7 @@ namespace System.Web.Util
 
             return output.ToString();
         }
-        
+
         internal static string HtmlDecode (string s)
         {
             if (s == null)
@@ -338,7 +338,7 @@ namespace System.Web.Util
 
             if (s.Length == 0)
                 return String.Empty;
-            
+
             if (s.IndexOf ('&') == -1)
                 return s;
             StringBuilder rawEntity = new StringBuilder ();
@@ -353,7 +353,7 @@ namespace System.Web.Util
             int number = 0;
             bool is_hex_value = false;
             bool have_trailing_digits = false;
-    
+
             for (int i = 0; i < len; i++) {
                 char c = s [i];
                 if (state == 0) {
@@ -460,7 +460,7 @@ namespace System.Web.Util
             return (c == '!' || c == '(' || c == ')' || c == '*' || c == '-' || c == '.' || c == '_'
             );
         }
-        
+
         internal static void UrlEncodeChar (char c, Stream result, bool isUnicode) {
             if (c > 255) {
                 //FIXME: what happens when there is an internal error?
@@ -481,7 +481,7 @@ namespace System.Web.Util
                 result.WriteByte ((byte)hexChars [idx]);
                 return;
             }
-            
+
             if (c > ' ' && NotEncoded (c)) {
                 result.WriteByte ((byte)c);
                 return;
@@ -502,7 +502,7 @@ namespace System.Web.Util
                 }
                 else
                     result.WriteByte ((byte)'%');
-                
+
                 int idx = ((int) c) >> 4;
                 result.WriteByte ((byte)hexChars [idx]);
                 idx = ((int) c) & 0x0F;
@@ -532,13 +532,13 @@ namespace System.Web.Util
             else
                 result.WriteByte ((byte) c);
         }
-        
+
         static void InitEntities ()
         {
             // Build the hash table of HTML entity references.  This list comes
             // from the HTML 4.01 W3C recommendation.
             entities = new SortedDictionary <string, char> (StringComparer.Ordinal);
-            
+
             entities.Add ("nbsp", '\u00A0');
             entities.Add ("iexcl", '\u00A1');
             entities.Add ("cent", '\u00A2');

@@ -1,4 +1,4 @@
-// 
+//
 // System.Web.HttpUtility
 //
 // Authors:
@@ -16,10 +16,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -63,41 +63,41 @@ namespace System.Web {
                 return sb.ToString ();
             }
         }
-        
+
         #region Constructors
 
-        public HttpUtility () 
+        public HttpUtility ()
         {
         }
-    
+
         #endregion // Constructors
-    
+
         #region Methods
-    
-        public static void HtmlAttributeEncode (string s, TextWriter output) 
+
+        public static void HtmlAttributeEncode (string s, TextWriter output)
         {
             if (output == null) {
                 throw new ArgumentNullException ("output");
             }
             HttpEncoder.Current.HtmlAttributeEncode (s, output);
         }
-    
-        public static string HtmlAttributeEncode (string s) 
+
+        public static string HtmlAttributeEncode (string s)
         {
             if (s == null)
                 return null;
-            
+
             using (var sw = new StringWriter ()) {
                 HttpEncoder.Current.HtmlAttributeEncode (s, sw);
                 return sw.ToString ();
             }
         }
-    
-        public static string UrlDecode (string str) 
+
+        public static string UrlDecode (string str)
         {
             return UrlDecode(str, Encoding.UTF8);
         }
-    
+
         static char [] GetChars (MemoryStream b, Encoding e)
         {
             return e.GetChars (b.GetBuffer (), 0, (int) b.Length);
@@ -111,15 +111,15 @@ namespace System.Web {
             } else
                 buf.Add ((byte)ch);
         }
-        
+
         public static string UrlDecode (string str, Encoding e)
         {
-            if (null == str) 
+            if (null == str)
                 return null;
 
             if (str.IndexOf ('%') == -1 && str.IndexOf ('+') == -1)
                 return str;
-            
+
             if (e == null)
                 e = Encoding.UTF8;
 
@@ -127,7 +127,7 @@ namespace System.Web {
             var bytes = new List <byte> ();
             int xchar;
             char ch;
-            
+
             for (int i = 0; i < len; i++) {
                 ch = str [i];
                 if (ch == '%' && i + 2 < len && str [i + 1] != '%') {
@@ -153,13 +153,13 @@ namespace System.Web {
                 else
                     WriteCharBytes (bytes, ch, e);
             }
-            
+
             byte[] buf = bytes.ToArray ();
             bytes = null;
             return e.GetString (buf);
-            
+
         }
-    
+
         public static string UrlDecode (byte [] bytes, Encoding e)
         {
             if (bytes == null)
@@ -214,7 +214,7 @@ namespace System.Web {
 
             return val;
         }
-        
+
         public static string UrlDecode (byte [] bytes, int offset, int count, Encoding e)
         {
             if (bytes == null)
@@ -271,11 +271,11 @@ namespace System.Web {
             if (acc.Length > 0) {
                 output.Append (GetChars (acc, e));
             }
-            
+
             acc = null;
             return output.ToString ();
         }
-    
+
         public static byte [] UrlDecodeToBytes (byte [] bytes)
         {
             if (bytes == null)
@@ -333,12 +333,12 @@ namespace System.Web {
             return result.ToArray ();
         }
 
-        public static string UrlEncode(string str) 
+        public static string UrlEncode(string str)
         {
             return UrlEncode(str, Encoding.UTF8);
         }
-    
-        public static string UrlEncode (string str, Encoding e) 
+
+        public static string UrlEncode (string str, Encoding e)
         {
             if (str == null)
                 return null;
@@ -367,7 +367,7 @@ namespace System.Web {
             int realLen = e.GetBytes (str, 0, str.Length, bytes, 0);
             return Encoding.ASCII.GetString (UrlEncodeToBytes (bytes, 0, realLen));
         }
-    
+
         public static string UrlEncode (byte [] bytes)
         {
             if (bytes == null)
@@ -453,28 +453,28 @@ namespace System.Web {
         /// </summary>
         /// <param name="s">The HTML string to decode. </param>
         /// <returns>The decoded text.</returns>
-        public static string HtmlDecode (string s) 
+        public static string HtmlDecode (string s)
         {
             if (s == null)
                 return null;
-            
+
             using (var sw = new StringWriter ()) {
                 HttpEncoder.Current.HtmlDecode (s, sw);
                 return sw.ToString ();
             }
         }
-    
+
         /// <summary>
         /// Decodes an HTML-encoded string and sends the resulting output to a TextWriter output stream.
         /// </summary>
         /// <param name="s">The HTML string to decode</param>
         /// <param name="output">The TextWriter output stream containing the decoded string. </param>
-        public static void HtmlDecode(string s, TextWriter output) 
+        public static void HtmlDecode(string s, TextWriter output)
         {
             if (output == null) {
                 throw new ArgumentNullException ("output");
             }
-                
+
             if (!String.IsNullOrEmpty (s)) {
                 HttpEncoder.Current.HtmlDecode (s, output);
             }
@@ -484,24 +484,24 @@ namespace System.Web {
         {
             if (s == null)
                 return null;
-            
+
             using (var sw = new StringWriter ()) {
                 HttpEncoder.Current.HtmlEncode (s, sw);
                 return sw.ToString ();
             }
         }
-        
+
         /// <summary>
         /// HTML-encodes a string and sends the resulting output to a TextWriter output stream.
         /// </summary>
         /// <param name="s">The string to encode. </param>
         /// <param name="output">The TextWriter output stream containing the encoded string. </param>
-        public static void HtmlEncode(string s, TextWriter output) 
+        public static void HtmlEncode(string s, TextWriter output)
         {
             if (output == null) {
                 throw new ArgumentNullException ("output");
             }
-                
+
             if (!String.IsNullOrEmpty (s)) {
                 HttpEncoder.Current.HtmlEncode (s, output);
             }
@@ -613,7 +613,7 @@ namespace System.Web {
                 return new HttpQSCollection ();
             if (query[0] == '?')
                 query = query.Substring (1);
-                
+
             NameValueCollection result = new HttpQSCollection ();
             ParseQueryString (query, encoding, result);
             return result;
@@ -644,7 +644,7 @@ namespace System.Web {
                     if (decoded [namePos] == '?')
                         namePos++;
                 }
-                
+
                 string name, value;
                 if (valuePos == -1) {
                     name = null;
