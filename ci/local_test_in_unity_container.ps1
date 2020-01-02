@@ -10,20 +10,42 @@ param(
     [string]
     $UnityLicenseULF = (Join-Path $PSScriptRoot Unity_v2019.2.11f1.ulf),
 
-    [string] $VolumeSource = "/c/Projekt/Newtonsoft.Json-for-Unity",
+    [string]
+    $VolumeSource = "/c/Projekt/Newtonsoft.Json-for-Unity",
 
-    [string] $DockerImage = "applejag/newtonsoft.json-for-unity.package-unity-tester:v1",
+    [string]
+    $DockerImage = "applejag/newtonsoft.json-for-unity.package-unity-tester",
 
-    [string] $WorkingDirectory = "/root/repo",
+    [ValidateSet("2018.4.14f1", "2019.2.11f1")]
+    [string]
+    $UnityVersion = "2019.2.11f1",
 
-    [switch] $SkipPackageRebuild
+    [int]
+    [ValidateRange(1, [int]::MaxValue)]
+    $DockerImageVersion = 1,
+
+    [string]
+    $DockerImageOverride = "",
+
+    [string]
+    $WorkingDirectory = "/root/repo",
+
+    [switch]
+    $SkipPackageRebuild
 )
 
 $ErrorActionPreference = "Stop"
 
+if (-not [string]::IsNullOrEmpty($DockerImageOverride)) {
+    $DockerImage = $DockerImageOverride
+} elseif ($DockerImage.IndexOf(':') -eq -1) {
+    $DockerImage = "${DockerImage}:v$DockerImageVersion-$UnityVersion"
+}
+
 Write-Output "Using Unity license $UnityLicenseULF"
 Write-Output "Using Docker image $DockerImage"
-Write-Output "Using volume $VolumePath at /root/repo"
+Write-Output "Using Unity license $UnityVersion"
+Write-Output "Using volume $VolumeSource at /root/repo"
 
 $UnityLicenseContent = Get-Content -Path $UnityLicenseULF -Raw
 $UnityLicenseBytes = [System.Text.Encoding]::UTF8.GetBytes($UnityLicenseContent)
@@ -37,6 +59,7 @@ if (!$SkipPackageRebuild) {
         -Configuration Debug `
         -UnityBuilds @('Tests') `
         -RelativeBuildDestinationBase "Src/Newtonsoft.Json-for-Unity.Tests/Packages/Newtonsoft.Json-for-Unity.Tests/Plugins/" `
+        -VolumeSource $VolumeSource `
         -DontSign
     if ($LASTEXITCODE -ne 0) {
         throw "Failed to complete debug build"
@@ -86,6 +109,22 @@ function Invoke-DockerCommand ([string] $name, [string] $command) {
 }
 
 try {
+    if ($UnityVersion.StartsWith("2018.")) {
+        # Unity will regenerate the removed files
+        Invoke-DockerCommand "Downgrade Unity project to 2018.x" @'
+            echo "Removing ./Library folder"
+            rm -rf ./Library
+            echo "Removing ./Temp folder"
+            rm -rf ./Temp
+            echo "Moving ./Packages/manifest.json file"
+            mv -v ./Packages/manifest.json ./Packages/.manifest.json.old
+            echo
+            find ./Assets -name '.*.asmdef.old' -exec rm -v {} +
+            echo
+            find ./Assets -name '*.asmdef' -exec $SCRIPTS/unity_downgrade_asmdef.sh --backup "{}" \;
+'@
+    }
+
     Invoke-DockerCommand "Setup Unity license" `
         '$SCRIPTS/unity_login.sh'
 
@@ -106,6 +145,16 @@ try {
 } finally {
     Invoke-DockerCommand "Convert NUnit to JUnit xml" `
         '$SCRIPTS/nunit2junit.sh ~/repo/tests/nunit ~/repo/tests/junit/'
+    
+    if ($UnityVersion.StartsWith("2018.")) {
+        # Unity will regenerate the removed files
+        Invoke-DockerCommand "Revert downgrade Unity project from 2018.x" @'
+            echo "Moving ./Packages/manifest.json.old file"
+            rm -v ./Packages/manifest.json
+            mv -v ./Packages/.manifest.json.old ./Packages/manifest.json
+            find ./Assets -name '.*.asmdef.old' -exec $SCRIPTS/unity_downgrade_asmdef.sh --reset "{}" \;
+'@
+    }
 
     $watch.Stop()
     Write-Host ">> Stopping $container" -BackgroundColor DarkGray
