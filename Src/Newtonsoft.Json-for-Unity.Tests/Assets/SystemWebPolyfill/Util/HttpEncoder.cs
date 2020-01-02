@@ -96,7 +96,7 @@ namespace System.Web.Util
             }
         }
 
-        private static HttpEncoder()
+        static HttpEncoder()
         {
             defaultEncoder = new Lazy<HttpEncoder>(() => new HttpEncoder());
             currentEncoderLazy = new Lazy<HttpEncoder>(new Func<HttpEncoder>(GetCustomEncoderFromConfig));
