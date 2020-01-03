@@ -40,7 +40,7 @@ namespace Aot.Tests
                 _ = CreateListOfType<MyNonAotClass>();
             });
 
-            Assert.IsInstanceOf<TypeInitializationException>(ex.InnerException);
+            Assert.IsInstanceOf<TypeInitializationException>(ex.InnerException, ex.Message);
         }
 #endif
 

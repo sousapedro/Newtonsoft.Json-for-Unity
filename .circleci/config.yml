@@ -170,7 +170,7 @@ jobs:
           paths:
             - C:\Users\circleci\.nuget\packages
 
-  test-unity:
+  test-unity-2018-4-14f1:
     working_directory: ~/repo
     
     environment:
@@ -180,7 +180,7 @@ jobs:
       PLATFORMS: playmode
 
     docker:
-      - image: applejag/newtonsoft.json-for-unity.package-unity-tester:v1
+      - image: applejag/newtonsoft.json-for-unity.package-unity-tester:v1-2018.4.14f1
 
     steps:
       # Checkout repo -> ~/repo
@@ -188,11 +188,11 @@ jobs:
 
       - restore_cache:
           keys:
-            - test-unity-upm-manifest-{{ checksum "/root/repo/Src/Newtonsoft.Json-for-Unity.Tests/Packages/manifest.json" }}
+            - test-unity-upm-manifest-2018
 
       - restore_cache:
           keys:
-            - test-unity-upm-global
+            - test-unity-upm-global-2018
 
       - run:
           name: Enable permissions on scripts
@@ -201,8 +201,8 @@ jobs:
       - run:
           name: Setup Unity license
           command: |
-            # Requires UNITY_LICENSE_CONTENT_B64 environment variable to be filled in inside CircleCI
-            $SCRIPTS/unity_login.sh
+            # Requires UNITY_2018_4_14f1_LICENSE_CONTENT_B64 environment variable to be filled in inside CircleCI
+            UNITY_LICENSE_CONTENT_B64="$UNITY_2018_4_14f1_LICENSE_CONTENT_B64" $SCRIPTS/unity_login.sh
 
       - attach_workspace:
           at: /workspace
@@ -215,12 +215,93 @@ jobs:
             cp -vur Src/Newtonsoft.Json.Tests/. $TEST_PROJECT/Assets/Newtonsoft.Json.Tests/
 
       - run:
-          name: Copy Plugins into Unity testing project
-          command: cp -vfr /workspace/package/. $PACKAGE_FOLDER/
+          name: Copy dll's into Unity testing project
+          command: |
+            cp -vfr /workspace/package/. $PACKAGE_FOLDER/
+            cp -vfr /workspace/testlib/. "$PACKAGE_FOLDER/Plugins/Newtonsoft.Json Editor/"
 
       - run:
-          name: Overriding Editor dll's with testing dll's
-          command: cp -vfr /workspace/testlib/. "$PACKAGE_FOLDER/Plugins/Newtonsoft.Json Editor/"
+          name: Downgrade Unity project to 2018.x
+          command: |
+            echo "Moving $TEST_PROJECT/Packages/manifest.json file"
+            mv -v "$TEST_PROJECT/Packages/manifest.json" "$TEST_PROJECT/Packages/.manifest.json.old"
+            echo
+            find "$TEST_PROJECT/Assets" -name '.*.asmdef.old' -exec rm -v {} +
+            echo
+            find "$TEST_PROJECT/Assets" -name '*.asmdef' -exec $SCRIPTS/unity_downgrade_asmdef.sh --backup "{}" \;
+
+      - run:
+          name: Run tests
+          command: $SCRIPTS/unity_test.sh $TEST_PROJECT ~/tests/nunit
+
+      - run:
+          name: Convert NUnit to JUnit xml
+          when: always
+          command: $SCRIPTS/nunit2junit.sh ~/tests/nunit ~/tests/junit/
+
+      - store_test_results:
+          name: Store test results -> ~/tests/junit
+          path: ~/tests/junit
+
+      - save_cache:
+          key: test-unity-upm-manifest-2018
+          paths:
+            - /root/repo/Src/Newtonsoft.Json-for-Unity.Tests/Library/PackageCache
+
+      - save_cache:
+          key: test-unity-upm-global-2018
+          paths:
+            - /root/.config/unity3d/cache
+
+  test-unity-2019-2-11f1:
+    working_directory: ~/repo
+    
+    environment:
+      SCRIPTS: /root/repo/ci/scripts
+      PACKAGE_FOLDER: /root/repo/Src/Newtonsoft.Json-for-Unity.Tests/Packages/Newtonsoft.Json-for-Unity.Tests/
+      TEST_PROJECT: /root/repo/Src/Newtonsoft.Json-for-Unity.Tests
+      PLATFORMS: playmode
+
+    docker:
+      - image: applejag/newtonsoft.json-for-unity.package-unity-tester:v1-2019.2.11f1
+
+    steps:
+      # Checkout repo -> ~/repo
+      - checkout
+
+      - restore_cache:
+          keys:
+            - test-unity-upm-manifest-{{ checksum "/root/repo/Src/Newtonsoft.Json-for-Unity.Tests/Packages/manifest.json" }}
+
+      - restore_cache:
+          keys:
+            - test-unity-upm-global-2019
+
+      - run:
+          name: Enable permissions on scripts
+          command: chmod +x $SCRIPTS/**.sh -v
+
+      - run:
+          name: Setup Unity license
+          command: |
+            # Requires UNITY_2019_2_11f1_LICENSE_CONTENT_B64 environment variable to be filled in inside CircleCI
+            UNITY_LICENSE_CONTENT_B64="$UNITY_2019_2_11f1_LICENSE_CONTENT_B64" $SCRIPTS/unity_login.sh
+
+      - attach_workspace:
+          at: /workspace
+
+      - run:
+          name: Copy Newtonsoft.Json.Tests into Unity testing project
+          command: |
+            rm -rfv Src/Newtonsoft.Json.Tests/obj
+            rm -rfv Src/Newtonsoft.Json.Tests/bin
+            cp -vur Src/Newtonsoft.Json.Tests/. $TEST_PROJECT/Assets/Newtonsoft.Json.Tests/
+
+      - run:
+          name: Copy dll's into Unity testing project
+          command: |
+            cp -vfr /workspace/package/. $PACKAGE_FOLDER/
+            cp -vfr /workspace/testlib/. "$PACKAGE_FOLDER/Plugins/Newtonsoft.Json Editor/"
 
       - run:
           name: Run tests
@@ -241,7 +322,7 @@ jobs:
             - /root/repo/Src/Newtonsoft.Json-for-Unity.Tests/Library/PackageCache
 
       - save_cache:
-          key: test-unity-upm-global
+          key: test-unity-upm-global-2019
           paths:
             - /root/.config/unity3d/cache
 
@@ -431,7 +512,10 @@ workflows:
       - test-windows:
           requires:
             - build-package
-      - test-unity:
+      - test-unity-2018-4-14f1:
+          requires:
+            - build-package
+      - test-unity-2019-2-11f1:
           requires:
             - build-package
   check-deploy-ready:
@@ -449,14 +533,18 @@ workflows:
       - test-windows:
           requires:
             - build-package
-      - test-unity:
+      - test-unity-2018-4-14f1:
+          requires:
+            - build-package
+      - test-unity-2019-2-11f1:
           requires:
             - build-package
       - hold:
           type: approval
           requires:
             - test-windows
-            - test-unity
+            - test-unity-2018-4-14f1
+            - test-unity-2019-2-11f1
       - deploy-cloudsmith:
           requires:
             - hold

@@ -2728,7 +2728,7 @@ keyword such as type of business.""
             }
             catch (JsonSerializationException ex)
             {
-                Assert.IsTrue(ex.Message.StartsWith("Required property 'FirstName' expects a value but got null. Path ''"));
+                StringAssert.StartsWith("Required property 'FirstName' expects a value but got null. Path ''", ex.Message);
             }
         }
 
@@ -2763,7 +2763,7 @@ keyword such as type of business.""
             }
             catch (JsonSerializationException ex)
             {
-                Assert.IsTrue(ex.Message.StartsWith("Required property 'LastName' not found in JSON. Path ''"));
+                StringAssert.StartsWith("Required property 'LastName' not found in JSON. Path ''", ex.Message);
             }
         }
 
@@ -2988,7 +2988,7 @@ keyword such as type of business.""
             }
             catch (JsonSerializationException ex)
             {
-                Assert.IsTrue(ex.Message.StartsWith("Required property 'TestProperty2' not found in JSON. Path ''"));
+                StringAssert.StartsWith("Required property 'TestProperty2' not found in JSON. Path ''", ex.Message);
             }
         }
 
@@ -3525,9 +3525,9 @@ Path '', line 1, position 1.");
             }
             catch (JsonSerializationException ex)
             {
-                Assert.IsTrue(ex.Message.StartsWith(@"Cannot deserialize the current JSON object (e.g. {""name"":""value""}) into type 'System.Collections.Generic.List`1[Newtonsoft.Json.Tests.TestObjects.Organization.Person]' because the type requires a JSON array (e.g. [1,2,3]) to deserialize correctly." + Environment.NewLine +
-                                                    @"To fix this error either change the JSON to a JSON array (e.g. [1,2,3]) or change the deserialized type so that it is a normal .NET type (e.g. not a primitive type like integer, not a collection type like an array or List<T>) that can be deserialized from a JSON object. JsonObjectAttribute can also be added to the type to force it to deserialize from a JSON object." + Environment.NewLine +
-                                                    @"Path ''"));
+                StringAssert.StartsWith(@"Cannot deserialize the current JSON object (e.g. {""name"":""value""}) into type 'System.Collections.Generic.List`1[Newtonsoft.Json.Tests.TestObjects.Organization.Person]' because the type requires a JSON array (e.g. [1,2,3]) to deserialize correctly." + Environment.NewLine +
+                                        @"To fix this error either change the JSON to a JSON array (e.g. [1,2,3]) or change the deserialized type so that it is a normal .NET type (e.g. not a primitive type like integer, not a collection type like an array or List<T>) that can be deserialized from a JSON object. JsonObjectAttribute can also be added to the type to force it to deserialize from a JSON object." + Environment.NewLine +
+                                        @"Path ''", ex.Message);
             }
         }
 
@@ -3748,7 +3748,7 @@ Path '', line 1, position 1.");
             }
             catch (JsonSerializationException ex)
             {
-                Assert.IsTrue(ex.Message.StartsWith("Could not convert string 'Newtonsoft.Json.Tests.TestObjects.Organization.Person' to dictionary key type 'Newtonsoft.Json.Tests.TestObjects.Organization.Person'. Create a TypeConverter to convert from the string to the key type object. Path '['Newtonsoft.Json.Tests.TestObjects.Organization.Person']'"));
+                StringAssert.StartsWith("Could not convert string 'Newtonsoft.Json.Tests.TestObjects.Organization.Person' to dictionary key type 'Newtonsoft.Json.Tests.TestObjects.Organization.Person'. Create a TypeConverter to convert from the string to the key type object. Path '['Newtonsoft.Json.Tests.TestObjects.Organization.Person']'", ex.Message);
             }
         }
 
@@ -6126,10 +6126,10 @@ Path '', line 1, position 1.");
 
             Assert.IsNotNull(o);
             Assert.AreEqual(4, errors.Count);
-            Assert.IsTrue(errors[0].StartsWith("Required property 'NonAttributeProperty' not found in JSON. Path ''"));
-            Assert.IsTrue(errors[1].StartsWith("Required property 'UnsetProperty' not found in JSON. Path ''"));
-            Assert.IsTrue(errors[2].StartsWith("Required property 'AllowNullProperty' not found in JSON. Path ''"));
-            Assert.IsTrue(errors[3].StartsWith("Required property 'AlwaysProperty' not found in JSON. Path ''"));
+            StringAssert.StartsWith("Required property 'NonAttributeProperty' not found in JSON. Path ''", errors[0]);
+            StringAssert.StartsWith("Required property 'UnsetProperty' not found in JSON. Path ''", errors[1]);
+            StringAssert.StartsWith("Required property 'AllowNullProperty' not found in JSON. Path ''", errors[2]);
+            StringAssert.StartsWith("Required property 'AlwaysProperty' not found in JSON. Path ''", errors[3]);
         }
 
         [Test]
@@ -6151,9 +6151,9 @@ Path '', line 1, position 1.");
 
             Assert.IsNotNull(o);
             Assert.AreEqual(3, errors.Count);
-            Assert.IsTrue(errors[0].StartsWith("Required property 'NonAttributeProperty' expects a value but got null. Path ''"));
-            Assert.IsTrue(errors[1].StartsWith("Required property 'UnsetProperty' expects a value but got null. Path ''"));
-            Assert.IsTrue(errors[2].StartsWith("Required property 'AlwaysProperty' expects a value but got null. Path ''"));
+            StringAssert.StartsWith("Required property 'NonAttributeProperty' expects a value but got null. Path ''", errors[0]);
+            StringAssert.StartsWith("Required property 'UnsetProperty' expects a value but got null. Path ''", errors[1]);
+            StringAssert.StartsWith("Required property 'AlwaysProperty' expects a value but got null. Path ''", errors[2]);
         }
 
         [Test]
