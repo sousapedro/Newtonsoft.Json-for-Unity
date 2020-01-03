@@ -6,44 +6,63 @@
 # DO NOT USE IN PRODUCTION
 
 param(
-    # Unity license
+    # Unity license.ulf
     [string]
-    $UnityLicenseULF = (Join-Path $PSScriptRoot Unity_v2019.2.11f1.ulf),
+    $UnityLicenseOverride,
 
-    [string] $VolumeSource = "/c/Projekt/Newtonsoft.Json-for-Unity",
+    [string]
+    $VolumeSource = "/c/Projekt/Newtonsoft.Json-for-Unity",
 
-    [string] $DockerImage = "applejag/newtonsoft.json-for-unity.package-unity-tester:v1",
+    [string]
+    $DockerImage = "applejag/newtonsoft.json-for-unity.package-unity-tester",
 
-    [string] $WorkingDirectory = "/root/repo",
+    [ValidateSet("2018.4.14f1", "2019.2.11f1")]
+    [string]
+    $UnityVersion = "2019.2.11f1",
 
-    [switch] $SkipPackageRebuild
+    [int]
+    [ValidateRange(1, [int]::MaxValue)]
+    $DockerImageVersion = 1,
+
+    [string]
+    $DockerImageOverride,
+
+    [string]
+    $WorkingDirectory = "/root/repo",
+
+    [switch]
+    $SkipPackageRebuild
 )
 
 $ErrorActionPreference = "Stop"
 
+if (-not [string]::IsNullOrEmpty($DockerImageOverride)) {
+    $DockerImage = $DockerImageOverride
+} elseif ($DockerImage.IndexOf(':') -eq -1) {
+    $DockerImage = "${DockerImage}:v$DockerImageVersion-$UnityVersion"
+}
+
+$UnityLicenseULF = if (-not [string]::IsNullOrEmpty($UnityLicenseOverride)) {
+    Resolve-Path $UnityLicenseOverride
+} else {
+    Resolve-Path (Join-Path "$PSScriptRoot" "Unity_v$UnityVersion.ulf")
+}
+
 Write-Output "Using Unity license $UnityLicenseULF"
 Write-Output "Using Docker image $DockerImage"
-Write-Output "Using volume $VolumePath at /root/repo"
+Write-Output "Using Unity license $UnityVersion"
+Write-Output "Using volume $VolumeSource at /root/repo"
 
 $UnityLicenseContent = Get-Content -Path $UnityLicenseULF -Raw
 $UnityLicenseBytes = [System.Text.Encoding]::UTF8.GetBytes($UnityLicenseContent)
 $UnityLicenseB64 = [Convert]::ToBase64String($UnityLicenseBytes)
 
-if (!$SkipPackageRebuild) {
-    Write-Host ""
-    Write-Host ">>> BUILDING DEBUG BUILD OF PACKAGE USING local_build_into_package.ps1 " -BackgroundColor DarkCyan -ForegroundColor White
-    Write-Host ""
-    &$PSScriptRoot\local_build_into_package.ps1 `
-        -Configuration Debug `
-        -UnityBuilds @('Tests') `
-        -RelativeBuildDestinationBase "Src/Newtonsoft.Json-for-Unity.Tests/Packages/Newtonsoft.Json-for-Unity.Tests/Plugins/" `
-        -DontSign
+if (-not $SkipPackageRebuild) {
+    &$PSScriptRoot\local_build_into_test_project.ps1 `
+        -UnityBuilds @('Tests')
     if ($LASTEXITCODE -ne 0) {
         throw "Failed to complete debug build"
     }
-    Write-Host ""
-    Write-Host ">>> COMPLETED DEBUG BUILD OF PACKAGE USING local_build_into_package.ps1 " -BackgroundColor DarkGreen -ForegroundColor White
-    Write-Host ""
 }
 
 Write-Host ">> Starting $DockerImage" -BackgroundColor DarkRed
@@ -86,16 +105,32 @@ function Invoke-DockerCommand ([string] $name, [string] $command) {
 }
 
 try {
+    if ($UnityVersion.StartsWith("2018.")) {
+        # Unity will regenerate the removed files
+        Invoke-DockerCommand "Downgrade Unity project to 2018.x" @'
+            echo "Removing $TEST_PROJECT/Library folder"
+            rm -rf "$TEST_PROJECT/Library"
+            echo "Removing $TEST_PROJECT/Temp folder"
+            rm -rf "$TEST_PROJECT/Temp"
+            echo "Moving $TEST_PROJECT/Packages/manifest.json file"
+            mv -v "$TEST_PROJECT/Packages/manifest.json" "$TEST_PROJECT/Packages/.manifest.json.old"
+            echo
+            find "$TEST_PROJECT/Assets" -name '.*.asmdef.old' -exec rm -v {} +
+            echo
+            find "$TEST_PROJECT/Assets" -name '*.asmdef' -exec $SCRIPTS/unity_downgrade_asmdef.sh --backup "{}" \;
+'@
+    }
+
     Invoke-DockerCommand "Setup Unity license" `
         '$SCRIPTS/unity_login.sh'
 
     Invoke-DockerCommand "Copy Newtonsoft.Json.Tests into Unity testing project" @'
         rm -rfv Src/Newtonsoft.Json.Tests/obj
         rm -rfv Src/Newtonsoft.Json.Tests/bin
-        rm -rfv $TEST_PROJECT/Assets/Newtonsoft.Json.Tests/obj
-        rm -rfv $TEST_PROJECT/Assets/Newtonsoft.Json.Tests/bin
-        cp -vur Src/Newtonsoft.Json.Tests/. $TEST_PROJECT/Assets/Newtonsoft.Json.Tests/
-        cp -v Src/IdentityPublicKey.snk $TEST_PROJECT/Assets/
+        rm -rfv "$TEST_PROJECT/Assets/Newtonsoft.Json.Tests/obj"
+        rm -rfv "$TEST_PROJECT/Assets/Newtonsoft.Json.Tests/bin"
+        cp -vur Src/Newtonsoft.Json.Tests/. "$TEST_PROJECT/Assets/Newtonsoft.Json.Tests/"
+        cp -v Src/IdentityPublicKey.snk "$TEST_PROJECT/Assets/"
 '@
 
     Invoke-DockerCommand "Run tests" `
@@ -106,6 +141,15 @@ try {
 } finally {
     Invoke-DockerCommand "Convert NUnit to JUnit xml" `
         '$SCRIPTS/nunit2junit.sh ~/repo/tests/nunit ~/repo/tests/junit/'
+    
+    if ($UnityVersion.StartsWith("2018.")) {
+        # Unity will regenerate the removed files
+        Invoke-DockerCommand "Revert downgrade Unity project from 2018.x" @'
+            echo "Moving $TEST_PROJECT/Packages/manifest.json.old file"
+            mv -vf "$TEST_PROJECT/Packages/.manifest.json.old" "$TEST_PROJECT/Packages/manifest.json"
+            find "$TEST_PROJECT/Assets" -name '*.asmdef' -exec $SCRIPTS/unity_downgrade_asmdef.sh --reset "{}" \;
+'@
+    }
 
     $watch.Stop()
     Write-Host ">> Stopping $container" -BackgroundColor DarkGray

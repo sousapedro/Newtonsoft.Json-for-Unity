@@ -377,6 +377,14 @@ namespace Newtonsoft.Json.Tests
 
             Assert.AreEqual(expectedWithoutTimestamps, actualWithoutTimestamps);
         }
+
+        public static void StartsWith(string expectedStart, string actual) {
+            if (expectedStart == null || (expectedStart == null && actual == null)) {
+                return;
+            }
+            Assert.IsNotNull(actual, "Expected string to start with '{0}', but was null.", expectedStart);
+            Assert.AreEqual(expectedStart, actual.Substring(0, expectedStart.Length), "Expected string to start with '{0}', but did not.", expectedStart);
+        }
     }
 
     public static class ExceptionAssert

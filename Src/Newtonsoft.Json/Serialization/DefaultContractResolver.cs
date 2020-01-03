@@ -233,8 +233,10 @@ namespace Newtonsoft.Json.Serialization
 
             MemberSerialization memberSerialization = JsonTypeReflector.GetObjectMemberSerialization(objectType, ignoreSerializableAttribute);
 
+            // Exclude index properties
+            // Do not filter ByRef types here because accessing FieldType/PropertyType can trigger additonal assembly loads
             IEnumerable<MemberInfo> allMembers = ReflectionUtils.GetFieldsAndProperties(objectType, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static)
-                .Where(FilterMembers);
+                .Where(m => m is PropertyInfo p ? !ReflectionUtils.IsIndexedProperty(p) : true);
 
             List<MemberInfo> serializableMembers = new List<MemberInfo>();
 
@@ -245,6 +247,7 @@ namespace Newtonsoft.Json.Serialization
 #endif
 
 #pragma warning disable 618
+                // Exclude index properties and ByRef types
                 List<MemberInfo> defaultMembers = ReflectionUtils.GetFieldsAndProperties(objectType, DefaultMembersSearchFlags)
                     .Where(FilterMembers).ToList();
 #pragma warning restore 618
@@ -356,6 +359,7 @@ namespace Newtonsoft.Json.Serialization
             {
                 contract.ItemRequired = attribute._itemRequired;
                 contract.ItemNullValueHandling = attribute._itemNullValueHandling;
+                contract.MissingMemberHandling = attribute._missingMemberHandling;
 
                 if (attribute.NamingStrategyType != null)
                 {
@@ -552,7 +556,9 @@ namespace Newtonsoft.Json.Serialization
             if (extensionDataAttribute.WriteData)
             {
                 Type enumerableWrapper = typeof(EnumerableDictionaryWrapper<,>).MakeGenericType(keyType, valueType);
-                ConstructorInfo constructors = enumerableWrapper.GetConstructors().First();
+                ConstructorInfo constructors = enumerableWrapper.GetConstructors().FirstOrDefault()
+                    ?? throw new JsonException($"Missing constructor for enumerator type {enumerableWrapper.FullName}. Perhaps it got stripped?");
+
                 ObjectConstructor<object> createEnumerableWrapper = JsonTypeReflector.ReflectionDelegateFactory.CreateParameterizedConstructor(constructors);
 
                 ExtensionDataGetter extensionDataGetter = o =>

@@ -600,7 +600,7 @@ namespace Newtonsoft.Json.Tests.Serialization
             }
             catch (JsonSerializationException ex)
             {
-                Assert.IsTrue(ex.Message.StartsWith(@"Type specified in JSON '" + employeeRef + @"' is not compatible with '" + personRef + @"'."));
+                StringAssert.StartsWith($@"Type specified in JSON '{employeeRef}' is not compatible with '{personRef}'.", ex.Message);
             }
         }
 

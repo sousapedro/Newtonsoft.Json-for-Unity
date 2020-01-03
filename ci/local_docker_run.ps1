@@ -7,45 +7,55 @@
 # DO NOT USE IN PRODUCTION
 
 param(
-    # Unity license
     [string]
-    $UnityLicenseULF = (Join-Path $PSScriptRoot Unity_v2019.2.11f1.ulf),
+    $VolumeSource = "/c/Projekt/Newtonsoft.Json-for-Unity",
 
-    # Docker image
+    # Unity license.ulf
     [string]
-    $DockerImage = "applejag/newtonsoft.json-for-unity.package-unity-tester:latest",
+    $UnityLicenseOverride,
 
-    [ValidateScript({
-        if(-Not ($_ | Test-Path) ){
-            throw "Folder ""$_"" does not exist"
-        }
-        if(-Not ($_ | Test-Path -PathType Container) ){
-            throw "The Path argument must be a folder. File paths are not allowed."
-        }
-        return $true
-    })]
-    [System.IO.DirectoryInfo]
-    $VolumePath = (Join-Path $PSScriptRoot ..)
+    [string]
+    $DockerImage = "applejag/newtonsoft.json-for-unity.package-unity-tester",
+
+    [ValidateSet("2018.4.14f1", "2019.2.11f1")]
+    [string]
+    $UnityVersion = "2019.2.11f1",
+
+    [int]
+    [ValidateRange(1, [int]::MaxValue)]
+    $DockerImageVersion = 1,
+
+    [string]
+    $DockerImageOverride = ""
 )
 
 $ErrorActionPreference = "Stop"
 
-$VolumePath = [string] (Resolve-Path $VolumePath)
+if (-not [string]::IsNullOrEmpty($DockerImageOverride)) {
+    $DockerImage = $DockerImageOverride
+} elseif ($DockerImage.IndexOf(':') -eq -1) {
+    $DockerImage = "${DockerImage}:v$DockerImageVersion-$UnityVersion"
+}
+
+$UnityLicenseULF = if (-not [string]::IsNullOrEmpty($UnityLicenseOverride)) {
+    Resolve-Path $UnityLicenseOverride
+} else {
+    Join-Path "$PSScriptRoot" "Unity_v$UnityVersion.ulf"
+}
 
 $Command = '/bin/bash'
 $Args = @(
     , "-e", "TEST_PLATFORM=linux"
     , "-e", "WORKDIR=/root/repo"
     , "-e", "SCRIPTS=/root/repo/ci/scripts"
-    # , "-v", "${VolumePath}:/root/repo"
-    , "-v", "/c/Projekt/Newtonsoft.Json:/root/repo"
+    , "-v", "${VolumeSource}:/root/repo"
 )
 
-if ((![string]::IsNullOrWhiteSpace($UnityLicenseULF)) -and (Test-Path $UnityLicenseULF))
+if (Test-Path $UnityLicenseULF)
 {
     Write-Output "Using Unity license $UnityLicenseULF"
     Write-Output "Using Docker image $DockerImage"
-    Write-Output "Using volume $VolumePath at /root/repo"
+    Write-Output "Using volume $VolumeSource at /root/repo"
     
     $UnityLicenseContent = Get-Content -Path $UnityLicenseULF -Raw
     $UnityLicenseBytes = [System.Text.Encoding]::UTF8.GetBytes($UnityLicenseContent)
@@ -57,9 +67,9 @@ if ((![string]::IsNullOrWhiteSpace($UnityLicenseULF)) -and (Test-Path $UnityLice
 }
 else
 {
-    Write-Output "Using Unity license <NONE>"
+    Write-Output "No Unity license at $UnityLicenseULF, going for fetching login instead"
     Write-Output "Using Docker image $DockerImage"
-    Write-Output "Using volume $VolumePath at /root/repo"
+    Write-Output "Using volume $VolumeSource at /root/repo"
     
     $UnityID = Get-Credential -Message "Enter UnityID login"
     $UnityUserName = $UnityID.UserName
