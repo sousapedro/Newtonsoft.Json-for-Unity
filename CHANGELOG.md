@@ -2,7 +2,22 @@
 
 ## 12.0.201
 
-- ✨ New: Merged changes from [JamesNK/Newtonsoft.Json version `12.0.2`][json.net-12.0.2]
+- ✨ New: Merged changes from
+  [JamesNK/Newtonsoft.Json version `12.0.2`][json.net-12.0.2]
+
+- ✨ New: Downgrade script for .asmdef to be able to test in Unity 2018.x.
+
+- ✨ New: Now testing in both Unity 2019.x and 2018.x in CircleCI workflow.
+
+- ✨ New: Added `System.Web.HttpUtility` polyfill to test project due to it's
+  not included in IL2CPP builds.
+  See <https://forum.unity.com/threads/solved-httputility-in-il2cpp.802368/#post-5333634>
+
+- 🔄 Change: Custom StringAssert.StartsWith to get better error messages in
+  tests.
+
+- 🐛 Fix: AotHelper.EnsureDictionary was not generating constructor for
+  `DefaultContractResolver.EnumerableDictionaryWrapper<TKey, TValue>`
 
 ## 12.0.102
 
