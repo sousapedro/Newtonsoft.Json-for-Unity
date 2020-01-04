@@ -2,6 +2,7 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFrameworks>net46</TargetFrameworks>
+    <TargetFrameworks>net46;netcoreapp3.0</TargetFrameworks>
     <LangVersion>latest</LangVersion>
     <RootNamespace>Newtonsoft.Json.TestConsole</RootNamespace>
     <AssemblyName>Newtonsoft.Json.TestConsole</AssemblyName>

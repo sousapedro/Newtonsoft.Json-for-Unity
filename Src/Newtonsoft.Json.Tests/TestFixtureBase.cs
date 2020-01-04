@@ -214,10 +214,10 @@ namespace Newtonsoft.Json.Tests
         {
 #if UNITY_5_3_OR_NEWER
             return Path.Combine(UnityEngine.Application.streamingAssetsPath, path);
-#elif !DNXCORE50
-            return Path.Combine(TestContext.CurrentContext.TestDirectory, path);
 #else
-            return path;
+            var assemblyPath = Path.GetDirectoryName(typeof(TestFixtureBase).Assembly().Location);
+
+            return Path.Combine(assemblyPath, path);
 #endif
         }
 
@@ -396,7 +396,7 @@ namespace Newtonsoft.Json.Tests
             {
                 action();
 
-                Assert.Fail("Exception of type {0} expected. No exception thrown.", typeof(TException).Name);
+                Assert.Fail("Exception of type " + typeof(TException).Name + " expected. No exception thrown.");
                 return null;
             }
             catch (TException ex)
@@ -429,7 +429,7 @@ namespace Newtonsoft.Json.Tests
             {
                 await action();
 
-                Assert.Fail("Exception of type {0} expected. No exception thrown.", typeof(TException).Name);
+                Assert.Fail("Exception of type " + typeof(TException).Name + " expected. No exception thrown.");
                 return null;
             }
             catch (TException ex)

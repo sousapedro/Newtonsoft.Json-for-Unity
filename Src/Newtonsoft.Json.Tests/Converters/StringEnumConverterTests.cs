@@ -257,7 +257,7 @@ namespace Newtonsoft.Json.Tests.Converters
             ExceptionAssert.Throws<ArgumentNullException>(
                 () => new StringEnumConverter(null),
                 @"Value cannot be null.
-Parameter name: namingStrategyType");
+Parameter name: namingStrategyType", "Value cannot be null. (Parameter 'namingStrategyType')");
         }
 
         [Test]
@@ -266,7 +266,7 @@ Parameter name: namingStrategyType");
             ExceptionAssert.Throws<ArgumentNullException>(
                 () => new StringEnumConverter(null, new object[] { true, true, true }, false),
                 @"Value cannot be null.
-Parameter name: namingStrategyType");
+Parameter name: namingStrategyType", "Value cannot be null. (Parameter 'namingStrategyType')");
         }
 
         [Test]
