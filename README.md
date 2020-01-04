@@ -1,9 +1,9 @@
 # ![Logo](Doc/icons/logo-with-unity.png) Newtonsoft.Json for Unity
 
-[![Latest Version @ Cloudsmith][cloudsmith-badge]][cloudsmith-url]
-[![CircleCI][circleci-badge]][circleci-url]
-[![Codacy grade][codacy-badge]][codacy-url]
-[![Contributor Covenant][code-of-conduct-badge]][code-of-conduct-url]
+[![Latest Version @ Cloudsmith](https://api-prd.cloudsmith.io/badges/version/jillejr/newtonsoft-json-for-unity/npm/jillejr.newtonsoft.json-for-unity/latest/x/?render=true&badge_token=gAAAAABeClWC7DvHIyN1IvhxcvGYUIO8CFfs-PsrT973U91i_wmUiuhrzsGZgXqecxQgrEMj4p_-UUUz7XaWjxH3NB8DfA2kkQ%3D%3D)](https://cloudsmith.io/~jillejr/repos/newtonsoft-json-for-unity/packages/detail/npm/jillejr.newtonsoft.json-for-unity/latest/)
+[![CircleCI](https://img.shields.io/circleci/build/gh/jilleJr/Newtonsoft.Json-for-Unity/master?logo=circleci&style=flat-square)](https://circleci.com/gh/jilleJr/Newtonsoft.Json-for-Unity)
+[![Codacy grade](https://img.shields.io/codacy/grade/f91156e7066c484588f4dba263c8cf45?logo=codacy&style=flat-square)](https://www.codacy.com/manual/jilleJr/Newtonsoft.Json-for-Unity?utm_source=github.com&utm_medium=referral&utm_content=jilleJr/Newtonsoft.Json-for-Unity&utm_campaign=Badge_Grade)
+[![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-v2.0%20adopted-ff69b4.svg?style=flat-square)](/CODE_OF_CONDUCT.md)
 
 Json.<i></i>NET is a popular high-performance JSON framework for .NET
 
@@ -94,35 +94,9 @@ for more information.
 
 ### Merging changes from JamesNK/Newtonsoft.Json
 
-As an example, this is how to make a release for Json.<i></i>NET 12.0.3,
-resulting in Newtonsoft.Json-for-Unity (this project) version 12.0.301. Check
-the [About the versioning](https://github.com/jilleJr/Newtonsoft.Json-for-Unity/wiki/About-the-versioning)
-guide on the Wiki about the version format.
+Common enough occurrence that we have a wiki page for just this.
 
-1. First, read the [Working with branches][wiki-workingwithbranches] wiki page.
-
-2. If not yet done, create the release branch `release/12.0.301` based off of
-   the `master` branch.
-
-3. Checkout a new feature branch `feature/merge-12.0.3` based off of the
-   `release/12.0.301` branch.
-
-4. Merge the changes from the release tag of JamesNK repo.
-   For some files the changes are too grand and the auto merging fails.
-   Make sure then to compare said files with the actual changeset on JamesNKs
-   repo, like so: <https://github.com/JamesNK/Newtonsoft.Json/compare/12.0.2...12.0.3>
-
-    ```bash
-    git checkout -b feature/12.0.301/merge-12.0.3
-    git pull https://github.com/JamesNK/Newtonsoft.Json.git 12.0.3
-    # Resolve merge conflicts
-    # Only proceed when fully done
-    git commit -m "Merge JamesNK/Newtonsoft.Json:12.0.3 into feature/12.0.301/merge-12.0.3"
-    git push
-    ```
-
-5. Create a merge request from `feature/12.0.301/merge-12.0.3` to `release/12.0.301`  
-   <https://github.com/jilleJr/Newtonsoft.Json-for-Unity/compare/release/12.0.301...feature/12.0.301/merge-12.0.3>
+Read the [Working with branches, section "Merging changes from JamesNKs repo"][wiki-workingwithbranches#merging] wiki page.
 
 ---
 
@@ -136,11 +110,4 @@ See full copyrights in [LICENSE.md][license.md] inside repository
 [license.md]: https://github.com/jilleJr/Newtonsoft.Json-for-Unity/blob/master/LICENSE.md
 [newtonsoft.json.git]: https://github.com/JamesNK/Newtonsoft.Json
 [wiki-workingwithbranches]: https://github.com/jilleJr/Newtonsoft.Json-for-Unity/wiki/Working-with-branches
-[cloudsmith-badge]: https://img.shields.io/npm/v/jillejr.newtonsoft.json-for-unity/latest?label=cloudsmith&logo=data%3Aimage%2Fsvg%2Bxml%3Bbase64%2CPHN2ZyBpZD0iTGF5ZXJfMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2aWV3Qm94PSIwIDAgMTAwIDEwMCI%2BPHN0eWxlPi5zdDB7ZmlsbDojZmZmO3N0cm9rZTojZmZmO3N0cm9rZS1taXRlcmxpbWl0OjEwfTwvc3R5bGU%2BPGNpcmNsZSBjbGFzcz0ic3QwIiBjeD0iNTguOCIgY3k9Ijc0IiByPSIxMi43Ii8%2BPHBhdGggY2xhc3M9InN0MCIgZD0iTTU5LjEgMzguN2gxLjZjMy0uMiA1LjktMS40IDguMS0zLjcgNS01IDUtMTMgMC0xOHMtMTMtNS0xOCAwYy0zIDMtNC4xIDctMy42IDEwLjgtMS40IDcuOC04LjcgOC45LTExLjkgOS0zLjYtLjMtNy4yIDEtOS45IDMuNy01IDUtNSAxMyAwIDE4czEzIDUgMTggMGMyLjMtMi4zIDMuNS01LjIgMy43LTguMnYtLjdjLjMtOS41IDguNS0xMC44IDEyLTEwLjl6Ii8%2BPC9zdmc%2BCg%3D%3D&registry_uri=https%3A%2F%2Fnpm.cloudsmith.io%2Fjillejr%2Fnewtonsoft-json-for-unity&style=flat-square
-[cloudsmith-url]: https://cloudsmith.io/~jillejr/repos/newtonsoft-json-for-unity/packages/detail/npm/jillejr.newtonsoft.json-for-unity/latest/
-[circleci-badge]: https://img.shields.io/circleci/build/gh/jilleJr/Newtonsoft.Json-for-Unity/master?logo=circleci&style=flat-square
-[circleci-url]: https://circleci.com/gh/jilleJr/Newtonsoft.Json-for-Unity
-[codacy-badge]: https://img.shields.io/codacy/grade/f91156e7066c484588f4dba263c8cf45?logo=codacy&style=flat-square
-[codacy-url]: https://www.codacy.com/manual/jilleJr/Newtonsoft.Json-for-Unity?utm_source=github.com&utm_medium=referral&utm_content=jilleJr/Newtonsoft.Json-for-Unity&utm_campaign=Badge_Grade
-[code-of-conduct-badge]: https://img.shields.io/badge/Contributor%20Covenant-v2.0%20adopted-ff69b4.svg?style=flat-square
-[code-of-conduct-url]: /CODE_OF_CONDUCT.md
+[wiki-workingwithbranches#merging]: https://github.com/jilleJr/Newtonsoft.Json-for-Unity/wiki/Working-with-branches#merging-changes-from-jamesnks-repo
