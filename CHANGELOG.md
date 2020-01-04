@@ -1,5 +1,10 @@
 # Newtonsoft.Json for Unity changelog
 
+## 12.0.301
+
+- ✨ New: Merged changes from
+  [JamesNK/Newtonsoft.Json version `12.0.3`][json.net-12.0.3]
+
 ## 12.0.201
 
 - ✨ New: Merged changes from
@@ -76,6 +81,7 @@
 [codacy-url]: https://www.codacy.com/manual/jilleJr/Newtonsoft.Json-for-Unity?utm_source=github.com&utm_medium=referral&utm_content=jilleJr/Newtonsoft.Json-for-Unity&utm_campaign=Badge_Grade
 [json.net-12.0.1]: https://github.com/JamesNK/Newtonsoft.Json/releases/12.0.1
 [json.net-12.0.2]: https://github.com/JamesNK/Newtonsoft.Json/releases/12.0.2
+[json.net-12.0.3]: https://github.com/JamesNK/Newtonsoft.Json/releases/12.0.3
 [npmjs-badge]: https://img.shields.io/npm/v/jillejr.newtonsoft.json-for-unity?logo=npm&style=flat-square
 [npmjs-url]: https://www.npmjs.com/package/jillejr.newtonsoft.json-for-unity
 [portable-class-library]: https://docs.microsoft.com/en-us/dotnet/standard/net-standard#pcl-compatibility
