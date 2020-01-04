@@ -1,9 +1,9 @@
 # ![Logo](Doc/icons/logo-with-unity.png) Newtonsoft.Json for Unity
 
-[![Latest Version @ Cloudsmith](https://api-prd.cloudsmith.io/badges/version/jillejr/newtonsoft-json-for-unity/npm/jillejr.newtonsoft.json-for-unity/latest/x/?render=true&badge_token=gAAAAABeClWC7DvHIyN1IvhxcvGYUIO8CFfs-PsrT973U91i_wmUiuhrzsGZgXqecxQgrEMj4p_-UUUz7XaWjxH3NB8DfA2kkQ%3D%3D)](https://cloudsmith.io/~jillejr/repos/newtonsoft-json-for-unity/packages/detail/npm/jillejr.newtonsoft.json-for-unity/latest/)
-[![CircleCI](https://img.shields.io/circleci/build/gh/jilleJr/Newtonsoft.Json-for-Unity/master?logo=circleci&style=flat-square)](https://circleci.com/gh/jilleJr/Newtonsoft.Json-for-Unity)
-[![Codacy grade](https://img.shields.io/codacy/grade/f91156e7066c484588f4dba263c8cf45?logo=codacy&style=flat-square)](https://www.codacy.com/manual/jilleJr/Newtonsoft.Json-for-Unity?utm_source=github.com&utm_medium=referral&utm_content=jilleJr/Newtonsoft.Json-for-Unity&utm_campaign=Badge_Grade)
-[![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-v2.0%20adopted-ff69b4.svg?style=flat-square)](/CODE_OF_CONDUCT.md)
+[![Latest Version @ Cloudsmith][cloudsmith-badge]][cloudsmith-url]
+[![CircleCI][circleci-badge]][circleci-url]
+[![Codacy grade][codacy-badge]][codacy-url]
+[![Contributor Covenant][code-of-conduct-badge]][code-of-conduct-url]
 
 Json.<i></i>NET is a popular high-performance JSON framework for .NET
 
@@ -136,3 +136,11 @@ See full copyrights in [LICENSE.md][license.md] inside repository
 [license.md]: https://github.com/jilleJr/Newtonsoft.Json-for-Unity/blob/master/LICENSE.md
 [newtonsoft.json.git]: https://github.com/JamesNK/Newtonsoft.Json
 [wiki-workingwithbranches]: https://github.com/jilleJr/Newtonsoft.Json-for-Unity/wiki/Working-with-branches
+[cloudsmith-badge]: https://img.shields.io/npm/v/jillejr.newtonsoft.json-for-unity/latest?label=cloudsmith&logo=data%3Aimage%2Fsvg%2Bxml%3Bbase64%2CPHN2ZyBpZD0iTGF5ZXJfMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2aWV3Qm94PSIwIDAgMTAwIDEwMCI%2BPHN0eWxlPi5zdDB7ZmlsbDojZmZmO3N0cm9rZTojZmZmO3N0cm9rZS1taXRlcmxpbWl0OjEwfTwvc3R5bGU%2BPGNpcmNsZSBjbGFzcz0ic3QwIiBjeD0iNTguOCIgY3k9Ijc0IiByPSIxMi43Ii8%2BPHBhdGggY2xhc3M9InN0MCIgZD0iTTU5LjEgMzguN2gxLjZjMy0uMiA1LjktMS40IDguMS0zLjcgNS01IDUtMTMgMC0xOHMtMTMtNS0xOCAwYy0zIDMtNC4xIDctMy42IDEwLjgtMS40IDcuOC04LjcgOC45LTExLjkgOS0zLjYtLjMtNy4yIDEtOS45IDMuNy01IDUtNSAxMyAwIDE4czEzIDUgMTggMGMyLjMtMi4zIDMuNS01LjIgMy43LTguMnYtLjdjLjMtOS41IDguNS0xMC44IDEyLTEwLjl6Ii8%2BPC9zdmc%2BCg%3D%3D&registry_uri=https%3A%2F%2Fnpm.cloudsmith.io%2Fjillejr%2Fnewtonsoft-json-for-unity&style=flat-square
+[cloudsmith-url]: https://cloudsmith.io/~jillejr/repos/newtonsoft-json-for-unity/packages/detail/npm/jillejr.newtonsoft.json-for-unity/latest/
+[circleci-badge]: https://img.shields.io/circleci/build/gh/jilleJr/Newtonsoft.Json-for-Unity/master?logo=circleci&style=flat-square
+[circleci-url]: https://circleci.com/gh/jilleJr/Newtonsoft.Json-for-Unity
+[codacy-badge]: https://img.shields.io/codacy/grade/f91156e7066c484588f4dba263c8cf45?logo=codacy&style=flat-square
+[codacy-url]: https://www.codacy.com/manual/jilleJr/Newtonsoft.Json-for-Unity?utm_source=github.com&utm_medium=referral&utm_content=jilleJr/Newtonsoft.Json-for-Unity&utm_campaign=Badge_Grade
+[code-of-conduct-badge]: https://img.shields.io/badge/Contributor%20Covenant-v2.0%20adopted-ff69b4.svg?style=flat-square
+[code-of-conduct-url]: /CODE_OF_CONDUCT.md
