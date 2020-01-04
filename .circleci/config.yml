@@ -17,7 +17,7 @@ preset-filter-check: &WORKFLOW_CHECK_DEPLOY_READY_FILTER
     - /^release.*/
 
 orbs:
-  win: circleci/windows@1.0.0
+  win: circleci/windows@2.3.0
 
 jobs:
   build-package:
@@ -114,7 +114,7 @@ jobs:
             - package
 
   test-windows:
-    executor: win/vs2019
+    executor: win/default
 
     steps:
       - run:
