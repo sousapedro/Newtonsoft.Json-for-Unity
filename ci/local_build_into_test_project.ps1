@@ -13,6 +13,7 @@ Write-Host ""
     -Configuration Debug `
     -UnityBuilds @($UnityBuild) `
     -RelativeBuildDestination "Src/Newtonsoft.Json-for-Unity.Tests/Packages/Newtonsoft.Json-for-Unity.Tests/Plugins/Newtonsoft.Json Tests/" `
+    -RelativeBuildDestinationBase "Src/Newtonsoft.Json-for-Unity.Tests/Packages/Newtonsoft.Json-for-Unity.Tests/Plugins/" `
     -DontSign
 if ($LASTEXITCODE -ne 0) {
     throw "Failed to complete debug build"

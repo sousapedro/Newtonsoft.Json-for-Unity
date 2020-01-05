@@ -15,7 +15,7 @@ param (
         ,'Editor'
     ),
 
-    [string] $VolumeSource = "/c/Projekt/Newtonsoft.Json-for-Unity",
+    [string] $VolumeSource = ([Path]::GetFullPath("$PSScriptRoot..")),
 
     [string] $DockerImage = "applejag/newtonsoft.json-for-unity.package-builder:v1",
 

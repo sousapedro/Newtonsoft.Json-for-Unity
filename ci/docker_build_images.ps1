@@ -42,7 +42,7 @@ function Start-DockerBuild  {
 
     Process {
         $ImageName = "applejag/newtonsoft.json-for-unity.$($Build.ImageNameKey)"
-        $DockerFile = "$PSScriptRoot\$($Build.ImageNameKey).Dockerfile"
+        $DockerFile = "$PSScriptRoot/$($Build.ImageNameKey).Dockerfile"
         $ImageVersion = $Build.ImageVersion
         $ExtraArgs = $Build.ExtraArgs
         if ($PSCmdlet.ShouldProcess("${ImageName}:${ImageVersion}")) {
