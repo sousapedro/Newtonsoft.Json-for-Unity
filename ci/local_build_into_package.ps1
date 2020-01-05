@@ -1,3 +1,4 @@
+using namespace System.IO
 
 # Run this script to build the
 # <repo>/Src/Newtonsoft.Json/Newtonsoft.Json.csproj
@@ -15,7 +16,7 @@ param (
         ,'Editor'
     ),
 
-    [string] $VolumeSource = ([Path]::GetFullPath("$PSScriptRoot..")),
+    [string] $VolumeSource = ([Path]::GetFullPath("$PSScriptRoot/..")),
 
     [string] $DockerImage = "applejag/newtonsoft.json-for-unity.package-builder:v1",
 
