@@ -9,7 +9,7 @@
     <MicrosoftNetCompilersToolsetPackageVersion>3.3.1</MicrosoftNetCompilersToolsetPackageVersion>
     <MicrosoftNETTestSdkPackageVersion>16.3.0</MicrosoftNETTestSdkPackageVersion>
     <MoqPackageVersion>4.8.1</MoqPackageVersion>
-    <NunitPackageVersion>3.11.0</NunitPackageVersion>
+    <NunitPackageVersion>3.5.0</NunitPackageVersion>
     <Nunit3TestAdapterPackageVersion>3.13.0</Nunit3TestAdapterPackageVersion>
     <SystemBuffersPackageVersion>4.4.0</SystemBuffersPackageVersion>
     <SystemCollectionsImmutablePackageVersion>1.4.0</SystemCollectionsImmutablePackageVersion>
