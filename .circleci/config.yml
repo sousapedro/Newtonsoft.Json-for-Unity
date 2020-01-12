@@ -91,52 +91,14 @@ jobs:
 
       - run:
           name: Build Testing library
-          command: BUILD_CONFIGURATION=Debug BUILD_DESTINATION=/workspace/testlib BUILD_ADDITIONAL_CONSTANTS= $SCRIPTS/build.sh Tests "$BUILD_SOLUTION"
-
-      - run:
-          name: Move resulting package into workspace
           command: |
-            mkdir -pv /workspace/package
-            cp -rv Src/Newtonsoft.Json-for-Unity/. /workspace/package/
-            cp -vf CHANGELOG.md /workspace/package/
+            export BUILD_CONFIGURATION=Debug
+            export BUILD_DESTINATION=/workspace/testlib
+            export BUILD_ADDITIONAL_CONSTANTS=
+            $SCRIPTS/build.sh Tests "$BUILD_SOLUTION"
 
       - run:
-          name: Fix meta files
-          command: |
-            $SCRIPTS/generate_metafiles.sh /workspace/package
-
-      - persist_to_workspace:
-          root: /workspace
-          paths:
-            - testlib
-            - package
-
-  build-unity-tests:
-    working_directory: ~/repo
-    
-    environment:
-      SCRIPTS: /root/repo/ci/scripts
-      BUILD_SOLUTION: /root/repo/Src/Newtonsoft.Json.Tests/Newtonsoft.Json.Tests.csproj
-      BUILD_CONFIGURATION: Debug
-      BUILD_DESTINATION: /root/repo/Src/Newtonsoft.Json.Tests/bin/Debug/net46
-
-    docker:
-      - image: applejag/newtonsoft.json-for-unity.package-builder:v2
-
-    steps:
-      # Checkout repo -> ~/repo
-      - checkout
-
-      - restore_cache:
-          keys:
-            - build-package-nuget
-
-      - run:
-          name: Enable permissions on scripts
-          command: chmod +x $SCRIPTS/**.sh -v
-
-      - run:
-          name: Setup variables
+          name: Setup variables for Newtonsoft.Json.Tests
           command: |
             env() {
                 echo "export '$1=$2'" >> $BASH_ENV
@@ -153,27 +115,35 @@ jobs:
             env VERSION_ASSEMBLY "$(xml AssemblyVersion)"
 
       - run:
-          name: NuGet restore
-          command: msbuild -t:restore "$BUILD_SOLUTION"
-
-      - save_cache:
-          key: build-package-nuget
-          paths:
-            - /root/.nuget/packages
-
-      - run:
-          name: Build Newtonsoft.Json.Tests
-          command: $SCRIPTS/build.sh Tests "$BUILD_SOLUTION"
+          name: Build Newtonsoft.Json.Tests for Unity
+          command: |
+            export BUILD_SOLUTION=/root/repo/Src/Newtonsoft.Json.Tests/Newtonsoft.Json.Tests.csproj
+            export BUILD_CONFIGURATION=Debug
+            export BUILD_DESTINATION=/root/tmp/Newtonsoft.Json.Tests/bin
+            export BUILD_ADDITIONAL_CONSTANTS=
+            $SCRIPTS/build.sh Tests "$BUILD_SOLUTION"
 
       - run:
           name: Move resulting package into workspace
           command: |
+            mkdir -pv /workspace/package
+            cp -rv Src/Newtonsoft.Json-for-Unity/. /workspace/package/
+            cp -vf CHANGELOG.md /workspace/package/
+
             mkdir -pv /workspace/tests
+            export BUILD_DESTINATION=/root/tmp/Newtonsoft.Json.Tests/bin
             cp -rv $BUILD_DESTINATION/Newtonsoft.Json.Tests.dll $BUILD_DESTINATION/Newtonsoft.Json.Tests.pdb /workspace/tests/
+
+      - run:
+          name: Fix meta files
+          command: |
+            $SCRIPTS/generate_metafiles.sh /workspace/package
 
       - persist_to_workspace:
           root: /workspace
           paths:
+            - testlib
+            - package
             - tests
 
   test-windows:
@@ -560,22 +530,15 @@ workflows:
           filters:
             branches:
               <<: *WORKFLOW_BUILD_TEST_FILTER
-      - build-unity-tests:
-          filters:
-            branches:
-              <<: *WORKFLOW_BUILD_TEST_DEPLOY_FILTER
       - test-windows:
           requires:
             - build-package
-            - build-unity-tests
       - test-unity-2018-4-14f1:
           requires:
             - build-package
-            - build-unity-tests
       - test-unity-2019-2-11f1:
           requires:
             - build-package
-            - build-unity-tests
   check-deploy-ready:
     jobs:
       - check-deploy-ready:
@@ -588,22 +551,15 @@ workflows:
           filters:
             branches:
               <<: *WORKFLOW_BUILD_TEST_DEPLOY_FILTER
-      - build-unity-tests:
-          filters:
-            branches:
-              <<: *WORKFLOW_BUILD_TEST_DEPLOY_FILTER
       - test-windows:
           requires:
             - build-package
-            - build-unity-tests
       - test-unity-2018-4-14f1:
           requires:
             - build-package
-            - build-unity-tests
       - test-unity-2019-2-11f1:
           requires:
             - build-package
-            - build-unity-tests
       - hold:
           type: approval
           requires:
