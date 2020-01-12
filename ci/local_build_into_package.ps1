@@ -26,8 +26,11 @@ param (
     [string] $RelativeBuildDestination = "",
     [string] $RelativeBuildDestinationBase = "Src/Newtonsoft.Json-for-Unity/Plugins/",
     [string[]] $CopyFiles = @('*'),
+    [string] $AdditionalConstants = "",
     
     [switch] $UseDefaultAssemblyVersion,
+    [switch] $DontUseNuGetPackageCache,
+    [switch] $DontUseNuGetHttpCache,
     [switch] $DontSign
 )
 
@@ -36,7 +39,6 @@ $ErrorActionPreference = "Stop"
 Write-Host ">> Starting $DockerImage" -BackgroundColor DarkRed
 $watch = [System.Diagnostics.Stopwatch]::StartNew()
 
-$AdditionalConstants = ""
 if (-not $DontSign) {
     $AdditionalConstants += ";SIGNING"
 }
@@ -55,9 +57,38 @@ if (-not [string]::IsNullOrEmpty($RelativeBuildDestination)) {
     }
 }
 
+$dockerVolumes = @(
+    "${VolumeSource}:/root/repo"
+)
+
+$IsWSL = ($IsLinux -and $Env:WSL_DISTRO_NAME)
+
+if (-not $DontUseNuGetPackageCache) {
+    if ($IsWindows) {
+        $dockerVolumes += @("$Env:UserProfile/.nuget/packages:/root/.nuget/packages")
+    } elseif ($IsWSL) {
+        $UserProfile = wslpath $(cmd.exe /C "echo %USERPROFILE%")
+        $dockerVolumes += @("$UserProfile/.nuget/packages:/root/.nuget/packages")
+    } elseif ($IsLinux) {
+        $dockerVolumes += @("$Env:HOME/.nuget/packages:/root/.nuget/packages")
+    }
+}
+
+if (-not $DontUseNuGetHttpCache) {
+    if ($IsWindows) {
+        $dockerVolumes += @("$Env:LocalAppData/NuGet/v3-cache:/root/.local/share/NuGet/v3-cache")
+    } elseif ($IsWSL) {
+        $LocalAppData = wslpath $(cmd.exe /C "echo %LOCALAPPDATA%")
+        $dockerVolumes += @("$LocalAppData/NuGet/v3-cache:/root/.local/share/NuGet/v3-cache")
+    } elseif ($IsLinux) {
+        $dockerVolumes += @("$Env:HOME/.local/share/NuGet/v3-cache:/root/.local/share/NuGet/v3-cache")
+    }
+}
+
+$dockerVolumesArgs
 Write-Host @"
 `$container = docker run -dit ``
-    -v "${VolumeSource}:/root/repo" ``
+    $(($dockerVolumes | ForEach-Object {"-v $_ ``"}) -join "`n    ")
     -e SCRIPTS=/root/repo/ci/scripts ``
     -e BUILD_SOLUTION=/root/repo/$RelativeBuildSolution ``
     -e BUILD_DESTINATION_BASE=/root/repo/$RelativeBuildDestinationBase ``

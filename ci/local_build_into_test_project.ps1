@@ -84,6 +84,7 @@ Write-Host ""
     -RelativeBuildDestinationBase "Src/Newtonsoft.Json-for-Unity.Tests/Packages/Newtonsoft.Json-for-Unity.Tests/Plugins/" `
     -CopyFiles @("Newtonsoft.Json.Tests.dll", "Newtonsoft.Json.Tests.pdb") `
     -UseDefaultAssemblyVersion `
+    -AdditionalConstants "ENABLE_IL2CPP" `
     -DontSign
 if ($LASTEXITCODE -ne 0) {
     throw "Failed to complete debug build"
