@@ -120,7 +120,7 @@ jobs:
       - run:
           name: Build Newtonsoft.Json.Tests for Unity
           command: |
-            export BUILD_SOLUTION=TEST_SOLUTION
+            export BUILD_SOLUTION="$TEST_SOLUTION"
             export BUILD_CONFIGURATION=Debug
             export BUILD_DESTINATION=/root/tmp/Newtonsoft.Json.Tests/bin
             export BUILD_ADDITIONAL_CONSTANTS=
