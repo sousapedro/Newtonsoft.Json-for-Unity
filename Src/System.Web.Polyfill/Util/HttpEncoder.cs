@@ -108,7 +108,7 @@ namespace System.Web.Util
             out string encodedHeaderName,
             out string encodedHeaderValue)
         {
-            if (String.IsNullOrEmpty(headerName))
+            if (string.IsNullOrEmpty(headerName))
             {
                 encodedHeaderName = headerName;
             }
@@ -117,7 +117,7 @@ namespace System.Web.Util
                 encodedHeaderName = EncodeHeaderString(headerName);
             }
 
-            if (String.IsNullOrEmpty(headerValue))
+            if (string.IsNullOrEmpty(headerValue))
             {
                 encodedHeaderValue = headerValue;
             }
@@ -149,7 +149,7 @@ namespace System.Web.Util
 
                 if ((ch < 32 && ch != 9) || ch == 127)
                 {
-                    StringBuilderAppend(String.Format("%{0:x2}", (int)ch), ref sb);
+                    StringBuilderAppend(string.Format("%{0:x2}", (int)ch), ref sb);
                 }
             }
 
@@ -168,7 +168,7 @@ namespace System.Web.Util
                 throw new ArgumentNullException(nameof(output));
             }
 
-            if (String.IsNullOrEmpty(value))
+            if (string.IsNullOrEmpty(value))
             {
                 return;
             }
@@ -233,12 +233,12 @@ namespace System.Web.Util
 
         protected internal virtual string UrlPathEncode(string value)
         {
-            if (String.IsNullOrEmpty(value))
+            if (string.IsNullOrEmpty(value))
             {
                 return value;
             }
 
-            MemoryStream result = new MemoryStream();
+            var result = new MemoryStream();
             int length = value.Length;
             for (int i = 0; i < length; i++)
             {
@@ -271,7 +271,7 @@ namespace System.Web.Util
                 throw new ArgumentOutOfRangeException("count");
             }
 
-            MemoryStream result = new MemoryStream(count);
+            var result = new MemoryStream(count);
             int end = offset + count;
             for (int i = offset; i < end; i++)
             {
@@ -290,7 +290,7 @@ namespace System.Web.Util
 
             if (s.Length == 0)
             {
-                return String.Empty;
+                return string.Empty;
             }
 
             bool needEncode = false;
@@ -311,7 +311,7 @@ namespace System.Web.Util
                 return s;
             }
 
-            StringBuilder output = new StringBuilder();
+            var output = new StringBuilder();
             int len = s.Length;
 
             for (int i = 0; i < len; i++)
@@ -362,9 +362,9 @@ namespace System.Web.Util
 
         internal static string HtmlAttributeEncode(string s)
         {
-            if (String.IsNullOrEmpty(s))
+            if (string.IsNullOrEmpty(s))
             {
-                return String.Empty;
+                return string.Empty;
             }
 
             bool needEncode = false;
@@ -385,7 +385,7 @@ namespace System.Web.Util
                 return s;
             }
 
-            StringBuilder output = new StringBuilder();
+            var output = new StringBuilder();
             int len = s.Length;
 
             for (int i = 0; i < len; i++)
@@ -423,7 +423,7 @@ namespace System.Web.Util
 
             if (s.Length == 0)
             {
-                return String.Empty;
+                return string.Empty;
             }
 
             if (s.IndexOf('&') == -1)
@@ -431,9 +431,9 @@ namespace System.Web.Util
                 return s;
             }
 
-            StringBuilder rawEntity = new StringBuilder();
-            StringBuilder entity = new StringBuilder();
-            StringBuilder output = new StringBuilder();
+            var rawEntity = new StringBuilder();
+            var entity = new StringBuilder();
+            var output = new StringBuilder();
             int len = s.Length;
             // 0 -> nothing,
             // 1 -> right after '&'
@@ -549,7 +549,7 @@ namespace System.Web.Util
                         have_trailing_digits = true;
                         rawEntity.Append(c);
                     }
-                    else if (Char.IsDigit(c))
+                    else if (char.IsDigit(c))
                     {
                         number = number * 10 + ((int)c - '0');
                         have_trailing_digits = true;
