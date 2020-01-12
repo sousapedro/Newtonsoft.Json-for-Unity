@@ -135,7 +135,11 @@ jobs:
 
             mkdir -pv /workspace/tests
             export BUILD_DESTINATION=/root/tmp/Newtonsoft.Json.Tests/bin
-            cp -rv $BUILD_DESTINATION/Newtonsoft.Json.Tests.dll $BUILD_DESTINATION/Newtonsoft.Json.Tests.pdb /workspace/tests/
+            cp -rvt /workspace/tests/ \
+              $BUILD_DESTINATION/Newtonsoft.Json.Tests.dll \
+              $BUILD_DESTINATION/Newtonsoft.Json.Tests.pdb \
+              $BUILD_DESTINATION/System.Web.Polyfill.dll \
+              $BUILD_DESTINATION/System.Web.Polyfill.pdb
 
       - run:
           name: Fix meta files
@@ -211,7 +215,7 @@ jobs:
     
     environment:
       SCRIPTS: /root/repo/ci/scripts
-      PACKAGE_FOLDER: /root/repo/Src/Newtonsoft.Json-for-Unity.Tests/Packages/Newtonsoft.Json-for-Unity.Tests/
+      ASSETS_FOLDER: /root/repo/Src/Newtonsoft.Json-for-Unity.Tests/Assets
       TEST_PROJECT: /root/repo/Src/Newtonsoft.Json-for-Unity.Tests
       PLATFORMS: playmode
 
@@ -246,8 +250,8 @@ jobs:
       - run:
           name: Copy dll's into Unity testing project
           command: |
-            cp -vur /workspace/tests/. $PACKAGE_FOLDER/Plugins/Newtonsoft.Json.Tests/
-            cp -vfr /workspace/testlib/. $PACKAGE_FOLDER/Plugins/Newtonsoft.Json/
+            cp -vur /workspace/tests/. $ASSETS_FOLDER/Plugins/Newtonsoft.Json.Tests/
+            cp -vfr /workspace/testlib/. $ASSETS_FOLDER/Plugins/Newtonsoft.Json/
 
       - run:
           name: Downgrade Unity project to 2018.x
@@ -255,9 +259,9 @@ jobs:
             echo "Moving $TEST_PROJECT/Packages/manifest.json file"
             mv -v "$TEST_PROJECT/Packages/manifest.json" "$TEST_PROJECT/Packages/.manifest.json.old"
             echo
-            find "$TEST_PROJECT/Assets" -name '.*.asmdef.old' -exec rm -v {} +
+            find "$ASSETS_FOLDER" -name '.*.asmdef.old' -exec rm -v {} +
             echo
-            find "$TEST_PROJECT/Assets" -name '*.asmdef' -exec $SCRIPTS/unity_downgrade_asmdef.sh --backup "{}" \;
+            find "$ASSETS_FOLDER" -name '*.asmdef' -exec $SCRIPTS/unity_downgrade_asmdef.sh --backup "{}" \;
 
       - run:
           name: Run tests
@@ -287,7 +291,7 @@ jobs:
     
     environment:
       SCRIPTS: /root/repo/ci/scripts
-      PACKAGE_FOLDER: /root/repo/Src/Newtonsoft.Json-for-Unity.Tests/Packages/Newtonsoft.Json-for-Unity.Tests/
+      ASSETS_FOLDER: /root/repo/Src/Newtonsoft.Json-for-Unity.Tests/Assets
       TEST_PROJECT: /root/repo/Src/Newtonsoft.Json-for-Unity.Tests
       PLATFORMS: playmode
 
@@ -322,8 +326,8 @@ jobs:
       - run:
           name: Copy dll's into Unity testing project
           command: |
-            cp -vur /workspace/tests/. $PACKAGE_FOLDER/Plugins/Newtonsoft.Json.Tests/
-            cp -vfr /workspace/testlib/. $PACKAGE_FOLDER/Plugins/Newtonsoft.Json/
+            cp -vur /workspace/tests/. $ASSETS_FOLDER/Plugins/Newtonsoft.Json.Tests/
+            cp -vfr /workspace/testlib/. $ASSETS_FOLDER/Plugins/Newtonsoft.Json/
 
       - run:
           name: Run tests
