@@ -73,7 +73,7 @@ jobs:
           name: NuGet restore
           command: |
             msbuild -t:restore "$BUILD_SOLUTION"
-            msbuild -t:restore "$TEST_SOLUTION"
+            msbuild -t:restore "$TEST_SOLUTION" -p:UnityBuild=Tests
 
       - save_cache:
           key: build-package-nuget
