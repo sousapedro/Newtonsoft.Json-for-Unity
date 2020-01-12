@@ -71,7 +71,7 @@ $Builds = [DockerBuild[]] @(
     , [DockerBuild]::new('package-unity-tester', 'v1-2019.2.11f1').
         WithExtraArg('--build-arg', 'UNITY_VERSION=2019.2.11f1')
 
-    , [DockerBuild]::new('package-builder', 'v1')
+    , [DockerBuild]::new('package-builder', 'v2')
 
     , [DockerBuild]::new('package-deploy-npm', 'v3')
 

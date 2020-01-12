@@ -18,7 +18,7 @@ Publish-DockerImage applejag/newtonsoft.json-for-unity.package-unity-tester:v1-2
 Publish-DockerImage applejag/newtonsoft.json-for-unity.package-unity-tester:v1-2018.4.14f1
 Publish-DockerImage applejag/newtonsoft.json-for-unity.package-unity-tester:latest
 
-Publish-DockerImage applejag/newtonsoft.json-for-unity.package-builder:v1
+Publish-DockerImage applejag/newtonsoft.json-for-unity.package-builder:v2
 Publish-DockerImage applejag/newtonsoft.json-for-unity.package-builder:latest
 
 Publish-DockerImage applejag/newtonsoft.json-for-unity.package-deploy-npm:v3
