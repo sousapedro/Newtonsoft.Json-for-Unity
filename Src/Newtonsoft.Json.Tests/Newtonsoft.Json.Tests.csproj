@@ -98,6 +98,9 @@
     <PackageReference Include="System.ValueTuple" Version="$(SystemValueTuplePackageVersion)" />
     <PackageReference Include="Moq" Version="$(MoqPackageVersion)" />
     <PackageReference Include="Unity3D.UnityEngine" Version="2018.3.5.1" />
+    <ProjectReference Include="..\System.Web.Polyfill\System.Web.Polyfill.csproj">
+        <Aliases>SystemWebPolyfill</Aliases>
+    </ProjectReference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Web" />
     <Reference Include="System.Data.Linq" />
