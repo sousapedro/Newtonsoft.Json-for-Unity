@@ -26,6 +26,7 @@ jobs:
     environment:
       SCRIPTS: /root/repo/ci/scripts
       BUILD_SOLUTION: /root/repo/Src/Newtonsoft.Json/Newtonsoft.Json.csproj
+      TEST_SOLUTION: /root/repo/Src/Newtonsoft.Json.Tests/Newtonsoft.Json.Tests.csproj
       BUILD_DESTINATION_BASE: /root/repo/Src/Newtonsoft.Json-for-Unity/Plugins
       BUILD_ADDITIONAL_CONSTANTS: SIGNING
 
@@ -70,7 +71,9 @@ jobs:
 
       - run:
           name: NuGet restore
-          command: msbuild -t:restore "$BUILD_SOLUTION"
+          command: |
+            msbuild -t:restore "$BUILD_SOLUTION"
+            msbuild -t:restore "$TEST_SOLUTION"
 
       - save_cache:
           key: build-package-nuget
@@ -117,7 +120,7 @@ jobs:
       - run:
           name: Build Newtonsoft.Json.Tests for Unity
           command: |
-            export BUILD_SOLUTION=/root/repo/Src/Newtonsoft.Json.Tests/Newtonsoft.Json.Tests.csproj
+            export BUILD_SOLUTION=TEST_SOLUTION
             export BUILD_CONFIGURATION=Debug
             export BUILD_DESTINATION=/root/tmp/Newtonsoft.Json.Tests/bin
             export BUILD_ADDITIONAL_CONSTANTS=
