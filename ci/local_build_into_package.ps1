@@ -174,11 +174,12 @@ try {
 '@
     }
 
-    Invoke-DockerCommand 'NuGet restore' `
-        'msbuild -t:restore "$BUILD_SOLUTION"'
-
+    
     foreach ($build in $UnityBuilds) {
-        Invoke-DockerCommand "Build $build" @"
+        Invoke-DockerCommand "NuGet restore for build '$build'" `
+            "msbuild -t:restore `"`$BUILD_SOLUTION`" -p:UnityBuild=$build"
+
+        Invoke-DockerCommand "Build '$build'" @"
             mkdir -p Temp/Build
             rm -rf Temp/Build/*
             BUILD_DESTINATION="`$(pwd)/Temp/Build" `$SCRIPTS/build.sh $build
