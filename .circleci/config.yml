@@ -247,7 +247,6 @@ jobs:
           name: Copy dll's into Unity testing project
           command: |
             cp -vur /workspace/tests/. $PACKAGE_FOLDER/Plugins/Newtonsoft.Json.Tests/
-            cp -vfr /workspace/package/. $PACKAGE_FOLDER/
             cp -vfr /workspace/testlib/. $PACKAGE_FOLDER/Plugins/Newtonsoft.Json/
 
       - run:
@@ -324,7 +323,6 @@ jobs:
           name: Copy dll's into Unity testing project
           command: |
             cp -vur /workspace/tests/. $PACKAGE_FOLDER/Plugins/Newtonsoft.Json.Tests/
-            cp -vfr /workspace/package/. $PACKAGE_FOLDER/
             cp -vfr /workspace/testlib/. $PACKAGE_FOLDER/Plugins/Newtonsoft.Json/
 
       - run:
