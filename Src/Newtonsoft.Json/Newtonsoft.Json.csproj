@@ -44,7 +44,7 @@
     <!-- Compiler to support nullable in non-preview VS2019 -->
     <PackageReference Include="Microsoft.Net.Compilers.Toolset" Version="$(MicrosoftNetCompilersToolsetPackageVersion)" PrivateAssets="All" />
   </ItemGroup> 
-  <PropertyGroup Condition="'$(UnityBuild)'=='Tests' OR ('$(UnityBuild)'=='' AND '$(TargetFramework)'=='net45')">
+  <PropertyGroup Condition="'$(UnityBuild)'=='Tests' OR ('$(UnityBuild)'=='' AND '$(TargetFramework)'=='net46')">
     <!-- Only used in Unity Tests & Newtonsoft.Json.Tests -->
     <TargetFramework>net46</TargetFramework>
     <AssemblyTitle>Json.NET for Unity tests (NOT FOR PRODUCTION)</AssemblyTitle>

@@ -61,7 +61,7 @@
   </ItemGroup>
   <PropertyGroup Condition="'$(TargetFramework)'=='net46' AND '$(UnityBuild)'!='Tests'">
     <AssemblyTitle>Json.NET Tests</AssemblyTitle>
-    <ReferringTargetFrameworkForProjectReferences>.NETFramework,Version=v4.5</ReferringTargetFrameworkForProjectReferences>
+    <ReferringTargetFrameworkForProjectReferences>.NETFramework,Version=v4.6</ReferringTargetFrameworkForProjectReferences>
     <DefineConstants>NET45;HAVE_BENCHMARKS;$(AdditionalConstants)</DefineConstants>
   </PropertyGroup>
   
