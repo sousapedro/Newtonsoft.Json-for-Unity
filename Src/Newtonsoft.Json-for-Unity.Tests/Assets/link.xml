@@ -5,6 +5,8 @@
 		<type fullname="Newtonsoft.Json.Serialization.CamelCaseNamingStrategy" preserve="all" />
 	</assembly>
 
+    <assembly fullname="Newtonsoft.Json.Tests" preserve="all" />
+
 	<assembly fullname="System">
 		<type fullname="System.ComponentModel.TypeConverter" preserve="all"/>
 		<type fullname="System.ComponentModel.ArrayConverter" preserve="all"/>
