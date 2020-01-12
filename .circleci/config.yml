@@ -123,7 +123,7 @@ jobs:
             export BUILD_SOLUTION="$TEST_SOLUTION"
             export BUILD_CONFIGURATION=Debug
             export BUILD_DESTINATION=/root/tmp/Newtonsoft.Json.Tests/bin
-            export BUILD_ADDITIONAL_CONSTANTS=
+            export BUILD_ADDITIONAL_CONSTANTS=UNITY_EDITOR_LINUX
             $SCRIPTS/build.sh Tests "$BUILD_SOLUTION"
 
       - run:
