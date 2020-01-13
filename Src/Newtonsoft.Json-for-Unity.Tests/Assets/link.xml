@@ -25,8 +25,30 @@
         <type fullname="Newtonsoft.Json.Tests.Utilities.OutAndRefTestClass" />
         <type fullname="Newtonsoft.Json.Tests.Utilities.InTestClass" />
         <type fullname="Newtonsoft.Json.Tests.Utilities.MyStruct" />
-        <type fullname="Newtonsoft.Json.Tests.Serialization.CamelCaseNamingStrategyTests/PropertyAttributeNamingStrategyTestClass" />
-        <type fullname="Newtonsoft.Json.Tests.Serialization.CamelCaseNamingStrategyTests/ContainerAttributeNamingStrategyTestClass" />
+
+        <type fullname="Newtonsoft.Json.Tests.Documentation.Samples.Json.ReadMultipleContentWithJsonReader/Role" />
+        <type fullname="Newtonsoft.Json.Tests.Documentation.SerializationTests/*" />
+        <type fullname="Newtonsoft.Json.Tests.Issues.Issue*/*" />
+        <type fullname="Newtonsoft.Json.Tests.JsonConvertTest/*" />
+        <type fullname="Newtonsoft.Json.Tests.Linq.JTokenReaderTest/ReadAsBytesTestObject" />
+        <type fullname="Newtonsoft.Json.Tests.Linq.JValueTests/ObjectWithDateTimeOffset" />
+        <type fullname="Newtonsoft.Json.Tests.Linq.LinqToJsonTest/*" />
+        <type fullname="Newtonsoft.Json.Tests.Linq.MergeTests/*" />
+        <type fullname="Newtonsoft.Json.Tests.Schema.JsonSchemaGeneratorTests/X" />
+        <type fullname="Newtonsoft.Json.Tests.Schema.NullableInt32TestClass" />
+        <type fullname="Newtonsoft.Json.Tests.Serialization.*/*" />
+        <type fullname="Newtonsoft.Json.Tests.Serialization.AddressWithDataMember" />
+        <type fullname="Newtonsoft.Json.Tests.Serialization.DefaultValueHandlingDeserializePopulate" />
+        <type fullname="Newtonsoft.Json.Tests.Serialization.InMemoryTraceWriter" />
+        <type fullname="Newtonsoft.Json.Tests.Serialization.IntegerTestClass" />
+        <type fullname="Newtonsoft.Json.Tests.Serialization.RoleTrace" />
+        <type fullname="Newtonsoft.Json.Tests.Serialization.Staff" />
+        <type fullname="Newtonsoft.Json.Tests.Serialization.TraceRecord" />
+        <type fullname="Newtonsoft.Json.Tests.Serialization.TraceTestObject" />
+        <type fullname="Newtonsoft.Json.Tests.Serialization.TraceWriterTests" />
+        <type fullname="Newtonsoft.Json.Tests.TestObjects.*" />
+        <type fullname="&lt;&gt;f__AnonymousType0`1" />
+        <type fullname="&lt;&gt;f__AnonymousType1`4" />
     </assembly>
 
 	<assembly fullname="System">
