@@ -5,7 +5,29 @@
 		<type fullname="Newtonsoft.Json.Serialization.CamelCaseNamingStrategy" preserve="all" />
 	</assembly>
 
-    <assembly fullname="Newtonsoft.Json.Tests" preserve="all" />
+    <assembly fullname="Newtonsoft.Json.Tests">
+        <type fullname="Newtonsoft.Json.Tests.Bson.BsonReaderTests/RegexTestClass" />
+        <type fullname="Newtonsoft.Json.Tests.Bson.BsonReaderTests/ObjectTestClass" />
+        <type fullname="Newtonsoft.Json.Tests.Bson.BsonReaderTests/BytesTestClass" />
+        <type fullname="Newtonsoft.Json.Tests.Bson.BsonReaderTests/BigIntegerTestClass" />
+        <type fullname="Newtonsoft.Json.Tests.TestObjects.GeoCoding.GoogleMapGeocoderStructure" />
+        <type fullname="Newtonsoft.Json.Tests.Converters.*Converter" />
+        <type fullname="Newtonsoft.Json.Tests.Converters.StringEnumConverterTests/Bucket" />
+        <type fullname="Newtonsoft.Json.Tests.DemoTests/*" />
+        <type fullname="Newtonsoft.Json.Tests.Documentation.ConditionalPropertiesTests/Employee" />
+        <type fullname="Newtonsoft.Json.Tests.Documentation.Employee" />
+        <type fullname="Newtonsoft.Json.Tests.Documentation.Samples.Bson.DeserializeFromBson/Event" />
+        <type fullname="Newtonsoft.Json.Tests.Documentation.Samples.Bson.DeserializeFromBsonCollection/Event" />
+        <type fullname="Newtonsoft.Json.Tests.Documentation.Samples.Bson.SerializeToBson/Event" />
+        <type fullname="Newtonsoft.Json.Tests.Documentation.Samples.Linq.ToObjectComplex/Person" />
+        <type fullname="Newtonsoft.Json.Tests.Documentation.Samples.Serializer.CustomContractResolver/Person" />
+        <type fullname="Newtonsoft.Json.Tests.Documentation.Samples.Serializer.*" />
+        <type fullname="Newtonsoft.Json.Tests.Utilities.OutAndRefTestClass" />
+        <type fullname="Newtonsoft.Json.Tests.Utilities.InTestClass" />
+        <type fullname="Newtonsoft.Json.Tests.Utilities.MyStruct" />
+        <type fullname="Newtonsoft.Json.Tests.Serialization.CamelCaseNamingStrategyTests/PropertyAttributeNamingStrategyTestClass" />
+        <type fullname="Newtonsoft.Json.Tests.Serialization.CamelCaseNamingStrategyTests/ContainerAttributeNamingStrategyTestClass" />
+    </assembly>
 
 	<assembly fullname="System">
 		<type fullname="System.ComponentModel.TypeConverter" preserve="all"/>
@@ -34,6 +56,10 @@
 		<type fullname="System.ComponentModel.UInt32Converter" preserve="all"/>
 		<type fullname="System.ComponentModel.UInt64Converter" preserve="all"/>
 	</assembly>
+
+    <assembly fullname="System.Text.RegularExpressions">
+        <type fullname="System.Text.RegularExpressions.Regex" />
+    </assembly>
 
 	<assembly fullname="System.Xml.Linq">
 		<type fullname="MS.Internal.Xml.Linq.ComponentModel.XTypeDescriptionProvider`1" preserve="all"/>
