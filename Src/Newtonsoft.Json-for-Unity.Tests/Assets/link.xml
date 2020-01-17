@@ -3,53 +3,10 @@
 		<!-- They're referenced in the tests but the constructors are not -->
 		<type fullname="Newtonsoft.Json.Serialization.SnakeCaseNamingStrategy" preserve="all" />
 		<type fullname="Newtonsoft.Json.Serialization.CamelCaseNamingStrategy" preserve="all" />
+		<type fullname="Newtonsoft.Json.Serialization.KebabCaseNamingStrategy" preserve="all" />
 	</assembly>
 
-    <assembly fullname="Newtonsoft.Json.Tests">
-        <type fullname="Newtonsoft.Json.Tests.Bson.BsonReaderTests/RegexTestClass" />
-        <type fullname="Newtonsoft.Json.Tests.Bson.BsonReaderTests/ObjectTestClass" />
-        <type fullname="Newtonsoft.Json.Tests.Bson.BsonReaderTests/BytesTestClass" />
-        <type fullname="Newtonsoft.Json.Tests.Bson.BsonReaderTests/BigIntegerTestClass" />
-        <type fullname="Newtonsoft.Json.Tests.TestObjects.GeoCoding.GoogleMapGeocoderStructure" />
-        <type fullname="Newtonsoft.Json.Tests.Converters.*Converter" />
-        <type fullname="Newtonsoft.Json.Tests.Converters.StringEnumConverterTests/Bucket" />
-        <type fullname="Newtonsoft.Json.Tests.DemoTests/*" />
-        <type fullname="Newtonsoft.Json.Tests.Documentation.ConditionalPropertiesTests/Employee" />
-        <type fullname="Newtonsoft.Json.Tests.Documentation.Employee" />
-        <type fullname="Newtonsoft.Json.Tests.Documentation.Samples.Bson.DeserializeFromBson/Event" />
-        <type fullname="Newtonsoft.Json.Tests.Documentation.Samples.Bson.DeserializeFromBsonCollection/Event" />
-        <type fullname="Newtonsoft.Json.Tests.Documentation.Samples.Bson.SerializeToBson/Event" />
-        <type fullname="Newtonsoft.Json.Tests.Documentation.Samples.Linq.ToObjectComplex/Person" />
-        <type fullname="Newtonsoft.Json.Tests.Documentation.Samples.Serializer.CustomContractResolver/Person" />
-        <type fullname="Newtonsoft.Json.Tests.Documentation.Samples.Serializer.*" />
-        <type fullname="Newtonsoft.Json.Tests.Utilities.OutAndRefTestClass" />
-        <type fullname="Newtonsoft.Json.Tests.Utilities.InTestClass" />
-        <type fullname="Newtonsoft.Json.Tests.Utilities.MyStruct" />
-
-        <type fullname="Newtonsoft.Json.Tests.Documentation.Samples.Json.ReadMultipleContentWithJsonReader/Role" />
-        <type fullname="Newtonsoft.Json.Tests.Documentation.SerializationTests/*" />
-        <type fullname="Newtonsoft.Json.Tests.Issues.Issue*/*" />
-        <type fullname="Newtonsoft.Json.Tests.JsonConvertTest/*" />
-        <type fullname="Newtonsoft.Json.Tests.Linq.JTokenReaderTest/ReadAsBytesTestObject" />
-        <type fullname="Newtonsoft.Json.Tests.Linq.JValueTests/ObjectWithDateTimeOffset" />
-        <type fullname="Newtonsoft.Json.Tests.Linq.LinqToJsonTest/*" />
-        <type fullname="Newtonsoft.Json.Tests.Linq.MergeTests/*" />
-        <type fullname="Newtonsoft.Json.Tests.Schema.JsonSchemaGeneratorTests/X" />
-        <type fullname="Newtonsoft.Json.Tests.Schema.NullableInt32TestClass" />
-        <type fullname="Newtonsoft.Json.Tests.Serialization.*/*" />
-        <type fullname="Newtonsoft.Json.Tests.Serialization.AddressWithDataMember" />
-        <type fullname="Newtonsoft.Json.Tests.Serialization.DefaultValueHandlingDeserializePopulate" />
-        <type fullname="Newtonsoft.Json.Tests.Serialization.InMemoryTraceWriter" />
-        <type fullname="Newtonsoft.Json.Tests.Serialization.IntegerTestClass" />
-        <type fullname="Newtonsoft.Json.Tests.Serialization.RoleTrace" />
-        <type fullname="Newtonsoft.Json.Tests.Serialization.Staff" />
-        <type fullname="Newtonsoft.Json.Tests.Serialization.TraceRecord" />
-        <type fullname="Newtonsoft.Json.Tests.Serialization.TraceTestObject" />
-        <type fullname="Newtonsoft.Json.Tests.Serialization.TraceWriterTests" />
-        <type fullname="Newtonsoft.Json.Tests.TestObjects.*" />
-        <type fullname="&lt;&gt;f__AnonymousType0`1" />
-        <type fullname="&lt;&gt;f__AnonymousType1`4" />
-    </assembly>
+    <assembly fullname="Newtonsoft.Json.Tests" preserve="all" />
 
 	<assembly fullname="System">
 		<type fullname="System.ComponentModel.TypeConverter" preserve="all"/>
