@@ -5,26 +5,44 @@
 [![Codacy grade](https://img.shields.io/codacy/grade/f91156e7066c484588f4dba263c8cf45?logo=codacy&style=flat-square)](https://www.codacy.com/manual/jilleJr/Newtonsoft.Json-for-Unity?utm_source=github.com&utm_medium=referral&utm_content=jilleJr/Newtonsoft.Json-for-Unity&utm_campaign=Badge_Grade)
 [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-v2.0%20adopted-ff69b4.svg?style=flat-square)](/CODE_OF_CONDUCT.md)
 
-Json.<i></i>NET is a popular high-performance JSON framework for .NET
-
-Available for installation with
-
-- **Unity Package Manager (UPM)** `new!`
-- ~~UniGet~~ <sub>_(Coming soon<sup>tm</sup>)_</sub>
-- ~~Unity Asset packages~~ <sub>_(Coming soon<sup>tm</sup>)_</sub>
-- ~~Unity Asset Store~~ <sub>_(Coming soon<sup>tm</sup>)_</sub>
+Json.<i></i>NET is a popular high-performance JSON framework for .NET and the
+most used framework throughout the whole .NET ecosystem.
 
 This repo is a **fork** of [JamesNK/Newtonsoft.Json][newtonsoft.json.git]
 containing custom builds for regular standalone, but more importantly AOT
 targets such as all **IL2CPP builds (WebGL, iOS, Android, Windows, Mac OS X)**
 and portable .NET **(UWP, WP8)**.
 
+## Features
+
+- Expected always up-to-date fork of Newtonsoft.Json
+
+- Full Newtonsoft.Json.Tests test suite passes on Unity 2018.4.14f1 and
+  2019.2.11f1 with Mono and IL2CPP as scripting backend.
+
+- Precompiled as DLLs for faster builds
+
+- Full support for IL2CPP builds
+
+- Delivered via Unity Package Manager for easy updating and version switching
+
+- [_Newtonsoft.Json.Utility_.**AotHelper**][wiki-fix-aot-using-aothelper]
+  utility class for resolving common Ahead-Of-Time issues.
+  [(Read more about AOT)][wiki-what-even-is-aot]
+
+- Extensive
+  [documentation of solving AOT issues with
+  `link.xml`][wiki-fix-aot-using-link.xml]
+
 ## [Installation guide](https://github.com/jilleJr/Newtonsoft.Json-for-Unity/wiki/Installation-via-UPM)
 
 Click the header. It goes to the Wiki where the guide is now located. Here is
 the raw url:
 
-<https://github.com/jilleJr/Newtonsoft.Json-for-Unity/wiki/Installation-via-UPM>
+- [Installation via UPM][wiki-installation-via-upm]
+
+- [Installation via OpenUPM
+  ![OpenUPM icon](Doc/icons/openupm-icon-16.png)][wiki-installation-via-openupm]
 
 ## Newtonsoft.Json-for-Unity specific links
 
@@ -42,11 +60,7 @@ the raw url:
 
 ## Contributing
 
-> ⚠ Please note that this project is released with a Contributor Code of
-> Conduct. By participating in this project you agree to abide by its terms.
-> Read more: [CODE_OF_CONDUCT.md](/CODE_OF_CONDUCT.md)
-
-To contribute first you must read the [CONTRIBUTING.md](/CONTRIBUTING.md)
+To contribute please read the [CONTRIBUTING.md](/CONTRIBUTING.md)
 guidelines. It contains info about
 
 - How to edit the Src/Newtonsoft.Json projects to remain the ability to merge
@@ -94,35 +108,10 @@ for more information.
 
 ### Merging changes from JamesNK/Newtonsoft.Json
 
-As an example, this is how to make a release for Json.<i></i>NET 12.0.3,
-resulting in Newtonsoft.Json-for-Unity (this project) version 12.0.301. Check
-the [About the versioning](https://github.com/jilleJr/Newtonsoft.Json-for-Unity/wiki/About-the-versioning)
-guide on the Wiki about the version format.
+Common enough occurrence that we have a wiki page for just this.
 
-1. First, read the [Working with branches][wiki-workingwithbranches] wiki page.
-
-2. If not yet done, create the release branch `release/12.0.301` based off of
-   the `master` branch.
-
-3. Checkout a new feature branch `feature/merge-12.0.3` based off of the
-   `release/12.0.301` branch.
-
-4. Merge the changes from the release tag of JamesNK repo.
-   For some files the changes are too grand and the auto merging fails.
-   Make sure then to compare said files with the actual changeset on JamesNKs
-   repo, like so: <https://github.com/JamesNK/Newtonsoft.Json/compare/12.0.2...12.0.3>
-
-    ```bash
-    git checkout -b feature/12.0.301/merge-12.0.3
-    git pull https://github.com/JamesNK/Newtonsoft.Json.git 12.0.3
-    # Resolve merge conflicts
-    # Only proceed when fully done
-    git commit -m "Merge JamesNK/Newtonsoft.Json:12.0.3 into feature/12.0.301/merge-12.0.3"
-    git push
-    ```
-
-5. Create a merge request from `feature/12.0.301/merge-12.0.3` to `release/12.0.301`  
-   <https://github.com/jilleJr/Newtonsoft.Json-for-Unity/compare/release/12.0.301...feature/12.0.301/merge-12.0.3>
+Read the [Working with branches, section "Merging changes from JamesNKs
+repo"][wiki-workingwithbranches#merging] wiki page.
 
 ---
 
@@ -136,3 +125,9 @@ See full copyrights in [LICENSE.md][license.md] inside repository
 [license.md]: https://github.com/jilleJr/Newtonsoft.Json-for-Unity/blob/master/LICENSE.md
 [newtonsoft.json.git]: https://github.com/JamesNK/Newtonsoft.Json
 [wiki-workingwithbranches]: https://github.com/jilleJr/Newtonsoft.Json-for-Unity/wiki/Working-with-branches
+[wiki-workingwithbranches#merging]: https://github.com/jilleJr/Newtonsoft.Json-for-Unity/wiki/Working-with-branches#merging-changes-from-jamesnks-repo
+[wiki-fix-aot-using-aothelper]: https://github.com/jilleJr/Newtonsoft.Json-for-Unity/wiki/Fix-AOT-using-AotHelper
+[wiki-fix-aot-using-link.xml]: https://github.com/jilleJr/Newtonsoft.Json-for-Unity/wiki/Fix-AOT-using-link.xml
+[wiki-what-even-is-aot]: https://github.com/jilleJr/Newtonsoft.Json-for-Unity/wiki/What-even-is-AOT
+[wiki-installation-via-upm]: https://github.com/jilleJr/Newtonsoft.Json-for-Unity/wiki/Installation-via-UPM
+[wiki-installation-via-openupm]: https://github.com/jilleJr/Newtonsoft.Json-for-Unity/wiki/Installation-via-OpenUPM

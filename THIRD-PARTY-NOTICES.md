@@ -1,7 +1,7 @@
-This repository ([jilleJr/Newtonsoft.Json-for-Unity][repo-url]) is contains code
+This repository ([jilleJr/Newtonsoft.Json-for-Unity][repo-url]) contains code
 from many glorious other open source projects.
 
-Without those this repository would never been created. Much love.
+Without those this repository would never been created. ❤ Much love.
 
 ---
 

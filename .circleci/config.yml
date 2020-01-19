@@ -17,7 +17,7 @@ preset-filter-check: &WORKFLOW_CHECK_DEPLOY_READY_FILTER
     - /^release.*/
 
 orbs:
-  win: circleci/windows@1.0.0
+  win: circleci/windows@2.3.0
 
 jobs:
   build-package:
@@ -26,11 +26,12 @@ jobs:
     environment:
       SCRIPTS: /root/repo/ci/scripts
       BUILD_SOLUTION: /root/repo/Src/Newtonsoft.Json/Newtonsoft.Json.csproj
+      TEST_SOLUTION: /root/repo/Src/Newtonsoft.Json.Tests/Newtonsoft.Json.Tests.csproj
       BUILD_DESTINATION_BASE: /root/repo/Src/Newtonsoft.Json-for-Unity/Plugins
       BUILD_ADDITIONAL_CONSTANTS: SIGNING
 
     docker:
-      - image: applejag/newtonsoft.json-for-unity.package-builder:v1
+      - image: applejag/newtonsoft.json-for-unity.package-builder:v2
 
     steps:
       # Checkout repo -> ~/repo
@@ -70,7 +71,9 @@ jobs:
 
       - run:
           name: NuGet restore
-          command: msbuild -t:restore "$BUILD_SOLUTION"
+          command: |
+            msbuild -t:restore "$BUILD_SOLUTION"
+            msbuild -t:restore "$TEST_SOLUTION" -p:UnityBuild=Tests
 
       - save_cache:
           key: build-package-nuget
@@ -91,7 +94,37 @@ jobs:
 
       - run:
           name: Build Testing library
-          command: BUILD_CONFIGURATION=Debug BUILD_DESTINATION=/workspace/testlib BUILD_ADDITIONAL_CONSTANTS= $SCRIPTS/build.sh Tests "$BUILD_SOLUTION"
+          command: |
+            export BUILD_CONFIGURATION=Debug
+            export BUILD_DESTINATION=/workspace/testlib
+            export BUILD_ADDITIONAL_CONSTANTS=
+            $SCRIPTS/build.sh Tests "$BUILD_SOLUTION"
+
+      - run:
+          name: Setup variables for Newtonsoft.Json.Tests
+          command: |
+            env() {
+                echo "export '$1=$2'" >> $BASH_ENV
+                echo "$1='$2'"
+                export "$1=$2"
+            }
+            xml() {
+                xmlstarlet sel -t -v "/Project/PropertyGroup/$1" -n Src/Newtonsoft.Json/Newtonsoft.Json.csproj | head -n 1
+            }
+            echo ">>> OBTAINING VERSION FROM $(pwd)/Src/Newtonsoft.Json/Newtonsoft.Json.csproj"
+            env VERSION "$(xml VersionPrefix)"
+            env VERSION_SUFFIX "$(xml VersionSuffix)"
+            env VERSION_JSON_NET "$(xml VersionPrefix)"
+            env VERSION_ASSEMBLY "$(xml AssemblyVersion)"
+
+      - run:
+          name: Build Newtonsoft.Json.Tests for Unity
+          command: |
+            export BUILD_SOLUTION="$TEST_SOLUTION"
+            export BUILD_CONFIGURATION=Debug
+            export BUILD_DESTINATION=/root/tmp/Newtonsoft.Json.Tests/bin
+            export BUILD_ADDITIONAL_CONSTANTS=UNITY_EDITOR_LINUX
+            $SCRIPTS/build.sh Tests "$BUILD_SOLUTION"
 
       - run:
           name: Move resulting package into workspace
@@ -100,21 +133,28 @@ jobs:
             cp -rv Src/Newtonsoft.Json-for-Unity/. /workspace/package/
             cp -vf CHANGELOG.md /workspace/package/
 
+            mkdir -pv /workspace/tests
+            export BUILD_DESTINATION=/root/tmp/Newtonsoft.Json.Tests/bin
+            cp -rvt /workspace/tests/ \
+              $BUILD_DESTINATION/Newtonsoft.Json.Tests.dll \
+              $BUILD_DESTINATION/Newtonsoft.Json.Tests.pdb \
+              $BUILD_DESTINATION/System.Web.Polyfill.dll \
+              $BUILD_DESTINATION/System.Web.Polyfill.pdb
+
       - run:
           name: Fix meta files
           command: |
             $SCRIPTS/generate_metafiles.sh /workspace/package
-            echo
-            $SCRIPTS/generate_metafiles.sh /workspace/testlib
 
       - persist_to_workspace:
           root: /workspace
           paths:
             - testlib
             - package
+            - tests
 
   test-windows:
-    executor: win/vs2019
+    executor: win/default
 
     steps:
       - run:
@@ -175,7 +215,7 @@ jobs:
     
     environment:
       SCRIPTS: /root/repo/ci/scripts
-      PACKAGE_FOLDER: /root/repo/Src/Newtonsoft.Json-for-Unity.Tests/Packages/Newtonsoft.Json-for-Unity.Tests/
+      ASSETS_FOLDER: /root/repo/Src/Newtonsoft.Json-for-Unity.Tests/Assets
       TEST_PROJECT: /root/repo/Src/Newtonsoft.Json-for-Unity.Tests
       PLATFORMS: playmode
 
@@ -208,17 +248,10 @@ jobs:
           at: /workspace
 
       - run:
-          name: Copy Newtonsoft.Json.Tests into Unity testing project
-          command: |
-            rm -rfv Src/Newtonsoft.Json.Tests/obj
-            rm -rfv Src/Newtonsoft.Json.Tests/bin
-            cp -vur Src/Newtonsoft.Json.Tests/. $TEST_PROJECT/Assets/Newtonsoft.Json.Tests/
-
-      - run:
           name: Copy dll's into Unity testing project
           command: |
-            cp -vfr /workspace/package/. $PACKAGE_FOLDER/
-            cp -vfr /workspace/testlib/. "$PACKAGE_FOLDER/Plugins/Newtonsoft.Json Editor/"
+            cp -vur /workspace/tests/. $ASSETS_FOLDER/Plugins/Newtonsoft.Json.Tests/
+            cp -vfr /workspace/testlib/. $ASSETS_FOLDER/Plugins/Newtonsoft.Json/
 
       - run:
           name: Downgrade Unity project to 2018.x
@@ -226,9 +259,9 @@ jobs:
             echo "Moving $TEST_PROJECT/Packages/manifest.json file"
             mv -v "$TEST_PROJECT/Packages/manifest.json" "$TEST_PROJECT/Packages/.manifest.json.old"
             echo
-            find "$TEST_PROJECT/Assets" -name '.*.asmdef.old' -exec rm -v {} +
+            find "$ASSETS_FOLDER" -name '.*.asmdef.old' -exec rm -v {} +
             echo
-            find "$TEST_PROJECT/Assets" -name '*.asmdef' -exec $SCRIPTS/unity_downgrade_asmdef.sh --backup "{}" \;
+            find "$ASSETS_FOLDER" -name '*.asmdef' -exec $SCRIPTS/unity_downgrade_asmdef.sh --backup "{}" \;
 
       - run:
           name: Run tests
@@ -258,7 +291,7 @@ jobs:
     
     environment:
       SCRIPTS: /root/repo/ci/scripts
-      PACKAGE_FOLDER: /root/repo/Src/Newtonsoft.Json-for-Unity.Tests/Packages/Newtonsoft.Json-for-Unity.Tests/
+      ASSETS_FOLDER: /root/repo/Src/Newtonsoft.Json-for-Unity.Tests/Assets
       TEST_PROJECT: /root/repo/Src/Newtonsoft.Json-for-Unity.Tests
       PLATFORMS: playmode
 
@@ -291,17 +324,10 @@ jobs:
           at: /workspace
 
       - run:
-          name: Copy Newtonsoft.Json.Tests into Unity testing project
-          command: |
-            rm -rfv Src/Newtonsoft.Json.Tests/obj
-            rm -rfv Src/Newtonsoft.Json.Tests/bin
-            cp -vur Src/Newtonsoft.Json.Tests/. $TEST_PROJECT/Assets/Newtonsoft.Json.Tests/
-
-      - run:
           name: Copy dll's into Unity testing project
           command: |
-            cp -vfr /workspace/package/. $PACKAGE_FOLDER/
-            cp -vfr /workspace/testlib/. "$PACKAGE_FOLDER/Plugins/Newtonsoft.Json Editor/"
+            cp -vur /workspace/tests/. $ASSETS_FOLDER/Plugins/Newtonsoft.Json.Tests/
+            cp -vfr /workspace/testlib/. $ASSETS_FOLDER/Plugins/Newtonsoft.Json/
 
       - run:
           name: Run tests

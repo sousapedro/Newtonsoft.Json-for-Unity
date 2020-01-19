@@ -2,15 +2,15 @@
     "name": "UnityTests",
     "references": [
         "UnityEngine.TestRunner",
-        "UnityEditor.TestRunner",
-        "SystemWebPolyfill"
+        "UnityEditor.TestRunner"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
     "overrideReferences": true,
     "precompiledReferences": [
-        "nunit.framework.dll"
+        "nunit.framework.dll",
+        "System.Web.Polyfill.dll"
     ],
     "autoReferenced": false,
     "defineConstraints": [

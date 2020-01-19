@@ -102,5 +102,5 @@ Copyright (c) 2019 Kalle Jillheden (jilleJr)
 See full copyrights in [LICENSE.md][license.md] inside repository
 
 [license.md]: https://github.com/jilleJr/Newtonsoft.Json-for-Unity/blob/master/LICENSE.md
-[changelog.md]: https://github.com/jilleJr/Newtonsoft.Json-for-Unity/blob/master/LICENSE.md
+[changelog.md]: https://github.com/jilleJr/Newtonsoft.Json-for-Unity/blob/master/CHANGELOG.md
 [version-explanation.png]: https://github.com/jilleJr/Newtonsoft.Json-for-Unity/raw/ce23d98230673744d73656b4c4f6bc1f9989c37a/Doc/version-explanation.png
