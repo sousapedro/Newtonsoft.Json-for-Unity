@@ -41,7 +41,7 @@
     <ProjectReference Include="..\Newtonsoft.Json\Newtonsoft.Json.csproj" />
   </ItemGroup>
   
-  <ItemGroup Condition="'$(TargetFramework)'=='net46'">
+  <ItemGroup Condition="'$(TargetFramework)'=='net46' AND '$(UnityBuild)'!='Tests'">
     <PackageReference Include="NUnit" Version="$(NunitPackageVersion)" />
     <PackageReference Include="NUnit3TestAdapter" Version="$(Nunit3TestAdapterPackageVersion)" />
     <PackageReference Include="Autofac" Version="$(AutofacPackageVersion)" />
@@ -59,9 +59,9 @@
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Data.DataSetExtensions" />
   </ItemGroup>
-  <PropertyGroup Condition="'$(TargetFramework)'=='net46'">
+  <PropertyGroup Condition="'$(TargetFramework)'=='net46' AND '$(UnityBuild)'!='Tests'">
     <AssemblyTitle>Json.NET Tests</AssemblyTitle>
-    <ReferringTargetFrameworkForProjectReferences>.NETFramework,Version=v4.5</ReferringTargetFrameworkForProjectReferences>
+    <ReferringTargetFrameworkForProjectReferences>.NETFramework,Version=v4.6</ReferringTargetFrameworkForProjectReferences>
     <DefineConstants>NET45;HAVE_BENCHMARKS;$(AdditionalConstants)</DefineConstants>
   </PropertyGroup>
   
@@ -86,5 +86,33 @@
     <AssemblyTitle>Json.NET Tests Portable</AssemblyTitle>
     <ReferringTargetFrameworkForProjectReferences>.NETPortable,Version=v0.0,Profile=Profile259</ReferringTargetFrameworkForProjectReferences>
     <DefineConstants>PORTABLE;$(AdditionalConstants)</DefineConstants>
+  </PropertyGroup>
+  
+  <ItemGroup Condition="'$(TargetFramework)'=='net46' AND '$(UnityBuild)'=='Tests'">
+    <PackageReference Include="NUnit" Version="$(NunitPackageVersion)" />
+    <PackageReference Include="NUnit3TestAdapter" Version="$(Nunit3TestAdapterPackageVersion)" />
+    <PackageReference Include="Autofac" Version="$(AutofacPackageVersion)" />
+    <PackageReference Include="FSharp.Core" Version="$(FSharpCorePackageVersion)" />
+    <PackageReference Include="System.Buffers" Version="$(SystemBuffersPackageVersion)" />
+    <PackageReference Include="System.Collections.Immutable" Version="$(SystemCollectionsImmutablePackageVersion)" />
+    <PackageReference Include="System.ValueTuple" Version="$(SystemValueTuplePackageVersion)" />
+    <PackageReference Include="Moq" Version="$(MoqPackageVersion)" />
+    <PackageReference Include="Unity3D.UnityEngine" Version="2018.3.5.1" />
+    <ProjectReference Include="..\System.Web.Polyfill\System.Web.Polyfill.csproj">
+        <Aliases>SystemWebPolyfill</Aliases>
+    </ProjectReference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Data.DataSetExtensions" />
+  </ItemGroup>
+  <PropertyGroup Condition="'$(TargetFramework)'=='net46' AND '$(UnityBuild)'=='Tests'">
+    <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    <AssemblyTitle>Json.NET Tests in Unity</AssemblyTitle>
+    <ReferringTargetFrameworkForProjectReferences>.NETFramework,Version=v4.6</ReferringTargetFrameworkForProjectReferences>
+    <DefineConstants>UNITY_LTS;UNITY_5_3_OR_NEWER;NET40;NET46;$(AdditionalConstants)</DefineConstants>
   </PropertyGroup>
 </Project>

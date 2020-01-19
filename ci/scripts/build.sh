@@ -39,6 +39,7 @@ echo
 msbuild -t:build "$BUILD_SOLUTION" \
     -p:Configuration="$BUILD_CONFIGURATION" \
     -p:LibraryFrameworks="$BUILD_FRAMEWORK" \
+    -p:TestFrameworks="$BUILD_FRAMEWORK" \
     -p:OutputPath="$BUILD_DESTINATION" \
     -p:UnityBuild="$BUILD_UNITY" \
     -p:VersionPrefix="$VERSION_JSON_NET" \
