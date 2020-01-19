@@ -5,26 +5,41 @@
 [![Codacy grade](https://img.shields.io/codacy/grade/f91156e7066c484588f4dba263c8cf45?logo=codacy&style=flat-square)](https://www.codacy.com/manual/jilleJr/Newtonsoft.Json-for-Unity?utm_source=github.com&utm_medium=referral&utm_content=jilleJr/Newtonsoft.Json-for-Unity&utm_campaign=Badge_Grade)
 [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-v2.0%20adopted-ff69b4.svg?style=flat-square)](/CODE_OF_CONDUCT.md)
 
-Json.<i></i>NET is a popular high-performance JSON framework for .NET
-
-Available for installation with
-
-- **Unity Package Manager (UPM)** `new!`
-- ~~UniGet~~ <sub>_(Coming soon<sup>tm</sup>)_</sub>
-- ~~Unity Asset packages~~ <sub>_(Coming soon<sup>tm</sup>)_</sub>
-- ~~Unity Asset Store~~ <sub>_(Coming soon<sup>tm</sup>)_</sub>
+Json.<i></i>NET is a popular high-performance JSON framework for .NET and the
+most used framework throughout the whole .NET ecosystem.
 
 This repo is a **fork** of [JamesNK/Newtonsoft.Json][newtonsoft.json.git]
 containing custom builds for regular standalone, but more importantly AOT
 targets such as all **IL2CPP builds (WebGL, iOS, Android, Windows, Mac OS X)**
 and portable .NET **(UWP, WP8)**.
 
+## Features
+
+- Expected always up-to-date fork of Newtonsoft.Json
+
+- Full Newtonsoft.Json.Tests test suite passes on Unity 2018.4.14f1 and
+  2019.2.11f1 with Mono and IL2CPP as scripting backend.
+
+- Precompiled as DLLs for faster builds
+
+- Full support for IL2CPP builds
+
+- Delivered via Unity Package Manager for easy updating and version switching
+
+- [*Newtonsoft.Json.Utility*.**AotHelper**][wiki-Fix-AOT-using-AotHelper]
+  utility class for resolving common Ahead-Of-Time issues.
+  [(Read more about AOT)][wiki-What-even-is-AOT]
+
+- Extensive [documentation of solving AOT issues with `link.xml`][wiki-Fix-AOT-using-link.xml].
+
 ## [Installation guide](https://github.com/jilleJr/Newtonsoft.Json-for-Unity/wiki/Installation-via-UPM)
 
 Click the header. It goes to the Wiki where the guide is now located. Here is
 the raw url:
 
-<https://github.com/jilleJr/Newtonsoft.Json-for-Unity/wiki/Installation-via-UPM>
+- [Installation via UPM][wiki-Installation-via-UPM]
+
+- [Installation via OpenUPM ![OpenUPM icon](Doc/icons/openupm-icon-16.png)][wiki-Installation-via-OpenUPM]
 
 ## Newtonsoft.Json-for-Unity specific links
 
@@ -42,11 +57,7 @@ the raw url:
 
 ## Contributing
 
-> ⚠ Please note that this project is released with a Contributor Code of
-> Conduct. By participating in this project you agree to abide by its terms.
-> Read more: [CODE_OF_CONDUCT.md](/CODE_OF_CONDUCT.md)
-
-To contribute first you must read the [CONTRIBUTING.md](/CONTRIBUTING.md)
+To contribute please read the [CONTRIBUTING.md](/CONTRIBUTING.md)
 guidelines. It contains info about
 
 - How to edit the Src/Newtonsoft.Json projects to remain the ability to merge
@@ -111,3 +122,8 @@ See full copyrights in [LICENSE.md][license.md] inside repository
 [newtonsoft.json.git]: https://github.com/JamesNK/Newtonsoft.Json
 [wiki-workingwithbranches]: https://github.com/jilleJr/Newtonsoft.Json-for-Unity/wiki/Working-with-branches
 [wiki-workingwithbranches#merging]: https://github.com/jilleJr/Newtonsoft.Json-for-Unity/wiki/Working-with-branches#merging-changes-from-jamesnks-repo
+[wiki-Fix-AOT-using-AotHelper]: https://github.com/jilleJr/Newtonsoft.Json-for-Unity/wiki/Fix-AOT-using-AotHelper
+[wiki-Fix-AOT-using-link.xml]: https://github.com/jilleJr/Newtonsoft.Json-for-Unity/wiki/Fix-AOT-using-link.xml
+[wiki-What-even-is-AOT]: https://github.com/jilleJr/Newtonsoft.Json-for-Unity/wiki/What-even-is-AOT
+[wiki-Installation-via-UPM]: https://github.com/jilleJr/Newtonsoft.Json-for-Unity/wiki/Installation-via-UPM
+[wiki-Installation-via-OpenUPM]: https://github.com/jilleJr/Newtonsoft.Json-for-Unity/wiki/Installation-via-OpenUPM
