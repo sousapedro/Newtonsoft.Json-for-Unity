@@ -26,20 +26,23 @@ and portable .NET **(UWP, WP8)**.
 
 - Delivered via Unity Package Manager for easy updating and version switching
 
-- [*Newtonsoft.Json.Utility*.**AotHelper**][wiki-Fix-AOT-using-AotHelper]
+- [_Newtonsoft.Json.Utility_.**AotHelper**][wiki-fix-aot-using-aothelper]
   utility class for resolving common Ahead-Of-Time issues.
-  [(Read more about AOT)][wiki-What-even-is-AOT]
+  [(Read more about AOT)][wiki-what-even-is-aot]
 
-- Extensive [documentation of solving AOT issues with `link.xml`][wiki-Fix-AOT-using-link.xml].
+- Extensive
+  [documentation of solving AOT issues with
+  `link.xml`][wiki-fix-aot-using-link.xml]
 
 ## [Installation guide](https://github.com/jilleJr/Newtonsoft.Json-for-Unity/wiki/Installation-via-UPM)
 
 Click the header. It goes to the Wiki where the guide is now located. Here is
 the raw url:
 
-- [Installation via UPM][wiki-Installation-via-UPM]
+- [Installation via UPM][wiki-installation-via-upm]
 
-- [Installation via OpenUPM ![OpenUPM icon](Doc/icons/openupm-icon-16.png)][wiki-Installation-via-OpenUPM]
+- [Installation via OpenUPM
+  ![OpenUPM icon](Doc/icons/openupm-icon-16.png)][wiki-installation-via-openupm]
 
 ## Newtonsoft.Json-for-Unity specific links
 
@@ -107,7 +110,8 @@ for more information.
 
 Common enough occurrence that we have a wiki page for just this.
 
-Read the [Working with branches, section "Merging changes from JamesNKs repo"][wiki-workingwithbranches#merging] wiki page.
+Read the [Working with branches, section "Merging changes from JamesNKs
+repo"][wiki-workingwithbranches#merging] wiki page.
 
 ---
 
@@ -122,8 +126,8 @@ See full copyrights in [LICENSE.md][license.md] inside repository
 [newtonsoft.json.git]: https://github.com/JamesNK/Newtonsoft.Json
 [wiki-workingwithbranches]: https://github.com/jilleJr/Newtonsoft.Json-for-Unity/wiki/Working-with-branches
 [wiki-workingwithbranches#merging]: https://github.com/jilleJr/Newtonsoft.Json-for-Unity/wiki/Working-with-branches#merging-changes-from-jamesnks-repo
-[wiki-Fix-AOT-using-AotHelper]: https://github.com/jilleJr/Newtonsoft.Json-for-Unity/wiki/Fix-AOT-using-AotHelper
-[wiki-Fix-AOT-using-link.xml]: https://github.com/jilleJr/Newtonsoft.Json-for-Unity/wiki/Fix-AOT-using-link.xml
-[wiki-What-even-is-AOT]: https://github.com/jilleJr/Newtonsoft.Json-for-Unity/wiki/What-even-is-AOT
-[wiki-Installation-via-UPM]: https://github.com/jilleJr/Newtonsoft.Json-for-Unity/wiki/Installation-via-UPM
-[wiki-Installation-via-OpenUPM]: https://github.com/jilleJr/Newtonsoft.Json-for-Unity/wiki/Installation-via-OpenUPM
+[wiki-fix-aot-using-aothelper]: https://github.com/jilleJr/Newtonsoft.Json-for-Unity/wiki/Fix-AOT-using-AotHelper
+[wiki-fix-aot-using-link.xml]: https://github.com/jilleJr/Newtonsoft.Json-for-Unity/wiki/Fix-AOT-using-link.xml
+[wiki-what-even-is-aot]: https://github.com/jilleJr/Newtonsoft.Json-for-Unity/wiki/What-even-is-AOT
+[wiki-installation-via-upm]: https://github.com/jilleJr/Newtonsoft.Json-for-Unity/wiki/Installation-via-UPM
+[wiki-installation-via-openupm]: https://github.com/jilleJr/Newtonsoft.Json-for-Unity/wiki/Installation-via-OpenUPM

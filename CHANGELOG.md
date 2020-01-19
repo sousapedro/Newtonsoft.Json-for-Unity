@@ -5,7 +5,8 @@
 - ✨ New: Merged changes from
   [JamesNK/Newtonsoft.Json version `12.0.3`][json.net-12.0.3]
 
-- 🔄 Change: Testing libraries are precompiled to be able to use the nullable reference types, as Unity does not yet support them. ([#37][#37])
+- 🔄 Change: Testing libraries are precompiled to be able to use the nullable
+  reference types, as Unity does not yet support them. ([#37][#37])
 
 ## 12.0.201
 
