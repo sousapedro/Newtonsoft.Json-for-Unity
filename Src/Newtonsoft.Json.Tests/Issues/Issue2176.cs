@@ -23,7 +23,8 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
-#if !(NETSTANDARD1_0 || NETSTANDARD1_3)
+// IL2CPP's name generator makes this type throw Fatal Error C1064 "compiler limit : token overflowed internal buffer"
+#if !(NETSTANDARD1_0 || NETSTANDARD1_3 || ENABLE_IL2CPP)
 #if DNXCORE50
 using Xunit;
 using Test = Xunit.FactAttribute;

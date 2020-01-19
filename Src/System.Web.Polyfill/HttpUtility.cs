@@ -41,7 +41,7 @@ using System.Web.Util;
 namespace System.Web
 {
 
-#if !MOBILE
+#if !MOBILE && false
     // CAS - no InheritanceDemand here as the class is sealed
     [AspNetHostingPermission(SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
 #endif
@@ -57,7 +57,7 @@ namespace System.Web
                     return "";
                 }
 
-                StringBuilder sb = new StringBuilder();
+                var sb = new StringBuilder();
                 string[] keys = AllKeys;
 
                 for (int i = 0; i < count; i++)
@@ -289,8 +289,8 @@ namespace System.Web
                 throw new ArgumentOutOfRangeException(nameof(count));
             }
 
-            StringBuilder output = new StringBuilder();
-            MemoryStream acc = new MemoryStream();
+            var output = new StringBuilder();
+            var acc = new MemoryStream();
 
             int end = count + offset;
             int xchar;
@@ -400,7 +400,7 @@ namespace System.Web
                 throw new ArgumentOutOfRangeException(nameof(count));
             }
 
-            MemoryStream result = new MemoryStream();
+            var result = new MemoryStream();
             int end = offset + count;
             for (int i = offset; i < end; i++)
             {
@@ -568,7 +568,7 @@ namespace System.Web
                 return new byte[0];
             }
 
-            MemoryStream result = new MemoryStream(str.Length);
+            var result = new MemoryStream(str.Length);
             foreach (char c in str)
             {
                 HttpEncoder.UrlEncodeChar(c, result, true);
@@ -682,7 +682,7 @@ namespace System.Web
             {
                 c = value[i];
 
-                if (c >= 0 && c <= 31 || c == 34 || c == 39 || c == 60 || c == 62 || c == 92)
+                if ((c >= 0 && c <= 31) || c == 34 || c == 39 || c == 60 || c == 62 || c == 92)
                 {
                     needEncode = true;
                     break;
@@ -703,7 +703,7 @@ namespace System.Web
             for (int i = 0; i < len; i++)
             {
                 c = value[i];
-                if (c >= 0 && c <= 7 || c == 11 || c >= 14 && c <= 31 || c == 39 || c == 60 || c == 62)
+                if ((c >= 0 && c <= 7) || c == 11 || (c >= 14 && c <= 31) || c == 39 || c == 60 || c == 62)
                 {
                     sb.AppendFormat("\\u{0:x4}", (int)c);
                 }
