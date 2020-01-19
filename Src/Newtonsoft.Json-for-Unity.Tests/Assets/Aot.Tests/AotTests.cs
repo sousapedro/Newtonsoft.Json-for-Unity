@@ -24,7 +24,6 @@ namespace Aot.Tests
 #pragma warning restore 649 // Field is never assigned to, and will always have its default value `null'
         }
 
-#if ENABLE_IL2CPP
         private class MyNonAotClass
         {
 #pragma warning disable 649 // Field is never assigned to, and will always have its default value `null'
@@ -35,14 +34,17 @@ namespace Aot.Tests
         [Test]
         public void ThrowsOnNoAOTGenerated()
         {
+#if ENABLE_IL2CPP
             var ex = Assert.Throws<TargetInvocationException>(delegate
             {
                 _ = CreateListOfType<MyNonAotClass>();
             });
 
             Assert.IsInstanceOf<TypeInitializationException>(ex.InnerException, ex.Message);
-        }
+#else
+            Assert.Ignore();
 #endif
+        }
 
         [Test]
         public void PassesOnAOTGenerated()
