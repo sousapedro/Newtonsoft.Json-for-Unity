@@ -1,5 +1,24 @@
 # Newtonsoft.Json for Unity changelog
 
+## 12.0.201
+
+- ✨ New: Merged changes from
+  [JamesNK/Newtonsoft.Json version `12.0.2`][json.net-12.0.2]
+
+- ✨ New: Downgrade script for .asmdef to be able to test in Unity 2018.x.
+
+- ✨ New: Now testing in both Unity 2019.x and 2018.x in CircleCI workflow.
+
+- ✨ New: Added `System.Web.HttpUtility` polyfill to test project due to it's
+  not included in IL2CPP builds.
+  See <https://forum.unity.com/threads/solved-httputility-in-il2cpp.802368/#post-5333634>
+
+- 🔄 Change: Custom StringAssert.StartsWith to get better error messages in
+  tests.
+
+- 🐛 Fix: AotHelper.EnsureDictionary was not generating constructor for
+  `DefaultContractResolver.EnumerableDictionaryWrapper<TKey, TValue>`
+
 ## 12.0.102
 
 - ✨ New: Moved some documentation to the new wiki. All markdown files in the
@@ -56,6 +75,7 @@
 [codacy-badge]: https://img.shields.io/codacy/grade/f91156e7066c484588f4dba263c8cf45?logo=codacy&style=flat-square
 [codacy-url]: https://www.codacy.com/manual/jilleJr/Newtonsoft.Json-for-Unity?utm_source=github.com&utm_medium=referral&utm_content=jilleJr/Newtonsoft.Json-for-Unity&utm_campaign=Badge_Grade
 [json.net-12.0.1]: https://github.com/JamesNK/Newtonsoft.Json/releases/12.0.1
+[json.net-12.0.2]: https://github.com/JamesNK/Newtonsoft.Json/releases/12.0.2
 [npmjs-badge]: https://img.shields.io/npm/v/jillejr.newtonsoft.json-for-unity?logo=npm&style=flat-square
 [npmjs-url]: https://www.npmjs.com/package/jillejr.newtonsoft.json-for-unity
 [portable-class-library]: https://docs.microsoft.com/en-us/dotnet/standard/net-standard#pcl-compatibility
