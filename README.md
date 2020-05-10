@@ -119,7 +119,7 @@ repo"][wiki-workingwithbranches#merging] wiki page.
 This package is licensed under The MIT License (MIT)
 
 Copyright &copy; 2019 Kalle Jillheden (jilleJr)  
-<https://github.com/jilleJr/Newtonsoft.Json>
+<https://github.com/jilleJr/Newtonsoft.Json-for-Unity>
 
 See full copyrights in [LICENSE.md][license.md] inside repository
 
