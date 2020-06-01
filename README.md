@@ -150,8 +150,8 @@ Copyright &copy; 2019 Kalle Jillheden (jilleJr)
 
 See full copyrights in [LICENSE.md][license.md] inside repository
 
-[issue-create]: https://github.com/jilleJr/Newtonsoft.Json-for-Unity.Converters/issues/new/choose
-[issue-list-unassigned]: https://github.com/jilleJr/Newtonsoft.Json-for-Unity.Converters/issues?q=is%3Aopen+is%3Aissue+no%3Aassignee
+[issue-create]: https://github.com/jilleJr/Newtonsoft.Json-for-Unity/issues/new/choose
+[issue-list-unassigned]: https://github.com/jilleJr/Newtonsoft.Json-for-Unity/issues?q=is%3Aopen+is%3Aissue+no%3Aassignee
 [json.net-4-unity.converters]: https://github.com/jilleJr/Newtonsoft.Json-for-Unity.Converters
 [json.net-4-unity.converters-compatability]: https://github.com/jilleJr/Newtonsoft.Json-for-Unity.Converters/blob/master/Doc/Compatability-table.md
 [license.md]: https://github.com/jilleJr/Newtonsoft.Json-for-Unity/blob/master/LICENSE.md
