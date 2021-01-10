@@ -7,8 +7,9 @@
 [![Financial Contributors on Open Collective](https://opencollective.com/newtonsoftjson-for-unity/all/badge.svg?label=financial+contributors&style=flat-square)](https://opencollective.com/newtonsoftjson-for-unity) 
 [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-v2.0%20adopted-ff69b4.svg?style=flat-square)](/CODE_OF_CONDUCT.md)
 
-Json.<i></i>NET is a popular high-performance JSON framework for .NET and the
-most used framework throughout the whole .NET ecosystem.
+<abbr title="The names 'Json.NET' and 'Newtonsoft.Json' are interchangeable. They both refer to James Newton-King's JSON library.">
+Json.<i></i>NET</abbr> is a popular high-performance JSON framework for .NET and
+the most used framework throughout the whole .NET ecosystem.
 
 This repo is a **fork** of [JamesNK/Newtonsoft.Json][newtonsoft.json.git]
 containing custom builds for regular standalone, but more importantly AOT
@@ -17,16 +18,18 @@ and portable .NET **(UWP, WP8)**.
 
 ## Features
 
-- Expected always up-to-date fork of Newtonsoft.Json
+- *(🌟 new!)* [Newtonsoft.Json-for-Unity.Converters][json.net-4-unity.converters]
+  package for converting Unity types, such as the Vector3, Quaternion, Color,
+  and [many, many more!][json.net-4-unity.converters-compatability]
+
+- Full support for IL2CPP builds
+
+- Delivered via Unity Package Manager for easy updating and version switching
 
 - Full Newtonsoft.Json.Tests test suite passes on Unity 2018.4.14f1 and
   2019.2.11f1 with Mono and IL2CPP as scripting backend.
 
 - Precompiled as DLLs for faster builds
-
-- Full support for IL2CPP builds
-
-- Delivered via Unity Package Manager for easy updating and version switching
 
 - [_Newtonsoft.Json.Utility_.**AotHelper**][wiki-fix-aot-using-aothelper]
   utility class for resolving common Ahead-Of-Time issues.
@@ -34,33 +37,89 @@ and portable .NET **(UWP, WP8)**.
 
 - Extensive [documentation of solving AOT issues with `link.xml`][wiki-fix-aot-using-link.xml]
 
-- `(🌟 new!)` Optional side package [Newtonsoft.Json-for-Unity.Converters][json.net-4-unity.converters]
-  to help with converting Unity types, such as the Vector3, Quaternion, Color,
-  and [many, many more!][json.net-4-unity.converters-compatability]
+## Installation
 
-## [Installation guide](https://github.com/jilleJr/Newtonsoft.Json-for-Unity/wiki/Installation-via-UPM)
+### Installation via [Package Installer][package-installer] *(experimental)*
 
-Click the header. It goes to the Wiki where the guide is now located. Here is
-the raw url:
+1. [Click here to download `Install-jillejr.newtonsoft.json-for-unity-12.0.301.unitypackage`](https://package-installer.glitch.me/v1/installer/jilleJr/jillejr.newtonsoft.json-for-unity?registry=https%3A%2F%2Fnpm.cloudsmith.io%2Fjillejr%2Fnewtonsoft-json-for-unity)
 
-- [Installation via UPM][wiki-installation-via-upm]
+2. Open the downloaded `.unitypackage` file in Unity. Easiestly done by
+   drag'n'dropping the file into the Unity window.
+   
+3. Click "Import" to import it all.
 
-- [Installation via OpenUPM
-  ![OpenUPM icon](Doc/icons/openupm-icon-16.png)][wiki-installation-via-openupm]
+4. Once the installer has successfully compiled, it will add the correct UPM
+   registry and package to your project, followed by removing itself.
+
+> The installer does not run until your project can successfully compile.
+> Make sure to resolve all syntax- and other compiling errors, even just
+> temporarily, so that the installer may execute.
+
+Much love :heart: to [@needle-tools](https://github.com/needle-tools) for
+making such a great tool!
+
+### Installation via [OpenUPM][openupm] ![OpenUPM icon][openupm-icon.png]
+
+```sh
+openupm add jillejr.newtonsoft.json-for-unity
+```
+
+Full installation guide over at the wiki:
+[Installation via OpenUPM
+![OpenUPM icon][openupm-icon.png]][wiki-installation-via-openupm]
+
+Much love :heart: to [@favoyang](https://github.com/favoyang) for making such a
+great tool!
+
+### Installation via pure UPM
+
+Full installation guide over at the wiki:
+[Installation via pure UPM][wiki-installation-via-upm]
+
+### Installation via Git in UPM
+
+You can also install via Git. This assumes you have Git installed on your
+computer.
+
+> This is the least recommended version (but works as a fallback) because:
+>
+> - You will not be able to update the package via the Package Manager
+>   interface if you install via Git.
+>
+> - This requires you, your coworkers, and your CI/CD pipelines to have
+>   Git installed for the project to build.
+>
+> - It takes a lot longer to install as UPM will in most version clone the
+>   entire history of the project.
+
+In later versions of Unity, you can import directly via the Package Manager
+interface.
+
+![UPM, add from Git URL dropdown](Doc/upm-via-git.png)
+
+Supply the following URL:
+
+```none
+https://github.com/jilleJr/Newtonsoft.Json-for-Unity.git#upm
+```
+
+Full installation guide over at the wiki:
+[Installation via Git in UPM][wiki-installation-via-git-in-upm]
 
 ## Newtonsoft.Json-for-Unity specific links
 
-- [Wiki about this fork](https://github.com/jilleJr/Newtonsoft.Json-for-Unity/wiki)
-- [Release notes of this fork](https://github.com/jilleJr/Newtonsoft.Json-for-Unity/releases)
-- [Cloudsmith package](https://cloudsmith.io/~jillejr/repos/newtonsoft-json-for-unity/packages/detail/npm/jillejr.newtonsoft.json-for-unity/latest/)
+- Newtonsoft.Json-for-Unity Wiki: [Wiki of this fork](https://github.com/jilleJr/Newtonsoft.Json-for-Unity/wiki)
+- Newtonsoft.Json-for-Unity release notes: [Release notes of this fork](https://github.com/jilleJr/Newtonsoft.Json-for-Unity/releases)
+- Newtonsoft.Json-for-Unity package repo: [Cloudsmith package](https://cloudsmith.io/~jillejr/repos/newtonsoft-json-for-unity/packages/detail/npm/jillejr.newtonsoft.json-for-unity/latest/)
+- Newtonsoft.Json-for-Unity QA: [GitHub discussions](https://github.com/jilleJr/Newtonsoft.Json-for-Unity/discussions/categories/q-a)
 
-## Other links
+## Newtonsoft.Json links
 
-- [Source repository (github.com/JamesNK/Newtonsoft.Json)](https://github.com/JamesNK/Newtonsoft.Json)
-- [Homepage (www.newtonsoft.com/json)](https://www.newtonsoft.com/json)
-- [Documentation (www.newtonsoft.com/json/help)](https://www.newtonsoft.com/json/help)
-- [Release Notes on GitHub from source repository](https://github.com/JamesNK/Newtonsoft.Json/releases)
-- [Stack Overflow posts tagged with `json.net`](https://stackoverflow.com/questions/tagged/json.net)
+- Newtonsoft.Json repo: [github.com/JamesNK/Newtonsoft.Json](https://github.com/JamesNK/Newtonsoft.Json)
+- Newtonsoft.Json homepage: [www.newtonsoft.com/json](https://www.newtonsoft.com/json)
+- Newtonsoft.Json documentation: [www.newtonsoft.com/json/help](https://www.newtonsoft.com/json/help)
+- Newtonsoft.Json release notes: [Release Notes of source repository](https://github.com/JamesNK/Newtonsoft.Json/releases)
+- Newtonsoft.Json QA: [Stack Overflow posts tagged with `json.net`](https://stackoverflow.com/questions/tagged/json.net)
 
 ## Contributing
 
@@ -104,25 +163,28 @@ Rule of thumb: Don't commit edits of the `Src/Newtonsoft.Json/`,
 for forking reasons. Exception is when doing a new release, as explained in
 a section little further down below.
 
-### Build
+### Prerequisites
 
-When using Visual Studio, open the `Src/Newtonsoft.Json.sln` solution and just
-<kbd>Ctrl+Shift+B</kbd> 😜
+- **Powershell**:
 
-When using command line, recommended to use MSBuild.exe for building and not the
-dotnet CLI.
+  For Linux users, install the `dotnet` CLI and then install the `powershell`
+  tool:
 
-```powershell
-PS> MSBuild.exe -t:build -restore .\Src\Newtonsoft.Json -p:Configuration=Debug
+  ```sh
+  # This will install the command `pwsh`
+  dotnet tool install --global powershell
+  ```
+  
+- **Docker**
+
+### Building
+
+``` sh
+./ci/local_build_into_package.ps1
 ```
 
-### Run tests
-
-Run the Newtonsoft.Json.Tests normally via the Test Runner inside Visual Studio.
-
-For testing inside Unity locally, look inside the
-[Src/Newtonsoft.Json-for-Unity.Tests/README.md](/Src/Newtonsoft.Json-for-Unity.Tests/README.md)
-for more information.
+This script will compile the project into the
+`Src/Newtonsoft.Json-for-Unity/Plugins` directory using Docker images.
 
 ### Merging changes from JamesNK/Newtonsoft.Json
 
@@ -152,16 +214,20 @@ See full copyrights in [LICENSE.md][license.md] inside repository
 
 [issue-create]: https://github.com/jilleJr/Newtonsoft.Json-for-Unity/issues/new/choose
 [issue-list-unassigned]: https://github.com/jilleJr/Newtonsoft.Json-for-Unity/issues?q=is%3Aopen+is%3Aissue+no%3Aassignee
-[json.net-4-unity.converters]: https://github.com/jilleJr/Newtonsoft.Json-for-Unity.Converters
 [json.net-4-unity.converters-compatability]: https://github.com/jilleJr/Newtonsoft.Json-for-Unity.Converters/blob/master/Doc/Compatability-table.md
+[json.net-4-unity.converters]: https://github.com/jilleJr/Newtonsoft.Json-for-Unity.Converters
 [license.md]: https://github.com/jilleJr/Newtonsoft.Json-for-Unity/blob/master/LICENSE.md
 [newtonsoft.json.git]: https://github.com/JamesNK/Newtonsoft.Json
 [opencollective-img-induvidual]: https://opencollective.com/newtonsoftjson-for-unity/individuals.svg?width=890
 [opencollective-url]: https://opencollective.com/newtonsoftjson-for-unity
+[openupm]: https://openupm.com/packages/jillejr.newtonsoft.json-for-unity/
+[openupm-icon.png]: https://github.com/jilleJr/Newtonsoft.Json-for-Unity/raw/c43046bc4763c0a5d3b0164a4f0a92e40de9d10e/Doc/icons/openupm-icon-16.png
+[package-installer]: https://package-installer.glitch.me/
 [wiki-fix-aot-using-aothelper]: https://github.com/jilleJr/Newtonsoft.Json-for-Unity/wiki/Fix-AOT-using-AotHelper
 [wiki-fix-aot-using-link.xml]: https://github.com/jilleJr/Newtonsoft.Json-for-Unity/wiki/Fix-AOT-using-link.xml
 [wiki-installation-via-openupm]: https://github.com/jilleJr/Newtonsoft.Json-for-Unity/wiki/Installation-via-OpenUPM
 [wiki-installation-via-upm]: https://github.com/jilleJr/Newtonsoft.Json-for-Unity/wiki/Installation-via-UPM
+[wiki-installation-via-git-in-upm]: https://github.com/jilleJr/Newtonsoft.Json-for-Unity/wiki/Installation-via-Git-in-UPM
 [wiki-what-even-is-aot]: https://github.com/jilleJr/Newtonsoft.Json-for-Unity/wiki/What-even-is-AOT
 [wiki-workingwithbranches#merging]: https://github.com/jilleJr/Newtonsoft.Json-for-Unity/wiki/Working-with-branches#merging-changes-from-jamesnks-repo
 [wiki-workingwithbranches]: https://github.com/jilleJr/Newtonsoft.Json-for-Unity/wiki/Working-with-branches
