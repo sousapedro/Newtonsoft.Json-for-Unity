@@ -1,6 +1,6 @@
 # Newtonsoft.Json for Unity changelog
 
-## 12.0.302
+## 12.0.302 (2021-02-19)
 
 - ✨ New: Properly embed the link.xml into the DLLs. ([#54][#54])
 
@@ -9,7 +9,7 @@
 
 - 🐛 Fix: Preserve all JSON converters. ([#8][#8], [#65][#65])
 
-## 12.0.301
+## 12.0.301 (2020-01-19)
 
 - ✨ New: Merged changes from
   [JamesNK/Newtonsoft.Json version `12.0.3`][json.net-12.0.3]
@@ -17,7 +17,7 @@
 - 🔄 Change: Testing libraries are precompiled to be able to use the nullable
   reference types, as Unity does not yet support them. ([#37][#37])
 
-## 12.0.201
+## 12.0.201 (2020-01-03)
 
 - ✨ New: Merged changes from
   [JamesNK/Newtonsoft.Json version `12.0.2`][json.net-12.0.2]
@@ -36,7 +36,7 @@
 - 🐛 Fix: AotHelper.EnsureDictionary was not generating constructor for
   `DefaultContractResolver.EnumerableDictionaryWrapper<TKey, TValue>`
 
-## 12.0.102
+## 12.0.102 (2019-12-30)
 
 - ✨ New: Moved some documentation to the new wiki. All markdown files in the
   repository has been tidied.
@@ -52,7 +52,7 @@
   The packaged DLL's are now signed with the public key of Newtonsoft.Json.
   ([#7][#7], [#10][#10])
 
-## 12.0.101
+## 12.0.101 (2019-11-26)
 
 - ✨ New: Setup CircleCI integration for build automation
   [![CircleCI badge][circleci-badge]][circleci-url]
@@ -70,7 +70,7 @@
 
 - 🐛 Fix: Building on standalone causes plugin collision ([#3][#3])
 
-## 12.0.1
+## 12.0.1 (2019-07-18)
 
 - ✨ New: Package published as an Unity Package Manager package on
   [npmjs.com][npmjs-url].
