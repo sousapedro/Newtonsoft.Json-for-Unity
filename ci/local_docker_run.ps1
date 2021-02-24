@@ -9,7 +9,7 @@
 
 param(
     [string]
-    $VolumeSource = "/c/Projekt/Newtonsoft.Json-for-Unity",
+    $VolumeSource = "$(Resolve-Path (Join-Path $PSScriptRoot ".."))",
 
     # Unity license.ulf
     [string]

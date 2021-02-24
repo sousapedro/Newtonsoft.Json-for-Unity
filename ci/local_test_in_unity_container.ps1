@@ -12,7 +12,7 @@ param(
     $UnityLicenseOverride,
 
     [string]
-    $VolumeSource = "/c/Projekt/Newtonsoft.Json-for-Unity",
+    $VolumeSource = "$(Resolve-Path (Join-Path $PSScriptRoot ".."))",
 
     [string]
     $DockerImage = "applejag/newtonsoft.json-for-unity.package-unity-tester",
