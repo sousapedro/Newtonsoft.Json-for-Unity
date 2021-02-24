@@ -1514,6 +1514,7 @@ namespace Newtonsoft.Json.Tests
             }
         }
 
+#if !ENABLE_IL2CPP // IL2CPP does not support attributes with object arguments that are array types.
         public class OverloadWithArrayParameters
         {
             [JsonConverter(typeof(OverloadsJsonConverterer), new int[] { 1, 2, 3 })]
@@ -1574,6 +1575,7 @@ namespace Newtonsoft.Json.Tests
             [JsonConverter(typeof(RoundingJsonConverter), 4)]
             public double Gain { get; set; }
         }
+#endif
 
         public class RoundingJsonConverter : JsonConverter
         {
