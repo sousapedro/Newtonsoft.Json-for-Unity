@@ -2,7 +2,7 @@
 
 [![Latest Version @ OpenUPM](https://img.shields.io/npm/v/jillejr.newtonsoft.json-for-unity?label=openupm&registry_uri=https://package.openupm.com&style=flat-square)](https://openupm.com/packages/jillejr.newtonsoft.json-for-unity/)
 [![Latest Version @ Cloudsmith](https://api-prd.cloudsmith.io/badges/version/jillejr/newtonsoft-json-for-unity/npm/jillejr.newtonsoft.json-for-unity/latest/x/?render=true&badge_token=gAAAAABeClWC7DvHIyN1IvhxcvGYUIO8CFfs-PsrT973U91i_wmUiuhrzsGZgXqecxQgrEMj4p_-UUUz7XaWjxH3NB8DfA2kkQ%3D%3D)](https://cloudsmith.io/~jillejr/repos/newtonsoft-json-for-unity/packages/detail/npm/jillejr.newtonsoft.json-for-unity/latest/)
-[![CircleCI](https://img.shields.io/circleci/build/gh/jilleJr/Newtonsoft.Json-for-Unity/master?logo=circleci&style=flat-square)](https://circleci.com/gh/jilleJr/Newtonsoft.Json-for-Unity)
+[![CircleCI](https://img.shields.io/circleci/build/gh/jilleJr/Newtonsoft.Json-for-Unity/backport%252f11.0.2?label=build%20%28backport%2F11.0.2%29&logo=circleci&style=flat-square)](https://app.circleci.com/pipelines/github/jilleJr/Newtonsoft.Json-for-Unity?branch=backport%2F11.0.2)
 [![Codacy grade](https://img.shields.io/codacy/grade/f91156e7066c484588f4dba263c8cf45?logo=codacy&style=flat-square)](https://www.codacy.com/manual/jilleJr/Newtonsoft.Json-for-Unity?utm_source=github.com&utm_medium=referral&utm_content=jilleJr/Newtonsoft.Json-for-Unity&utm_campaign=Badge_Grade)
 [![Financial Contributors on Open Collective](https://opencollective.com/newtonsoftjson-for-unity/all/badge.svg?label=financial+contributors&style=flat-square)](https://opencollective.com/newtonsoftjson-for-unity) 
 [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-v2.0%20adopted-ff69b4.svg?style=flat-square)](/CODE_OF_CONDUCT.md)
@@ -15,6 +15,10 @@ This repo is a **fork** of [JamesNK/Newtonsoft.Json][newtonsoft.json.git]
 containing custom builds for regular standalone, but more importantly AOT
 targets such as all **IL2CPP builds (WebGL, iOS, Android, Windows, Mac OS X)**
 and portable .NET **(UWP, WP8)**.
+
+> **Note:** This branch is for backporting all Unity compatability changes to
+> Newtonsoft.Json v11.0.2. To see the source of the latest version, visit
+> the [master branch][json.net-4-unity].
 
 ## Features
 
@@ -216,6 +220,7 @@ See full copyrights in [LICENSE.md][license.md] inside repository
 [issue-list-unassigned]: https://github.com/jilleJr/Newtonsoft.Json-for-Unity/issues?q=is%3Aopen+is%3Aissue+no%3Aassignee
 [json.net-4-unity.converters-compatability]: https://github.com/jilleJr/Newtonsoft.Json-for-Unity.Converters/blob/master/Doc/Compatability-table.md
 [json.net-4-unity.converters]: https://github.com/jilleJr/Newtonsoft.Json-for-Unity.Converters
+[json.net-4-unity]: https://github.com/jilleJr/Newtonsoft.Json-for-Unity
 [license.md]: https://github.com/jilleJr/Newtonsoft.Json-for-Unity/blob/master/LICENSE.md
 [newtonsoft.json.git]: https://github.com/JamesNK/Newtonsoft.Json
 [opencollective-img-induvidual]: https://opencollective.com/newtonsoftjson-for-unity/individuals.svg?width=890
