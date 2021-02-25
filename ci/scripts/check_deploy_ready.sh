@@ -24,9 +24,9 @@ fi
 
 echo
 
-if egrep -q "^## ${VERSION//\./\\.}$" CHANGELOG.md
+if egrep -q "^## ${VERSION//\./\\.}( |$)" CHANGELOG.md
 then
-    echo "> Changelog has been updated, all ok!"
+    echo "> Changelog has a '## $VERSION' section, all ok!"
 else
     echo "[!] Changelog in CHANGELOG.md is missing line '## $VERSION'."
     echo "[!] Make sure to update the CHANGELOG.md"
@@ -35,9 +35,21 @@ fi
 
 echo
 
+if egrep -q "^## ${VERSION//\./\\.} \\((WIP|[0-9]{4}-[0-9]{2}-[0-9]{2})\\)$" CHANGELOG.md
+then
+    echo "> Changelog has a version section with (YYYY-MM-DD) or (WIP), all ok!"
+else
+    echo "[!] Changelog in CHANGELOG.md is missing its date or WIP tag."
+    echo "[!] Expected: '## $VERSION ($(date '+%Y-%m-%e'))' or '## $VERSION (WIP)'"
+    echo "[!] Make sure to update the CHANGELOG.md"
+    OK=0
+fi
+
+echo
+
 for ENV_VAR in NPM_AUTH_TOKEN GITHUB_USER_EMAIL GITHUB_USER_NAME GITHUB_GPG_ID GITHUB_GPG_SEC_B64
 do
-    if [ -z "${!ENV_VAR}" ]
+    if [ -z "${!ENV_VAR:-}" ]
     then
         echo "[!] Missing environment variable \$$ENV_VAR."
         OK=0
