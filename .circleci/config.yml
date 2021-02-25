@@ -10,6 +10,7 @@ preset-filter-test: &WORKFLOW_BUILD_TEST_FILTER
 preset-filter-deploy: &WORKFLOW_BUILD_TEST_DEPLOY_FILTER
   only:
     - master
+    - /^backport.*/
 
 preset-filter-check: &WORKFLOW_CHECK_DEPLOY_READY_FILTER
   only:
