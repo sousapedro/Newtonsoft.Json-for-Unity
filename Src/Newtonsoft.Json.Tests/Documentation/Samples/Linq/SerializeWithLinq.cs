@@ -120,7 +120,7 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Linq
       ""Twitter"": ""JamesNK""
     },
     ""Date"": ""2013-01-23T19:30:00"",
-    ""BodyHtml"": ""&lt;h3&gt;Title!&lt;/h3&gt;\r\n                             &lt;p&gt;Content!&lt;/p&gt;""
+    ""BodyHtml"": ""&lt;h3&gt;Title!&lt;/h3&gt;"+Environment.NewLine+@"                             &lt;p&gt;Content!&lt;/p&gt;""
   }
 ]", blogPostsArray.ToString());
         }
