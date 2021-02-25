@@ -1,6 +1,6 @@
 # Newtonsoft.Json for Unity changelog
 
-## 11.0.202 (WIP)
+## 11.0.202 (2021-02-25)
 
 - ✨ Initial release of 11.0.2 backport.
 
