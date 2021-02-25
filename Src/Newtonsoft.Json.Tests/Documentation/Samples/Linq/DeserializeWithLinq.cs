@@ -78,7 +78,7 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Linq
                   'Picture': '/jamesnk.png'
                 },
                 'Date': '2013-01-23T19:30:00',
-                'BodyHtml': '&lt;h3&gt;Title!&lt;/h3&gt;"+Environment.NewLine+@"&lt;p&gt;Content!&lt;/p&gt;'
+                'BodyHtml': '&lt;h3&gt;Title!&lt;/h3&gt;\r\n&lt;p&gt;Content!&lt;/p&gt;'
               }
             ]";
 
@@ -98,8 +98,7 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Linq
             // <p>Content!</p>
             #endregion
 
-            Assert.AreEqual(@"<h3>Title!</h3>
-<p>Content!</p>", blogPosts[0].Body);
+            Assert.AreEqual("<h3>Title!</h3>\n<p>Content!</p>", blogPosts[0].Body.Replace("\r\n", "\n"));
         }
     }
 }
