@@ -35,7 +35,7 @@ and portable .NET **(UWP, WP8)**.
 
 - Precompiled as DLLs for faster builds
 
-- [_Newtonsoft.Json.Utility_.**AotHelper**][wiki-fix-aot-using-aothelper]
+- [*Newtonsoft.Json.Utility*.**AotHelper**][wiki-fix-aot-using-aothelper]
   utility class for resolving common Ahead-Of-Time issues.
   [(Read more about AOT)][wiki-what-even-is-aot]
 
@@ -235,4 +235,3 @@ See full copyrights in [LICENSE.md][license.md] inside repository
 [wiki-installation-via-git-in-upm]: https://github.com/jilleJr/Newtonsoft.Json-for-Unity/wiki/Installation-via-Git-in-UPM
 [wiki-what-even-is-aot]: https://github.com/jilleJr/Newtonsoft.Json-for-Unity/wiki/What-even-is-AOT
 [wiki-workingwithbranches#merging]: https://github.com/jilleJr/Newtonsoft.Json-for-Unity/wiki/Working-with-branches#merging-changes-from-jamesnks-repo
-[wiki-workingwithbranches]: https://github.com/jilleJr/Newtonsoft.Json-for-Unity/wiki/Working-with-branches
