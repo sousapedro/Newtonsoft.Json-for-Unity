@@ -25,6 +25,11 @@
 
 #if !DNXCORE50 || NETSTANDARD2_0
 
+#if UNITY_LTS
+extern alias SystemWebPolyfill;
+using HttpUtility = SystemWebPolyfill::System.Web.HttpUtility;
+#endif
+
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -72,8 +77,7 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Linq
                     AuthorName = "James Newton-King",
                     AuthorTwitter = "JamesNK",
                     PostedDate = new DateTime(2013, 1, 23, 19, 30, 0),
-                    Body = @"<h3>Title!</h3>
-                             <p>Content!</p>"
+                    Body = "<h3>Title!</h3>\n                             <p>Content!</p>"
                 }
             };
 
@@ -115,7 +119,7 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Linq
       ""Twitter"": ""JamesNK""
     },
     ""Date"": ""2013-01-23T19:30:00"",
-    ""BodyHtml"": ""&lt;h3&gt;Title!&lt;/h3&gt;\r\n                             &lt;p&gt;Content!&lt;/p&gt;""
+    ""BodyHtml"": ""&lt;h3&gt;Title!&lt;/h3&gt;\n                             &lt;p&gt;Content!&lt;/p&gt;""
   }
 ]", blogPostsArray.ToString());
         }

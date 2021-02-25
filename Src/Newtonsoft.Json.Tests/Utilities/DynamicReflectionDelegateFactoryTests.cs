@@ -23,7 +23,7 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
-#if !(PORTABLE || DNXCORE50 || PORTABLE40)
+#if !(PORTABLE || DNXCORE50 || PORTABLE40 || UNITY_LTS)
 using System;
 using System.Diagnostics;
 using System.Reflection;
@@ -103,7 +103,10 @@ namespace Newtonsoft.Json.Tests.Utilities
                 var setter = DynamicReflectionDelegateFactory.Instance.CreateGet<object>(typeof(Movie).GetProperty("Name"));
 
                 setter(p);
-            }, "Unable to cast object of type 'Newtonsoft.Json.Tests.TestObjects.Organization.Person' to type 'Newtonsoft.Json.Tests.TestObjects.Movie'.");
+            }, 
+                "Unable to cast object of type 'Newtonsoft.Json.Tests.TestObjects.Organization.Person' to type 'Newtonsoft.Json.Tests.TestObjects.Movie'.",
+                "Specified cast is not valid." // mono 2nd format
+            );
         }
 
         [Test]
@@ -123,7 +126,10 @@ namespace Newtonsoft.Json.Tests.Utilities
                 setter(p, "Hi");
 
                 Assert.AreEqual(p.Name, "Hi");
-            }, "Unable to cast object of type 'Newtonsoft.Json.Tests.TestObjects.Organization.Person' to type 'Newtonsoft.Json.Tests.TestObjects.Movie'.");
+            },
+                "Unable to cast object of type 'Newtonsoft.Json.Tests.TestObjects.Organization.Person' to type 'Newtonsoft.Json.Tests.TestObjects.Movie'.",
+                "Specified cast is not valid." // mono 2nd format
+            );
         }
 
         [Test]
@@ -153,7 +159,10 @@ namespace Newtonsoft.Json.Tests.Utilities
                 var setter = DynamicReflectionDelegateFactory.Instance.CreateSet<object>(typeof(Movie).GetProperty("Name"));
 
                 setter(m, new Version("1.1.1.1"));
-            }, "Unable to cast object of type 'System.Version' to type 'System.String'.");
+            },
+                "Unable to cast object of type 'System.Version' to type 'System.String'.",
+                "Specified cast is not valid." // mono 2nd format
+            );
         }
 
         [Test]
