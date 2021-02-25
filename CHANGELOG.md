@@ -1,84 +1,77 @@
 # Newtonsoft.Json for Unity changelog
 
-## 12.0.302 (2021-02-19)
+## 11.0.202 (WIP)
 
-- ✨ New: Properly embed the link.xml into the DLLs. ([#54][#54])
+- ✨ Initial release of 11.0.2 backport.
 
-- 🐛 Fix: Preserve `NullableAttribute` and `NullableContextAttribute`.
-  ([#54][#54])
+- ✨ Based on [JamesNK/Newtonsoft.Json version `11.0.2`][json.net-11.0.2]
 
-- 🐛 Fix: Preserve all JSON converters. ([#8][#8], [#65][#65])
+- ✨ New: Backport of all changes made from original Newtonsoft.Json 12.0.3 to
+  Newtonsoft.Json-for-Unity 12.0.302. Which includes:
 
-## 12.0.301 (2020-01-19)
+  - 12.0.302 (2021-02-19)
 
-- ✨ New: Merged changes from
-  [JamesNK/Newtonsoft.Json version `12.0.3`][json.net-12.0.3]
+    - ✨ New: Properly embed the link.xml into the DLLs. ([#54][#54])
 
-- 🔄 Change: Testing libraries are precompiled to be able to use the nullable
-  reference types, as Unity does not yet support them. ([#37][#37])
+    - 🐛 Fix: Preserve `NullableAttribute` and `NullableContextAttribute`.
+      ([#54][#54])
 
-## 12.0.201 (2020-01-03)
+    - 🐛 Fix: Preserve all JSON converters. ([#8][#8], [#65][#65])
 
-- ✨ New: Merged changes from
-  [JamesNK/Newtonsoft.Json version `12.0.2`][json.net-12.0.2]
+  - 12.0.301 (2020-01-19)
 
-- ✨ New: Downgrade script for .asmdef to be able to test in Unity 2018.x.
+    - 🔄 Change: Testing libraries are precompiled to be able to use the
+      nullable reference types, as Unity does not yet support them. ([#37][#37])
 
-- ✨ New: Now testing in both Unity 2019.x and 2018.x in CircleCI workflow.
+  - 12.0.201 (2020-01-03)
 
-- ✨ New: Added `System.Web.HttpUtility` polyfill to test project due to it's
-  not included in IL2CPP builds.
-  See <https://forum.unity.com/threads/solved-httputility-in-il2cpp.802368/#post-5333634>
+    - ✨ New: Downgrade script for .asmdef to be able to test in Unity 2018.x.
 
-- 🔄 Change: Custom StringAssert.StartsWith to get better error messages in
-  tests.
+    - ✨ New: Now testing in both Unity 2019.x and 2018.x in CircleCI workflow.
 
-- 🐛 Fix: AotHelper.EnsureDictionary was not generating constructor for
-  `DefaultContractResolver.EnumerableDictionaryWrapper<TKey, TValue>`
+    - ✨ New: Added `System.Web.HttpUtility` polyfill to test project due to
+      it's not included in IL2CPP builds.
+      See <https://forum.unity.com/threads/solved-httputility-in-il2cpp.802368/#post-5333634>
 
-## 12.0.102 (2019-12-30)
+    - 🔄 Change: Custom StringAssert.StartsWith to get better error messages in
+      tests.
 
-- ✨ New: Moved some documentation to the new wiki. All markdown files in the
-  repository has been tidied.
+    - 🐛 Fix: AotHelper.EnsureDictionary was not generating constructor for
+      `DefaultContractResolver.EnumerableDictionaryWrapper<TKey, TValue>`
 
-- 🐛 Fix: Only use major version in assembly version (ex: `12.0.0.0`, instead of
-  `12.0.1.0`) ([#18][#18])
+  - 12.0.102 (2019-12-30)
 
-- 🐛 Fix: Package targets .NET 4.5 & .NET 4.6.1 instead of recommended
-  .NET Standard 2.0. Portable should still target the [PCL profile 259
-  (`portable-net45+win8+wpa81+wp8`)][portable-class-library]. ([#29][#29])
+    - ✨ New: Moved some documentation to the new wiki. All markdown files in
+      the repository has been tidied.
 
-- 🐛 Fix: Assembly not found due to unsigned and not strong named assembly.
-  The packaged DLL's are now signed with the public key of Newtonsoft.Json.
-  ([#7][#7], [#10][#10])
+    - 🐛 Fix: Only use major version in assembly version (ex: `12.0.0.0`,
+      instead of `12.0.1.0`) ([#18][#18])
 
-## 12.0.101 (2019-11-26)
+    - 🐛 Fix: Package targets .NET 4.5 & .NET 4.6.1 instead of recommended
+      .NET Standard 2.0. Portable should still target the [PCL profile 259
+      (`portable-net45+win8+wpa81+wp8`)][portable-class-library]. ([#29][#29])
 
-- ✨ New: Setup CircleCI integration for build automation
-  [![CircleCI badge][circleci-badge]][circleci-url]
+    - 🐛 Fix: Assembly not found due to unsigned and not strong named assembly.
+      The packaged DLL's are now signed with the public key of Newtonsoft.Json.
+      ([#7][#7], [#10][#10])
 
-- ✨ New: Setup Codacy integration for automated code reviews
-  [![Codacy badge][codacy-badge]][codacy-url]
+  - 12.0.101 (2019-11-26)
 
-- 🔄 Change: Switched to [cloudsmith.com][cloudsmith-url] as registry provider
-  instead of [npmjs.com][npmjs-url]
-  [![Latest Version @ Cloudsmith][cloudsmith-badge]][cloudsmith-url]
+    - ✨ New: Setup CircleCI integration for build automation
+      [![CircleCI badge][circleci-badge]][circleci-url]
 
-- 🔄 Change: Better versioning format. For more info see
-  [the wiki page][wiki-versioning]. Changes are based of off `12.0.1`
-  version _(in previous format)._
+    - ✨ New: Setup Codacy integration for automated code reviews
+      [![Codacy badge][codacy-badge]][codacy-url]
 
-- 🐛 Fix: Building on standalone causes plugin collision ([#3][#3])
+    - 🔄 Change: Switched to [cloudsmith.com][cloudsmith-url] as registry
+      provider instead of [npmjs.com][npmjs-url]
+      [![Latest Version @ Cloudsmith][cloudsmith-badge]][cloudsmith-url]
 
-## 12.0.1 (2019-07-18)
+    - 🔄 Change: Better versioning format. For more info see
+      [the wiki page][wiki-versioning]. Changes are based of off `12.0.1`
+      version _(in previous format)._
 
-- ✨ New: Package published as an Unity Package Manager package on
-  [npmjs.com][npmjs-url].
-  ![npm badge][npmjs-badge]
-
-- ✨ Initial release
-
-- ✨ Based on [JamesNK/Newtonsoft.Json version `12.0.1`][json.net-12.0.1]
+    - 🐛 Fix: Building on standalone causes plugin collision ([#3][#3])
 
 [#3]: https://github.com/jilleJr/Newtonsoft.Json-for-Unity/issues/3
 [#7]: https://github.com/jilleJr/Newtonsoft.Json-for-Unity/issues/7
@@ -95,9 +88,7 @@
 [cloudsmith-url]: https://cloudsmith.io/~jillejr/repos/newtonsoft-json-for-unity/packages/detail/npm/jillejr.newtonsoft.json-for-unity/latest/#readme
 [codacy-badge]: https://img.shields.io/codacy/grade/f91156e7066c484588f4dba263c8cf45?logo=codacy&style=flat-square
 [codacy-url]: https://www.codacy.com/manual/jilleJr/Newtonsoft.Json-for-Unity?utm_source=github.com&utm_medium=referral&utm_content=jilleJr/Newtonsoft.Json-for-Unity&utm_campaign=Badge_Grade
-[json.net-12.0.1]: https://github.com/JamesNK/Newtonsoft.Json/releases/12.0.1
-[json.net-12.0.2]: https://github.com/JamesNK/Newtonsoft.Json/releases/12.0.2
-[json.net-12.0.3]: https://github.com/JamesNK/Newtonsoft.Json/releases/12.0.3
+[json.net-11.0.2]: https://github.com/JamesNK/Newtonsoft.Json/releases/11.0.2
 [npmjs-badge]: https://img.shields.io/npm/v/jillejr.newtonsoft.json-for-unity?logo=npm&style=flat-square
 [npmjs-url]: https://www.npmjs.com/package/jillejr.newtonsoft.json-for-unity
 [portable-class-library]: https://docs.microsoft.com/en-us/dotnet/standard/net-standard#pcl-compatibility
