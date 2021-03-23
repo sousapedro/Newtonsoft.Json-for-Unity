@@ -33,7 +33,7 @@ jobs:
       BUILD_ADDITIONAL_CONSTANTS: SIGNING
 
     docker:
-      - image: applejag/newtonsoft.json-for-unity.package-builder:v2
+      - image: applejag/newtonsoft.json-for-unity.package-builder:v3
 
     steps:
       # Checkout repo -> ~/repo
