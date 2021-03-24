@@ -33,7 +33,7 @@ jobs:
       BUILD_ADDITIONAL_CONSTANTS: SIGNING
 
     docker:
-      - image: applejag/newtonsoft.json-for-unity.package-builder:v2
+      - image: applejag/newtonsoft.json-for-unity.package-builder:v3
 
     steps:
       # Checkout repo -> ~/repo
@@ -56,8 +56,8 @@ jobs:
       - run:
           name: NuGet restore
           command: |
-            msbuild -t:restore "$BUILD_SOLUTION"
-            msbuild -t:restore "$TEST_SOLUTION" -p:UnityBuild=Tests
+            dotnet restore "$BUILD_SOLUTION"
+            dotnet restore "$TEST_SOLUTION" -p:UnityBuild=Tests
 
       - save_cache:
           key: build-package-nuget
@@ -71,10 +71,6 @@ jobs:
       - run:
           name: Build AOT
           command: $SCRIPTS/build.sh AOT
-
-      - run:
-          name: Build Portable
-          command: $SCRIPTS/build.sh Portable
 
       - run:
           name: Build Testing library
@@ -148,8 +144,6 @@ jobs:
             .'Temp/profile.ps1'
             &$nuget restore Src/Newtonsoft.Json.Tests/Newtonsoft.Json.Tests.csproj
 
-      ## Only targeting .NET 4.6 as the .NET 4.5.2 indirectly builds the portable version of Json.NET
-      ## CircleCI Windows Orb is missing the .NET Portable Library targeting pack
       - run:
           name: Run Build step
           command: |
@@ -157,18 +151,11 @@ jobs:
             &$msbuild -t:build -restore -p:Configuration=Debug -p:LibraryFrameworks=net46 -p:TestFrameworks=net46 Src/Newtonsoft.Json.Tests/Newtonsoft.Json.Tests.csproj
 
       - run:
-          name: Run tests (#1, .NET 4.6)
+          name: Run tests
           command: |
             .'Temp/profile.ps1'
             New-Item Tests/NUnit -ItemType Directory -ErrorAction SilentlyContinue
             &$nunit3console Src/Newtonsoft.Json.Tests/bin/Debug/net46/Newtonsoft.Json.Tests.dll --framework=net-4.0 --result=Tests/NUnit/net46.xml
-
-      ## CircleCI Windows Orb is missing the .NET Portable Library targeting pack
-      # - run:
-      #     name: Run tests (#2, portable, Profile259)
-      #     command: |
-      #       .'Temp/profile.ps1'
-      #       &$nunit3console Src/Newtonsoft.Json.Tests/bin/Debug/net452/Newtonsoft.Json.Tests.dll --framework=net-4.0 --result=Tests/NUnit/net452.xml
 
       - run:
           name: Convert NUnit to JUnit xml

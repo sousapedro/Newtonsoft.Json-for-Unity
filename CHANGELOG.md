@@ -1,5 +1,13 @@
 # Newtonsoft.Json for Unity changelog
 
+## 13.0.102 (WIP)
+
+- ✨ New: Merged changes from
+  [JamesNK/Newtonsoft.Json version `13.0.1`][json.net-13.0.1]
+
+- 🗑 Deprecated: Removed the Portable build target. This package now only ships
+  with the AOT and Editor builds.
+
 ## 12.0.302 (2021-02-19)
 
 - ✨ New: Properly embed the link.xml into the DLLs. ([#54][#54])
@@ -98,6 +106,7 @@
 [json.net-12.0.1]: https://github.com/JamesNK/Newtonsoft.Json/releases/12.0.1
 [json.net-12.0.2]: https://github.com/JamesNK/Newtonsoft.Json/releases/12.0.2
 [json.net-12.0.3]: https://github.com/JamesNK/Newtonsoft.Json/releases/12.0.3
+[json.net-13.0.1]: https://github.com/JamesNK/Newtonsoft.Json/releases/13.0.1
 [npmjs-badge]: https://img.shields.io/npm/v/jillejr.newtonsoft.json-for-unity?logo=npm&style=flat-square
 [npmjs-url]: https://www.npmjs.com/package/jillejr.newtonsoft.json-for-unity
 [portable-class-library]: https://docs.microsoft.com/en-us/dotnet/standard/net-standard#pcl-compatibility
