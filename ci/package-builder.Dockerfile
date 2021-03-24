@@ -1,4 +1,4 @@
-FROM mono:6.12.0.107
+FROM mcr.microsoft.com/dotnet/sdk:5.0.201-buster-slim-amd64
 
 # Should correspond to the image tag
 ARG IMAGE_VERSION

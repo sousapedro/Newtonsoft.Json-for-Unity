@@ -10,9 +10,9 @@ param (
     [ValidateSet('Release', 'Debug', IgnoreCase = $false)]
     [string] $Configuration = "Release",
 
-    [ValidateSet('Standalone','AOT','Portable','Editor','Tests')]
+    [ValidateSet('Standalone','AOT','Editor','Tests')]
     [string[]] $UnityBuilds = @(
-        'AOT', 'Portable', 'Editor'
+        'AOT', 'Editor'
     ),
 
     [string] $VolumeSource = ([Path]::GetFullPath("$PSScriptRoot/..")),
@@ -181,7 +181,7 @@ try {
     
     foreach ($build in $UnityBuilds) {
         Invoke-DockerCommand "NuGet restore for build '$build'" `
-            "msbuild -t:restore `"`$BUILD_SOLUTION`" -p:UnityBuild=$build"
+            "dotnet restore `"`$BUILD_SOLUTION`" -p:UnityBuild=$build"
 
         Invoke-DockerCommand "Build '$build'" @"
             mkdir -p Temp/Build
