@@ -1,6 +1,6 @@
 # Newtonsoft.Json for Unity changelog
 
-## 13.0.102 (WIP)
+## 13.0.102 (2021-03-24)
 
 - ✨ New: Merged changes from
   [JamesNK/Newtonsoft.Json version `13.0.1`][json.net-13.0.1]
