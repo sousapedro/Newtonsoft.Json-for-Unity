@@ -14,19 +14,19 @@ error() {
 
 case "$build" in
 Standalone)
-    framework="netstandard2.0"
+    framework="netstandard1.3"
     ;;
 AOT)
-    framework="netstandard2.0"
+    framework="netstandard1.3"
     ;;
 Portable)
     framework="portable-net45+win8+wpa81+wp8"
     ;;
 Editor)
-    framework="netstandard2.0"
+    framework="netstandard1.3"
     ;;
 Tests)
-    framework="net46"
+    framework="net45"
     ;;
 *)
     error "Invalid build name.
