@@ -212,10 +212,12 @@ namespace Newtonsoft.Json.Tests
 
         public static string ResolvePath(string path)
         {
-#if !DNXCORE50
-            return Path.Combine(TestContext.CurrentContext.TestDirectory, path);
+#if UNITY_5_3_OR_NEWER
+            return Path.Combine(UnityEngine.Application.streamingAssetsPath, path);
 #else
-            return path;
+            var assemblyPath = Path.GetDirectoryName(typeof(TestFixtureBase).Assembly().Location);
+
+            return Path.Combine(assemblyPath, path);
 #endif
         }
 
@@ -334,7 +336,10 @@ namespace Newtonsoft.Json.Tests
 
     public static class StringAssert
     {
-        private static readonly Regex Regex = new Regex(@"\r\n|\n\r|\n|\r", RegexOptions.CultureInvariant);
+        private static readonly Regex NewlinesPattern = new Regex(@"\r\n|\n\r|\n|\r",
+            RegexOptions.CultureInvariant | RegexOptions.Compiled);
+        private static readonly Regex TimestampPattern = new Regex(@"^\d\d\d\d-\d\d-\d\dT\d\d:\d\d:\d\d\.\d\d\d ",
+            RegexOptions.Multiline | RegexOptions.Compiled);
 
         public static void AreEqual(string expected, string actual)
         {
@@ -356,10 +361,26 @@ namespace Newtonsoft.Json.Tests
         {
             if (s != null)
             {
-                s = Regex.Replace(s, "\r\n");
+                s = NewlinesPattern.Replace(s, "\r\n");
             }
 
             return s;
+        }
+
+        public static void AreEqualExceptTimestamps(string expectedWithTimestamps, string actualWithTimestamps)
+        {
+            string expectedWithoutTimestamps = TimestampPattern.Replace(Normalize(expectedWithTimestamps), string.Empty);
+            string actualWithoutTimestamps = TimestampPattern.Replace(Normalize(actualWithTimestamps), string.Empty);
+
+            Assert.AreEqual(expectedWithoutTimestamps, actualWithoutTimestamps);
+        }
+
+        public static void StartsWith(string expectedStart, string actual) {
+            if (expectedStart == null || (expectedStart == null && actual == null)) {
+                return;
+            }
+            Assert.IsNotNull(actual, "Expected string to start with '{0}', but was null.", expectedStart);
+            Assert.AreEqual(expectedStart, actual.Substring(0, expectedStart.Length), "Expected string to start with '{0}', but did not.", expectedStart);
         }
     }
 

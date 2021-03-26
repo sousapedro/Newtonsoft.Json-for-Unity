@@ -642,7 +642,7 @@ namespace Newtonsoft.Json.Tests.Linq
         }
 #endif
 
-#if !(PORTABLE40 || NET35 || NET20)
+#if !(PORTABLE40 || NET35 || NET20 || ENABLE_IL2CPP)
         [Test]
         public void ExpicitConversionTest()
         {
@@ -797,7 +797,7 @@ namespace Newtonsoft.Json.Tests.Linq
 }", json);
         }
 
-#if !(NET20 || NET35 || PORTABLE40)
+#if !(NET20 || NET35 || PORTABLE40 || ENABLE_IL2CPP)
         [Test]
         public void EnumTests()
         {

@@ -23,6 +23,7 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
+#if !(PORTABLE || DNXCORE50 || PORTABLE40 || UNITY_LTS)
 using System.IO;
 using System.Text;
 using Newtonsoft.Json.Bson;

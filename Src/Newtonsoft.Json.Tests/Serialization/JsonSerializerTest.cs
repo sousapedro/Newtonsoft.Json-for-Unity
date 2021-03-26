@@ -38,6 +38,8 @@ using System.Configuration;
 using System.Runtime.CompilerServices;
 using System.Runtime.Serialization.Formatters;
 using System.Threading;
+#endif
+#if !(NET20 || DNXCORE50 || UNITY_LTS)
 using System.Web.Script.Serialization;
 #endif
 using System.Text;
@@ -883,7 +885,7 @@ namespace Newtonsoft.Json.Tests.Serialization
             public string Value { get; }
         }
 
-#if !(DNXCORE50 || NET20)
+#if !(DNXCORE50 || NET20 || UNITY_LTS)
         [MetadataType(typeof(CustomerValidation))]
         public partial class CustomerWithMetadataType
         {
@@ -1986,7 +1988,7 @@ namespace Newtonsoft.Json.Tests.Serialization
             }
         }
 
-#if !(NET20 || NET35)
+#if !(NET20 || NET35 || ENABLE_IL2CPP)
         [DataContract]
         public class BaseDataContractWithHidden
         {
@@ -2327,7 +2329,8 @@ namespace Newtonsoft.Json.Tests.Serialization
 
             string jsonText = JsonConvert.SerializeObject(testDictionary);
 
-#if !(NET20 || NET35)
+            // Requires JIT compilation
+#if !(NET20 || NET35 || ENABLE_IL2CPP)
             MemoryStream ms = new MemoryStream();
             DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(Dictionary<string, object>));
             serializer.WriteObject(ms, testDictionary);
@@ -2579,7 +2582,7 @@ keyword such as type of business.""
         {
             string json = @"[""vvv\/vvv\tvvv\""vvv\bvvv\nvvv\rvvv\\vvv\fvvv""]";
 
-#if !(DNXCORE50)
+#if !(DNXCORE50 || UNITY_LTS)
             JavaScriptSerializer javaScriptSerializer = new JavaScriptSerializer();
             List<string> javaScriptSerializerResult = javaScriptSerializer.Deserialize<List<string>>(json);
 #endif
@@ -2591,11 +2594,13 @@ keyword such as type of business.""
 
             Assert.AreEqual(1, jsonNetResult.Count);
             Assert.AreEqual(dataContractResult[0], jsonNetResult[0]);
-#if !(DNXCORE50)
+#if !(DNXCORE50 || UNITY_LTS)
             Assert.AreEqual(javaScriptSerializerResult[0], jsonNetResult[0]);
 #endif
         }
 
+        // Requires JIT
+#if !ENABLE_IL2CPP
         [Test]
         public void DateTimeTest()
         {
@@ -2620,6 +2625,7 @@ keyword such as type of business.""
             string result = JsonConvert.SerializeObject(testDates, new JsonSerializerSettings { DateFormatHandling = DateFormatHandling.MicrosoftDateFormat });
             Assert.AreEqual(expected, result);
         }
+#endif
 
         [Test]
         public void DateTimeOffsetIso()
@@ -3273,7 +3279,7 @@ keyword such as type of business.""
             }
             catch (JsonSerializationException ex)
             {
-                Assert.IsTrue(ex.Message.StartsWith("Required property 'FirstName' expects a value but got null. Path ''"));
+                StringAssert.StartsWith("Required property 'FirstName' expects a value but got null. Path ''", ex.Message);
             }
         }
 
@@ -3308,7 +3314,7 @@ keyword such as type of business.""
             }
             catch (JsonSerializationException ex)
             {
-                Assert.IsTrue(ex.Message.StartsWith("Required property 'LastName' not found in JSON. Path ''"));
+                StringAssert.StartsWith("Required property 'LastName' not found in JSON. Path ''", ex.Message);
             }
         }
 
@@ -3558,7 +3564,7 @@ keyword such as type of business.""
             }
             catch (JsonSerializationException ex)
             {
-                Assert.IsTrue(ex.Message.StartsWith("Required property 'TestProperty2' not found in JSON. Path ''"));
+                StringAssert.StartsWith("Required property 'TestProperty2' not found in JSON. Path ''", ex.Message);
             }
         }
 
@@ -3689,7 +3695,7 @@ keyword such as type of business.""
             Assert.AreEqual("titleId", n.FidOrder[n.FidOrder.Count - 1]);
         }
 
-#if !(NET20 || DNXCORE50)
+#if !(NET20 || DNXCORE50 || UNITY_LTS)
         [MetadataType(typeof(OptInClassMetadata))]
         public class OptInClass
         {
@@ -4093,7 +4099,7 @@ Path '', line 1, position 1.");
                 @"Unexpected character encountered while parsing value: [. Path '', line 1, position 1.");
         }
 
-#if !(NET35 || NET20 || PORTABLE40)
+#if !(NET35 || NET20 || PORTABLE40 || ENABLE_IL2CPP)
         [Test]
         public void CannotDeserializeArrayIntoDynamic()
         {
@@ -4117,7 +4123,9 @@ Path '', line 1, position 1.");
                 new[]
                 {
                     "Unable to cast object of type 'Newtonsoft.Json.Linq.JArray' to type 'Newtonsoft.Json.Linq.JObject'.",
-                    "Cannot cast from source type to destination type." // mono
+                    "Cannot cast from source type to destination type.", // mono
+                    "Specified cast is not valid.", // mono 2nd format
+                    "Unable to cast object of type 'JArray' to type 'JObject'." // il2cpp format
                 });
         }
 
@@ -4149,9 +4157,9 @@ Path '', line 1, position 1.");
             }
             catch (JsonSerializationException ex)
             {
-                Assert.IsTrue(ex.Message.StartsWith(@"Cannot deserialize the current JSON object (e.g. {""name"":""value""}) into type 'System.Collections.Generic.List`1[Newtonsoft.Json.Tests.TestObjects.Organization.Person]' because the type requires a JSON array (e.g. [1,2,3]) to deserialize correctly." + Environment.NewLine +
-                                                    @"To fix this error either change the JSON to a JSON array (e.g. [1,2,3]) or change the deserialized type so that it is a normal .NET type (e.g. not a primitive type like integer, not a collection type like an array or List<T>) that can be deserialized from a JSON object. JsonObjectAttribute can also be added to the type to force it to deserialize from a JSON object." + Environment.NewLine +
-                                                    @"Path ''"));
+                StringAssert.StartsWith(@"Cannot deserialize the current JSON object (e.g. {""name"":""value""}) into type 'System.Collections.Generic.List`1[Newtonsoft.Json.Tests.TestObjects.Organization.Person]' because the type requires a JSON array (e.g. [1,2,3]) to deserialize correctly." + Environment.NewLine +
+                                        @"To fix this error either change the JSON to a JSON array (e.g. [1,2,3]) or change the deserialized type so that it is a normal .NET type (e.g. not a primitive type like integer, not a collection type like an array or List<T>) that can be deserialized from a JSON object. JsonObjectAttribute can also be added to the type to force it to deserialize from a JSON object." + Environment.NewLine +
+                                        @"Path ''", ex.Message);
             }
         }
 
@@ -4189,7 +4197,7 @@ Path '', line 1, position 1.");
                 {
                     ContractResolver = new DefaultContractResolver
                     {
-#if !(PORTABLE || DNXCORE50 || PORTABLE40) || NETSTANDARD1_3
+#if !(PORTABLE || DNXCORE50 || PORTABLE40 || ENABLE_IL2CPP) || NETSTANDARD1_3
                         IgnoreSerializableAttribute = true
 #endif
                     }
@@ -4206,7 +4214,7 @@ Path '', line 1, position 1.");
                 {
                     ContractResolver = new DefaultContractResolver
                     {
-#if !(PORTABLE || DNXCORE50 || PORTABLE40) || NETSTANDARD1_3
+#if !(PORTABLE || DNXCORE50 || PORTABLE40 || ENABLE_IL2CPP) || NETSTANDARD1_3
                         IgnoreSerializableAttribute = true
 #endif
                     }
@@ -4223,7 +4231,7 @@ Path '', line 1, position 1.");
                 {
                     ContractResolver = new DefaultContractResolver
                     {
-#if !(PORTABLE || DNXCORE50 || PORTABLE40) || NETSTANDARD1_3
+#if !(PORTABLE || DNXCORE50 || PORTABLE40 || ENABLE_IL2CPP) || NETSTANDARD1_3
                         IgnoreSerializableAttribute = true
 #endif
                     }
@@ -4240,7 +4248,7 @@ Path '', line 1, position 1.");
                 {
                     ContractResolver = new DefaultContractResolver
                     {
-#if !(PORTABLE || DNXCORE50 || PORTABLE40)
+#if !(PORTABLE || DNXCORE50 || PORTABLE40 || ENABLE_IL2CPP)
                         IgnoreSerializableAttribute = true
 #endif
                     }
@@ -4372,7 +4380,7 @@ Path '', line 1, position 1.");
             }
             catch (JsonSerializationException ex)
             {
-                Assert.IsTrue(ex.Message.StartsWith("Could not convert string 'Newtonsoft.Json.Tests.TestObjects.Organization.Person' to dictionary key type 'Newtonsoft.Json.Tests.TestObjects.Organization.Person'. Create a TypeConverter to convert from the string to the key type object. Path '['Newtonsoft.Json.Tests.TestObjects.Organization.Person']'"));
+                StringAssert.StartsWith("Could not convert string 'Newtonsoft.Json.Tests.TestObjects.Organization.Person' to dictionary key type 'Newtonsoft.Json.Tests.TestObjects.Organization.Person'. Create a TypeConverter to convert from the string to the key type object. Path '['Newtonsoft.Json.Tests.TestObjects.Organization.Person']'", ex.Message);
             }
         }
 
@@ -4843,7 +4851,9 @@ Path '', line 1, position 1.");
             public string Ethnicity { get; set; }
         }
 
-#if !(NET20 || NET35)
+        // Throws on IL2CPP targetting .NET 4.x compatability
+        // https://forum.unity.com/threads/uwp-datacontractserializer-fails-to-load-configuration-section.507801/#post-3618808
+#if !(NET20 || NET35 || ENABLE_IL2CPP)
         public class DataContractJsonSerializerTestClass
         {
             public TimeSpan TimeSpanProperty { get; set; }
@@ -5949,7 +5959,7 @@ Path '', line 1, position 1.");
 }", json);
         }
 
-#if !(NET35 || NET20 || PORTABLE40)
+#if !(NET35 || NET20 || PORTABLE40 || ENABLE_IL2CPP)
         [Test]
         public void SerializeExpandoObject()
         {
@@ -6438,7 +6448,7 @@ Path '', line 1, position 1.");
             JsonConvert.DeserializeObject<EnumerableArrayPropertyClass>(json);
         }
 
-#if !(NET20)
+#if !(NET20 || ENABLE_IL2CPP)
         [DataContract]
         public class BaseDataContract
         {
@@ -6477,6 +6487,9 @@ Path '', line 1, position 1.");
 }", result);
         }
 
+
+        // Throws on IL2CPP targetting .NET 4.x compatability
+        // https://forum.unity.com/threads/uwp-datacontractserializer-fails-to-load-configuration-section.507801/#post-3618808
         [Test]
         public void ChildDataContractTestWithDataContractSerializer()
         {
@@ -7647,7 +7660,7 @@ Path '', line 1, position 1.");
         }
 #endif
 
-#if !(DNXCORE50)
+#if !(DNXCORE50 || UNITY_LTS)
         [Test]
         public void MetroBlogPost()
         {
@@ -7812,10 +7825,10 @@ Path '', line 1, position 1.");
 
             Assert.IsNotNull(o);
             Assert.AreEqual(4, errors.Count);
-            Assert.IsTrue(errors[0].StartsWith("Required property 'NonAttributeProperty' not found in JSON. Path ''"));
-            Assert.IsTrue(errors[1].StartsWith("Required property 'UnsetProperty' not found in JSON. Path ''"));
-            Assert.IsTrue(errors[2].StartsWith("Required property 'AllowNullProperty' not found in JSON. Path ''"));
-            Assert.IsTrue(errors[3].StartsWith("Required property 'AlwaysProperty' not found in JSON. Path ''"));
+            StringAssert.StartsWith("Required property 'NonAttributeProperty' not found in JSON. Path ''", errors[0]);
+            StringAssert.StartsWith("Required property 'UnsetProperty' not found in JSON. Path ''", errors[1]);
+            StringAssert.StartsWith("Required property 'AllowNullProperty' not found in JSON. Path ''", errors[2]);
+            StringAssert.StartsWith("Required property 'AlwaysProperty' not found in JSON. Path ''", errors[3]);
         }
 
         [Test]
@@ -7837,9 +7850,9 @@ Path '', line 1, position 1.");
 
             Assert.IsNotNull(o);
             Assert.AreEqual(3, errors.Count);
-            Assert.IsTrue(errors[0].StartsWith("Required property 'NonAttributeProperty' expects a value but got null. Path ''"));
-            Assert.IsTrue(errors[1].StartsWith("Required property 'UnsetProperty' expects a value but got null. Path ''"));
-            Assert.IsTrue(errors[2].StartsWith("Required property 'AlwaysProperty' expects a value but got null. Path ''"));
+            StringAssert.StartsWith("Required property 'NonAttributeProperty' expects a value but got null. Path ''", errors[0]);
+            StringAssert.StartsWith("Required property 'UnsetProperty' expects a value but got null. Path ''", errors[1]);
+            StringAssert.StartsWith("Required property 'AlwaysProperty' expects a value but got null. Path ''", errors[2]);
         }
 
         [Test]
@@ -9123,7 +9136,7 @@ This is just junk, though.";
 ]", json);
         }
 
-#if !(PORTABLE || PORTABLE40 || DNXCORE50)
+#if !(PORTABLE || PORTABLE40 || DNXCORE50 || UNITY_LTS)
         [Test]
         public void SerializeDictionaryWithStructKey()
         {
@@ -9977,7 +9990,10 @@ This is just junk, though.";
                         new AttachmentReadConverter(),
                         new EncodingReadConverter());
                 },
-                "Cannot populate list type System.Net.Mime.HeaderCollection. Path 'Headers', line 26, position 14.");
+                "Cannot populate list type System.Net.Mime.HeaderCollection. Path 'Headers', line 26, position 14.",
+                "Error setting value to 'ReplyTo' on 'System.Net.Mail.MailMessage'.", // mono
+                "Unable to find a constructor to use for type System.Net.Mail.MailMessage. A class should either have a default constructor, one constructor with arguments or a constructor marked with the JsonConstructor attribute. Path 'From', line 2, position 9." // il2cpp
+            );
         }
 
         public class MailAddressReadConverter : JsonConverter
