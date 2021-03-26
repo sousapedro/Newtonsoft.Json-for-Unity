@@ -510,7 +510,9 @@ namespace Newtonsoft.Json.Serialization
             if (extensionDataAttribute.WriteData)
             {
                 Type enumerableWrapper = typeof(EnumerableDictionaryWrapper<,>).MakeGenericType(keyType, valueType);
-                ConstructorInfo constructors = enumerableWrapper.GetConstructors().First();
+                ConstructorInfo constructors = enumerableWrapper.GetConstructors().FirstOrDefault()
+                    ?? throw new JsonException($"Missing constructor for enumerator type {enumerableWrapper.FullName}. Perhaps it got stripped?");
+
                 ObjectConstructor<object> createEnumerableWrapper = JsonTypeReflector.ReflectionDelegateFactory.CreateParameterizedConstructor(constructors);
 
                 ExtensionDataGetter extensionDataGetter = o =>
@@ -1351,7 +1353,7 @@ namespace Newtonsoft.Json.Serialization
             // warning - this method use to cause errors with Intellitrace. Retest in VS Ultimate after changes
             IValueProvider valueProvider;
 
-#if !(PORTABLE40 || PORTABLE || DOTNET)
+#if !(PORTABLE40 || PORTABLE || DOTNET || UNITY_LTS)
             if (DynamicCodeGeneration)
             {
                 valueProvider = new DynamicValueProvider(member);
@@ -1360,7 +1362,7 @@ namespace Newtonsoft.Json.Serialization
             {
                 valueProvider = new ReflectionValueProvider(member);
             }
-#elif !(PORTABLE40)
+#elif !(PORTABLE40 || UNITY_LTS)
             valueProvider = new ExpressionValueProvider(member);
 #else
             valueProvider = new ReflectionValueProvider(member);

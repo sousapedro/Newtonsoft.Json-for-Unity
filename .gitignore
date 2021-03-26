@@ -2,6 +2,7 @@
 [Oo]bj/
 [Ww]orking*/
 Build/Temp/
+Temp/
 Doc/doc.shfbproj_*
 TestResults/
 AppPackages/
@@ -18,3 +19,12 @@ _ReSharper.*
 *.nuget.targets
 *.orig
 .DS_Store
+
+# License files
+*.ulf
+*.ilf
+*.alf
+
+# NPM packages used in local dev environment
+node_modules/
+/package-lock.json

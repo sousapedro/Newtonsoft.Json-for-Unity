@@ -25,6 +25,11 @@
 
 #if !DNXCORE50
 
+#if UNITY_LTS
+extern alias SystemWebPolyfill;
+using HttpUtility = SystemWebPolyfill::System.Web.HttpUtility;
+#endif
+
 using System;
 using System.Collections.Generic;
 #if NET20

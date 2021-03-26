@@ -506,8 +506,8 @@ namespace Newtonsoft.Json.Tests.Serialization
             serializer.Deserialize(new JsonTextReader(new StringReader(json)), typeof(MyTypeWithRequiredMembers));
 
             Assert.AreEqual(2, errors.Count);
-            Assert.IsTrue(errors[0].StartsWith(" - Required1 - Required property 'Required1' not found in JSON. Path '', line 1, position 2."));
-            Assert.IsTrue(errors[1].StartsWith(" - Required2 - Required property 'Required2' not found in JSON. Path '', line 1, position 2."));
+            StringAssert.StartsWith(" - Required1 - Required property 'Required1' not found in JSON. Path '', line 1, position 2.", errors[0]);
+            StringAssert.StartsWith(" - Required2 - Required property 'Required2' not found in JSON. Path '', line 1, position 2.", errors[1]);
         }
 
         [Test]
@@ -741,7 +741,7 @@ namespace Newtonsoft.Json.Tests.Serialization
             Assert.AreEqual(@"Unexpected end when deserializing object. Path 'events2.code', line 1, position 49.", errors[1]);
         }
 
-#if !(NET35 || NET20 || PORTABLE40)
+#if !(NET35 || NET20 || PORTABLE40 || ENABLE_IL2CPP)
         [Test]
         public void ErrorHandlingEndOfContentDynamic()
         {
