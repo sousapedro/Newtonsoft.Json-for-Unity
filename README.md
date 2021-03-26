@@ -16,6 +16,10 @@ containing custom builds for regular standalone, but more importantly AOT
 targets such as all **IL2CPP builds (WebGL, iOS, Android, Windows, Mac OS X)**
 and portable .NET **(UWP, WP8)**.
 
+> **Note:** This branch is for backporting all Unity compatability changes to
+> Newtonsoft.Json v10.0.3. To see the source of the latest version, visit
+> the [master branch][json.net-4-unity].
+
 ## Features
 
 - *(🌟 new!)* [Newtonsoft.Json-for-Unity.Converters][json.net-4-unity.converters]
@@ -214,6 +218,7 @@ See full copyrights in [LICENSE.md][license.md] inside repository
 
 [issue-create]: https://github.com/jilleJr/Newtonsoft.Json-for-Unity/issues/new/choose
 [issue-list-unassigned]: https://github.com/jilleJr/Newtonsoft.Json-for-Unity/issues?q=is%3Aopen+is%3Aissue+no%3Aassignee
+[json.net-4-unity]: https://github.com/jilleJr/Newtonsoft.Json-for-Unity
 [json.net-4-unity.converters-compatability]: https://github.com/jilleJr/Newtonsoft.Json-for-Unity.Converters/blob/master/Doc/Compatability-table.md
 [json.net-4-unity.converters]: https://github.com/jilleJr/Newtonsoft.Json-for-Unity.Converters
 [license.md]: https://github.com/jilleJr/Newtonsoft.Json-for-Unity/blob/master/LICENSE.md
