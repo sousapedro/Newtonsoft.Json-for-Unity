@@ -26,7 +26,7 @@ Editor)
     framework="netstandard1.3"
     ;;
 Tests)
-    framework="net45"
+    framework="net46"
     ;;
 *)
     error "Invalid build name.
