@@ -47,7 +47,7 @@
     <PackageReference Include="System.Runtime.Serialization.Formatters" Version="4.3.0" />
     <PackageReference Include="System.Xml.XmlDocument" Version="4.3.0" />
   </ItemGroup>
-  <PropertyGroup Condition="'$(UnityBuild)'=='Tests' OR ('$(UnityBuild)'=='' AND '$(TargetFramework)'=='net45')">
+  <PropertyGroup Condition="'$(UnityBuild)'=='Tests' OR ('$(UnityBuild)'=='' AND '$(TargetFramework)'=='net46')">
     <!-- Only used in Unity Tests & Newtonsoft.Json.Tests -->
     <TargetFramework>net46</TargetFramework>
     <AssemblyTitle>Json.NET for Unity tests (NOT FOR PRODUCTION)</AssemblyTitle>

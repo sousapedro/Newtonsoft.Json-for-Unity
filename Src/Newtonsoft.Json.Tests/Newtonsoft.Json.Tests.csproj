@@ -63,7 +63,7 @@
   </ItemGroup>
   <PropertyGroup Condition="'$(TargetFramework)'=='net46' AND '$(UnityBuild)'!='Tests'">
     <AssemblyTitle>Json.NET Tests</AssemblyTitle>
-    <ReferringTargetFrameworkForProjectReferences>.NETFramework,Version=v4.5</ReferringTargetFrameworkForProjectReferences>
+    <ReferringTargetFrameworkForProjectReferences>.NETFramework,Version=v4.6</ReferringTargetFrameworkForProjectReferences>
     <DefineConstants>NET45;NET46;HAVE_BENCHMARKS;$(AdditionalConstants)</DefineConstants>
   </PropertyGroup>
   
@@ -87,7 +87,7 @@
   <PropertyGroup Condition="'$(TargetFramework)'=='net46' AND '$(UnityBuild)'=='Tests'">
     <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     <AssemblyTitle>Json.NET Tests in Unity</AssemblyTitle>
-    <ReferringTargetFrameworkForProjectReferences>.NETFramework,Version=v4.5</ReferringTargetFrameworkForProjectReferences>
+    <ReferringTargetFrameworkForProjectReferences>.NETFramework,Version=v4.6</ReferringTargetFrameworkForProjectReferences>
     <DefineConstants>UNITY_LTS;UNITY_5_3_OR_NEWER;NET40;NET45;NET46;$(AdditionalConstants)</DefineConstants>
   </PropertyGroup>
 </Project>
