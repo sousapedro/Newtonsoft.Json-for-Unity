@@ -7,6 +7,7 @@
 # 2018.3.11f1-android		: Android module
 # 2018.3.11f1-webgl			: WebGL module
 # 2018.3.11f1-facebook		: Facebook module
+# 2018.3.11f1-linux-il2cpp	: Linux with IL2CPP support for Editor
 ARG UNITY_VERSION=2019.2.11f1
 FROM gableroux/unity3d:${UNITY_VERSION}
 
