@@ -193,6 +193,44 @@ Common enough occurrence that we have a wiki page for just this.
 Read the [Working with branches, section "Merging changes from JamesNKs
 repo"][wiki-workingwithbranches#merging] wiki page.
 
+### Backporting changes
+
+Most changes to this repo can be applied to all the different versions. For
+example changes to the `link.xml` or bugfixes in the IL2CPP hotfixes should
+be applied to all the different versions, 10.0.3, 11.0.2, 12.0.3, etc.
+
+This repo has a `.backportrc.json` file that is used by the
+[sqren/backport](https://github.com/sqren/backport) CLI to make this easier. It
+is a tool that basically just does `git cherry-pick`, but with some other
+features such as automatically create branches and PRs.
+
+1. Install Node.js: <https://nodejs.org/en/download/>
+
+2. Install the `backport` CLI globally
+
+   ```sh
+   npm install -g backport
+   ```
+
+3. Configure the `backport` tool. It needs a GitHub access token and username
+   inside `~/.backport/config.json`.
+
+   More info here: <https://github.com/sqren/backport/blob/master/docs/configuration.md#global-config-backportconfigjson>
+
+4. After a PR merge, checkout `master` and pull the newly merged PR you want to
+   backport, then run the `backport` CLI. It's interactive, so just follow the
+   steps.
+
+   ```sh
+   git checkout master
+
+   git pull
+
+   # The tool is interactive. Choose the merge commit you want to backport
+   # and it takes care of the rest.
+   backport
+   ```
+
 ## Shameless plug
 
 This project, giving a stable Newtonsoft.Json experience to the Unity community,
