@@ -190,6 +190,36 @@ a section little further down below.
 This script will compile the project into the
 `Src/Newtonsoft.Json-for-Unity/Plugins` directory using Docker images.
 
+### Linting markdown
+
+All pull requests must comply with the remark styling rules found in the
+`.remarkrc` files within this repo. The `.md` files are linted automatically
+by Codacy, but to run them locally you must first install some prerequisites:
+
+1. Install NPM
+
+2. Install `remark-cli` and some styling packages
+
+   ```sh
+   # You may need to add "sudo"
+   npm install --global remark-cli
+
+   # Intentionally not globally
+   npm install remark-lint remark-preset-lint-markdown-style-guide remark-frontmatter
+   ```
+
+Then lint away! For example:
+
+```sh
+$ remark .github
+.github/ISSUE_TEMPLATE/bug_report.md: no issues found
+.github/ISSUE_TEMPLATE/feature_request.md: no issues found
+.github/ISSUE_TEMPLATE/not-working-as-expected.md: no issues found
+.github/ISSUE_TEMPLATE/question.md: no issues found
+.github/PULL_REQUEST_TEMPLATE/code-update.md: no issues found
+.github/PULL_REQUEST_TEMPLATE/docs-update.md: no issues found
+```
+
 ### Merging changes from JamesNK/Newtonsoft.Json
 
 Common enough occurrence that we have a wiki page for just this.
