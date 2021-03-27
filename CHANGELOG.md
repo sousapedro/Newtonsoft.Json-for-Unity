@@ -1,6 +1,14 @@
 # Newtonsoft.Json for Unity changelog
 
-## 12.0.302
+## 13.0.102 (2021-03-24)
+
+- ✨ New: Merged changes from
+  [JamesNK/Newtonsoft.Json version `13.0.1`][json.net-13.0.1]
+
+- 🗑 Deprecated: Removed the Portable build target. This package now only ships
+  with the AOT and Editor builds.
+
+## 12.0.302 (2021-02-19)
 
 - ✨ New: Properly embed the link.xml into the DLLs. ([#54][#54])
 
@@ -9,7 +17,7 @@
 
 - 🐛 Fix: Preserve all JSON converters. ([#8][#8], [#65][#65])
 
-## 12.0.301
+## 12.0.301 (2020-01-19)
 
 - ✨ New: Merged changes from
   [JamesNK/Newtonsoft.Json version `12.0.3`][json.net-12.0.3]
@@ -17,7 +25,7 @@
 - 🔄 Change: Testing libraries are precompiled to be able to use the nullable
   reference types, as Unity does not yet support them. ([#37][#37])
 
-## 12.0.201
+## 12.0.201 (2020-01-03)
 
 - ✨ New: Merged changes from
   [JamesNK/Newtonsoft.Json version `12.0.2`][json.net-12.0.2]
@@ -36,7 +44,7 @@
 - 🐛 Fix: AotHelper.EnsureDictionary was not generating constructor for
   `DefaultContractResolver.EnumerableDictionaryWrapper<TKey, TValue>`
 
-## 12.0.102
+## 12.0.102 (2019-12-30)
 
 - ✨ New: Moved some documentation to the new wiki. All markdown files in the
   repository has been tidied.
@@ -52,7 +60,7 @@
   The packaged DLL's are now signed with the public key of Newtonsoft.Json.
   ([#7][#7], [#10][#10])
 
-## 12.0.101
+## 12.0.101 (2019-11-26)
 
 - ✨ New: Setup CircleCI integration for build automation
   [![CircleCI badge][circleci-badge]][circleci-url]
@@ -66,11 +74,11 @@
 
 - 🔄 Change: Better versioning format. For more info see
   [the wiki page][wiki-versioning]. Changes are based of off `12.0.1`
-  version _(in previous format)._
+  version *(in previous format).*
 
 - 🐛 Fix: Building on standalone causes plugin collision ([#3][#3])
 
-## 12.0.1
+## 12.0.1 (2019-07-18)
 
 - ✨ New: Package published as an Unity Package Manager package on
   [npmjs.com][npmjs-url].
@@ -98,6 +106,7 @@
 [json.net-12.0.1]: https://github.com/JamesNK/Newtonsoft.Json/releases/12.0.1
 [json.net-12.0.2]: https://github.com/JamesNK/Newtonsoft.Json/releases/12.0.2
 [json.net-12.0.3]: https://github.com/JamesNK/Newtonsoft.Json/releases/12.0.3
+[json.net-13.0.1]: https://github.com/JamesNK/Newtonsoft.Json/releases/13.0.1
 [npmjs-badge]: https://img.shields.io/npm/v/jillejr.newtonsoft.json-for-unity?logo=npm&style=flat-square
 [npmjs-url]: https://www.npmjs.com/package/jillejr.newtonsoft.json-for-unity
 [portable-class-library]: https://docs.microsoft.com/en-us/dotnet/standard/net-standard#pcl-compatibility

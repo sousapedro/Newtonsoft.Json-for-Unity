@@ -3,7 +3,7 @@
 [CmdletBinding()]
 param (
     [string]
-    [ValidateSet('Standalone','AOT','Portable','Editor','Tests')]
+    [ValidateSet('Standalone','AOT','Editor','Tests')]
     $UnityBuild = 'Tests'
 )
 
