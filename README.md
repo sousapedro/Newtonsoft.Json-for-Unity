@@ -4,7 +4,7 @@
 [![Latest Version @ Cloudsmith](https://api-prd.cloudsmith.io/badges/version/jillejr/newtonsoft-json-for-unity/npm/jillejr.newtonsoft.json-for-unity/latest/x/?render=true&badge_token=gAAAAABeClWC7DvHIyN1IvhxcvGYUIO8CFfs-PsrT973U91i_wmUiuhrzsGZgXqecxQgrEMj4p_-UUUz7XaWjxH3NB8DfA2kkQ%3D%3D)](https://cloudsmith.io/~jillejr/repos/newtonsoft-json-for-unity/packages/detail/npm/jillejr.newtonsoft.json-for-unity/latest/)
 [![CircleCI](https://img.shields.io/circleci/build/gh/jilleJr/Newtonsoft.Json-for-Unity/master?logo=circleci&style=flat-square)](https://circleci.com/gh/jilleJr/Newtonsoft.Json-for-Unity)
 [![Codacy grade](https://img.shields.io/codacy/grade/f91156e7066c484588f4dba263c8cf45?logo=codacy&style=flat-square)](https://www.codacy.com/manual/jilleJr/Newtonsoft.Json-for-Unity?utm_source=github.com&utm_medium=referral&utm_content=jilleJr/Newtonsoft.Json-for-Unity&utm_campaign=Badge_Grade)
-[![Financial Contributors on Open Collective](https://opencollective.com/newtonsoftjson-for-unity/all/badge.svg?label=financial+contributors&style=flat-square)](https://opencollective.com/newtonsoftjson-for-unity) 
+[![Financial Contributors on Open Collective](https://opencollective.com/newtonsoftjson-for-unity/all/badge.svg?label=financial+contributors&style=flat-square)](https://opencollective.com/newtonsoftjson-for-unity)
 [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-v2.0%20adopted-ff69b4.svg?style=flat-square)](/CODE_OF_CONDUCT.md)
 
 <abbr title="The names 'Json.NET' and 'Newtonsoft.Json' are interchangeable. They both refer to James Newton-King's JSON library.">
@@ -16,10 +16,20 @@ containing custom builds for regular standalone, but more importantly AOT
 targets such as all **IL2CPP builds (WebGL, iOS, Android, Windows, Mac OS X)**
 and portable .NET **(UWP, WP8)**.
 
+## ⚠ Notice
+
+### Incompatible with `com.unity.nuget.newtonsoft-json`
+
+Sorry to say that this package is completely incompatible with any other
+Newtonsoft.Json solutions for Unity, including (perhaps especially) Unity's own
+fork of this repo ([`com.unity.nuget.newtonsoft-json`](https://docs.unity3d.com/Packages/com.unity.nuget.newtonsoft-json@2.0/manual/index.html)).
+
+My recommendation is that if your project depends (directly or indirectly) on
+their package, then remove my package as you will not get them to coexist.
+
 ## Features
 
-- *(🌟 new!)* Backported! Provides Newtonsoft.Json v10.0.3, v11.0.2, v12.0.3,
-  and v13.0.1 alternatives.
+- Provides Newtonsoft.Json v10.0.3, v11.0.2, v12.0.3, and v13.0.1 alternatives.
 
 - [Newtonsoft.Json-for-Unity.Converters][json.net-4-unity.converters]
   package for converting Unity types, such as the Vector3, Quaternion, Color,
@@ -34,21 +44,69 @@ and portable .NET **(UWP, WP8)**.
 
 - Precompiled as DLLs for faster builds
 
-- [*Newtonsoft.Json.Utility*.**AotHelper**][wiki-fix-aot-using-aothelper]
+- [_Newtonsoft.Json.Utility_.**AotHelper**][wiki-fix-aot-using-aothelper]
   utility class for resolving common Ahead-Of-Time issues.
   [(Read more about AOT)][wiki-what-even-is-aot]
 
 - Extensive [documentation of solving AOT issues with `link.xml`][wiki-fix-aot-using-link.xml]
 
+## Frequently asked questions (FAQ)
+
+### Is this project dead? I see no activity in a long time
+
+Development is haulted, but that doesn't mean it's unusable. The project is stable and doesn't need any additional changes.
+
+My main goal is to provide an up-to-date fork of Newtonsoft.Json, and as the upstream <https://github.com/JamesNK/Newtonsoft.Json> repo hasen't had much activity, so goes for this repo.
+
+I will continue to provide as much support as I can bare in my free time in the
+[issues](https://github.com/jilleJr/Newtonsoft.Json-for-Unity/issues) and
+[discussions](https://github.com/jilleJr/Newtonsoft.Json-for-Unity/discussions).
+
+### Help! I get `GUID [...] for assets '...' conflicts with: '...'`
+
+```
+GUID [6c694cfdc33ae264fb33e0cd1c7e25cf] for asset 'Packages/jillejr.newtonsoft.json-for-unity/Plugins/Newtonsoft.Json AOT/Newtonsoft.Json.dll' conflicts with:
+  'Packages/com.unity.nuget.newtonsoft-json/Runtime/AOT/Newtonsoft.Json.dll' (current owner)
+We can't assign a new GUID because the asset is in an immutable folder. The asset will be ignored.
+```
+
+This is because Unity's package, `com.unity.nuget.newtonsoft-json`, and this
+package exists in the project at the same time. This is not supported, and
+there's no direct plans on making this work.
+
+You have to sadly uninstall this package, `jillejr.newtonsoft.json-for-unity`,
+and rely completely on their package instead.
+
+```diff
+diff --git a/Packages/manifest.json b/Packages/manifest.json
+index 49a3afa..f0edd27 100644
+--- a/Packages/manifest.json
++++ b/Packages/manifest.json
+@@ -18,7 +18,7 @@
+     "com.unity.collab-proxy": "1.2.16",
+     "com.unity.test-framework": "1.1.22",
+     "com.unity.ugui": "1.0.0",
+-    "jillejr.newtonsoft.json-for-unity": "13.0.102",
++    "com.unity.nuget.newtonsoft-json": "2.0.0",
+     "jillejr.newtonsoft.json-for-unity.converters": "1.0.0",
+     "com.unity.modules.ai": "1.0.0",
+     "com.unity.modules.androidjni": "1.0.0",
+```
+
+Read more: <https://github.com/jilleJr/Newtonsoft.Json-for-Unity/issues/111#issuecomment-813319182>
+
+### What's the status of this repo vs `com.unity.nuget.newtonsoft-json`?
+
+I've tried so summarize it as best I can over at <https://github.com/jilleJr/Newtonsoft.Json-for-Unity/issues/145>
+
 ## Installation
 
-### Installation via [Package Installer][package-installer] *(experimental)*
+### Installation via [Package Installer][package-installer] _(experimental)_
 
 1. [Click here to download `Install-jillejr.newtonsoft.json-for-unity-13.0.102.unitypackage`](https://package-installer.glitch.me/v1/installer/jilleJr/jillejr.newtonsoft.json-for-unity?registry=https%3A%2F%2Fnpm.cloudsmith.io%2Fjillejr%2Fnewtonsoft-json-for-unity)
 
 2. Open the downloaded `.unitypackage` file in Unity. Easiestly done by
    drag'n'dropping the file into the Unity window.
-   
 3. Click "Import" to import it all.
 
 4. Once the installer has successfully compiled, it will add the correct UPM
