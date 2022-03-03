@@ -22,7 +22,20 @@ Since late February 2022, **Unity has now published an updated version of their
 package**: [`com.unity.nuget.newtonsoft-json@3.0`](https://docs.unity3d.com/Packages/com.unity.nuget.newtonsoft-json@3.0/manual/index.html)
 
 Their package, since v2.0.0-preview.1, is a fork of this fork of
-Newtonsoft.Json. This is still true for their latest release of v3.0.1.
+Newtonsoft.Json. This is still true for their latest release of v3.0.1. This
+means that by switching over to their official package you will get:
+
+- The `Newtonsoft.Json.Utilities.AotHelper` type I forked from SaladLab that has
+  been a core part of this fork since the get-go.
+
+- All my IL2CPP and managed code stripping specific bugfixes.
+
+- Continue to use an up-to-date fork of Newtonsoft.Json, but now kept up-to-date
+  by Unity employees instead of me.
+
+- Also, it's practically always included in newer versions of Unity as many of
+  Unity's internal packages depend on it, so you probably don't even have to
+  install it any more!
 
 I will continue to provide as much support as I can bare in my free time in the
 [issues](https://github.com/jilleJr/Newtonsoft.Json-for-Unity/issues) and
@@ -72,6 +85,10 @@ ecosystem. ♥
 
 My goal was before to be the most up-to-date fork of Newtonsoft.Json for Unity.
 Unity Technologies has now taken on this role.
+
+This repository has completed its task: to provide Newtonsoft.Json. And is now
+that it's fully endorced by Unity themselves, I can happily deprecate this
+project like no other.
 
 ### Help! I get `GUID [...] for assets '...' conflicts with: '...'`
 
