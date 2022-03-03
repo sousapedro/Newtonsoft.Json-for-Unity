@@ -16,16 +16,28 @@ containing custom builds for regular standalone, but more importantly AOT
 targets such as all **IL2CPP builds (WebGL, iOS, Android, Windows, Mac OS X)**
 and portable .NET **(UWP, WP8)**.
 
-## ⚠ Notice
+## ⚠ Deprecation warning
 
-### Incompatible with `com.unity.nuget.newtonsoft-json`
+Since late February 2022, **Unity has now published an updated version of their
+package**: [`com.unity.nuget.newtonsoft-json@3.0`](https://docs.unity3d.com/Packages/com.unity.nuget.newtonsoft-json@3.0/manual/index.html)
 
-Sorry to say that this package is completely incompatible with any other
-Newtonsoft.Json solutions for Unity, including (perhaps especially) Unity's own
-fork of this repo ([`com.unity.nuget.newtonsoft-json`](https://docs.unity3d.com/Packages/com.unity.nuget.newtonsoft-json@2.0/manual/index.html)).
+Their package, since v2.0.0-preview.1, is a fork of this fork of
+Newtonsoft.Json. This is still true for their latest release of v3.0.1.
 
-My recommendation is that if your project depends (directly or indirectly) on
-their package, then remove my package as you will not get them to coexist.
+I will continue to provide as much support as I can bare in my free time in the
+[issues](https://github.com/jilleJr/Newtonsoft.Json-for-Unity/issues) and
+[discussions](https://github.com/jilleJr/Newtonsoft.Json-for-Unity/discussions),
+however, **please focus your support tickets towards <https://forum.unity.com/>,
+<https://answers.unity.com/>, and <https://issuetracker.unity3d.com/>.**
+
+To get started with their official package, you can follow my installation guide
+here:
+
+### [Installing the official UPM package](https://github.com/jilleJr/Newtonsoft.Json-for-Unity/wiki/Install-official-via-UPM)
+
+---
+---
+---
 
 ## Features
 
@@ -54,13 +66,12 @@ their package, then remove my package as you will not get them to coexist.
 
 ### Is this project dead? I see no activity in a long time
 
-Development is haulted, but that doesn't mean it's unusable. The project is stable and doesn't need any additional changes.
+Yes. Now it is. Ever since Unity adopted this package since late February 2022
+to provide an officially maintained Newtonsoft.Json package to the Unity
+ecosystem. ♥
 
-My main goal is to provide an up-to-date fork of Newtonsoft.Json, and as the upstream <https://github.com/JamesNK/Newtonsoft.Json> repo hasen't had much activity, so goes for this repo.
-
-I will continue to provide as much support as I can bare in my free time in the
-[issues](https://github.com/jilleJr/Newtonsoft.Json-for-Unity/issues) and
-[discussions](https://github.com/jilleJr/Newtonsoft.Json-for-Unity/discussions).
+My goal was before to be the most up-to-date fork of Newtonsoft.Json for Unity.
+Unity Technologies has now taken on this role.
 
 ### Help! I get `GUID [...] for assets '...' conflicts with: '...'`
 
@@ -87,7 +98,7 @@ index 49a3afa..f0edd27 100644
      "com.unity.test-framework": "1.1.22",
      "com.unity.ugui": "1.0.0",
 -    "jillejr.newtonsoft.json-for-unity": "13.0.102",
-+    "com.unity.nuget.newtonsoft-json": "2.0.0",
++    "com.unity.nuget.newtonsoft-json": "3.0.1",
      "jillejr.newtonsoft.json-for-unity.converters": "1.0.0",
      "com.unity.modules.ai": "1.0.0",
      "com.unity.modules.androidjni": "1.0.0",
@@ -101,68 +112,75 @@ I've tried so summarize it as best I can over at <https://github.com/jilleJr/New
 
 ## Installation
 
-### Installation via [Package Installer][package-installer] _(experimental)_
+### Installation of the official UPM package
 
-1. [Click here to download `Install-jillejr.newtonsoft.json-for-unity-13.0.102.unitypackage`](https://package-installer.glitch.me/v1/installer/jilleJr/jillejr.newtonsoft.json-for-unity?registry=https%3A%2F%2Fnpm.cloudsmith.io%2Fjillejr%2Fnewtonsoft-json-for-unity)
+I've written documentation on installing the new officially adopted fork (of my
+fork) of Newtonsoft.Json, which can be found here: <https://github.com/jilleJr/Newtonsoft.Json-for-Unity/wiki/Install-official-via-UPM>
 
-2. Open the downloaded `.unitypackage` file in Unity. Easiestly done by
-   drag'n'dropping the file into the Unity window.
-3. Click "Import" to import it all.
+### Deprecated installations
 
-4. Once the installer has successfully compiled, it will add the correct UPM
-   registry and package to your project, followed by removing itself.
-
-> The installer does not run until your project can successfully compile.
-> Make sure to resolve all syntax- and other compiling errors, even just
-> temporarily, so that the installer may execute.
-
-Much love :heart: to [@needle-tools](https://github.com/needle-tools) for
-making such a great tool!
-
-### Installation via [OpenUPM][openupm] ![OpenUPM icon][openupm-icon.png]
-
-```sh
-openupm add jillejr.newtonsoft.json-for-unity
-```
-
-Full installation guide over at the wiki:
-[Installation via OpenUPM
-![OpenUPM icon][openupm-icon.png]][wiki-installation-via-openupm]
-
-Much love :heart: to [@favoyang](https://github.com/favoyang) for making such a
-great tool!
-
-### Installation via pure UPM
-
-Full installation guide over at the wiki:
-[Installation via pure UPM][wiki-installation-via-upm]
-
-### Installation via Git in UPM
-
-You can also install via Git. This assumes you have Git installed on your
-computer.
-
-> This is the least recommended version (but works as a fallback) because:
+> #### Installation via [Package Installer][package-installer] _(experimental)_
 >
-> - You will not be able to update the package via the Package Manager
->   interface if you install via Git.
->
-> - This requires you, your coworkers, and your CI/CD pipelines to have
->   Git installed for the project to build.
->
-> - It takes a lot longer to install as UPM will in most version clone the
->   entire history of the project.
-
-In later versions of Unity, you can import directly via the Package Manager
-interface.
-
-![UPM, add from Git URL dropdown](Doc/upm-via-git.png)
-
-Supply the following URL:
-
-```none
-https://github.com/jilleJr/Newtonsoft.Json-for-Unity.git#upm
-```
+> 1. [Click here to download `Install-jillejr.newtonsoft.json-for-unity-13.0.102.unitypackage`](https://package-installer.glitch.me/v1/installer/jilleJr/jillejr.newtonsoft.json-for-unity?registry=https%3A%2F%2Fnpm.cloudsmith.io%2Fjillejr%2Fnewtonsoft-json-for-unity)
+> 
+> 2. Open the downloaded `.unitypackage` file in Unity. Easiestly done by
+>    drag'n'dropping the file into the Unity window.
+> 3. Click "Import" to import it all.
+> 
+> 4. Once the installer has successfully compiled, it will add the correct UPM
+>    registry and package to your project, followed by removing itself.
+> 
+> > The installer does not run until your project can successfully compile.
+> > Make sure to resolve all syntax- and other compiling errors, even just
+> > temporarily, so that the installer may execute.
+> 
+> Much love :heart: to [@needle-tools](https://github.com/needle-tools) for
+> making such a great tool!
+> 
+> #### Installation via [OpenUPM][openupm] ![OpenUPM icon][openupm-icon.png]
+> 
+> ```sh
+> openupm add jillejr.newtonsoft.json-for-unity
+> ```
+> 
+> Full installation guide over at the wiki:
+> [Installation via OpenUPM
+> ![OpenUPM icon][openupm-icon.png]][wiki-installation-via-openupm]
+> 
+> Much love :heart: to [@favoyang](https://github.com/favoyang) for making such a
+> great tool!
+> 
+> #### Installation via pure UPM
+> 
+> Full installation guide over at the wiki:
+> [Installation via pure UPM][wiki-installation-via-upm]
+> 
+> #### Installation via Git in UPM
+> 
+> You can also install via Git. This assumes you have Git installed on your
+> computer.
+> 
+> > This is the least recommended version (but works as a fallback) because:
+> >
+> > - You will not be able to update the package via the Package Manager
+> >   interface if you install via Git.
+> >
+> > - This requires you, your coworkers, and your CI/CD pipelines to have
+> >   Git installed for the project to build.
+> >
+> > - It takes a lot longer to install as UPM will in most version clone the
+> >   entire history of the project.
+> 
+> In later versions of Unity, you can import directly via the Package Manager
+> interface.
+> 
+> ![UPM, add from Git URL dropdown](Doc/upm-via-git.png)
+> 
+> Supply the following URL:
+> 
+> ```none
+> https://github.com/jilleJr/Newtonsoft.Json-for-Unity.git#upm
+> ```
 
 Full installation guide over at the wiki:
 [Installation via Git in UPM][wiki-installation-via-git-in-upm]
