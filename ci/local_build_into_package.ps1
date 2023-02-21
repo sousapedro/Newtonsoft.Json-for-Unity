@@ -17,7 +17,7 @@ param (
 
     [string] $VolumeSource = ([Path]::GetFullPath("$PSScriptRoot/..")),
 
-    [string] $DockerImage = "applejag/newtonsoft.json-for-unity.package-builder:v3",
+    [string] $DockerImage = "applejag/newtonsoft.json-for-unity.package-builder.dotnet6",
 
     [string] $WorkingDirectory = "/root/repo",
 
