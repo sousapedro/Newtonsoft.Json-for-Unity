@@ -97,9 +97,6 @@
     <AssemblyTitle>Json.NET Tests in Unity</AssemblyTitle>
     <ReferringTargetFrameworkForProjectReferences>.NETFramework,Version=v4.6</ReferringTargetFrameworkForProjectReferences>
     <DefineConstants>UNITY_LTS;UNITY_5_3_OR_NEWER;NET40;NET46;$(AdditionalConstants)</DefineConstants>
-  <PropertyGroup Condition="'$(TargetFramework)'=='net40'">
-    <AssemblyTitle>Json.NET Tests .NET 4.0</AssemblyTitle>
-    <DefineConstants>NET40;$(AdditionalConstants)</DefineConstants>
   </PropertyGroup>
   
   <ItemGroup Condition="'$(TargetFramework)'=='net35'">
