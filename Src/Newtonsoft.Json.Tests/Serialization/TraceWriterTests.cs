@@ -867,7 +867,7 @@ Newtonsoft.Json Error: 0 : Error!
             Assert.IsTrue(traceWriter.TraceRecords[9].Message.StartsWith("Finished deserializing System.Collections.Generic.List`1[System.Object]. Path '$values'"));
         }
 
-#if !(PORTABLE || DNXCORE50 || PORTABLE40) || NETSTANDARD2_0 || NET6_0_OR_GREATER
+#if !(PORTABLE || DNXCORE50 || PORTABLE40 || UNITY_LTS) || NETSTANDARD2_0 || NET6_0_OR_GREATER
         [Test]
         public void DeserializeISerializable()
         {
