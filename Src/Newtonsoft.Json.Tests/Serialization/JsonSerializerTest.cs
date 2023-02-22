@@ -1545,7 +1545,7 @@ namespace Newtonsoft.Json.Tests.Serialization
             stopWatch.Stop();
         }
 
-#if !(NET20 || NET35)
+#if !(NET20 || NET35 || ENABLE_IL2CPP)
         [Test]
         public void ChildDataContractTestWithHidden()
         {
@@ -1784,7 +1784,7 @@ namespace Newtonsoft.Json.Tests.Serialization
 
             string jsonText = JsonConvert.SerializeObject(testDictionary);
 
-#if !(NET20 || NET35)
+#if !(NET20 || NET35 || ENABLE_IL2CPP)
             MemoryStream ms = new MemoryStream();
             DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(Dictionary<string, object>));
             serializer.WriteObject(ms, testDictionary);
@@ -2053,6 +2053,8 @@ keyword such as type of business.""
 #endif
         }
 
+        // Requires JIT
+#if !ENABLE_IL2CPP
         [Test]
         public void DateTimeTest()
         {
@@ -2077,7 +2079,8 @@ keyword such as type of business.""
             string result = JsonConvert.SerializeObject(testDates, new JsonSerializerSettings { DateFormatHandling = DateFormatHandling.MicrosoftDateFormat });
             Assert.AreEqual(expected, result);
         }
-
+#endif
+        
         [Test]
         public void DateTimeOffsetIso()
         {
@@ -3497,7 +3500,7 @@ Path '', line 1, position 1.");
                 @"Unexpected character encountered while parsing value: [. Path '', line 1, position 1.");
         }
 
-#if !(NET35 || NET20 || PORTABLE40)
+#if !(NET35 || NET20 || PORTABLE40 || ENABLE_IL2CPP)
         [Test]
         public void CannotDeserializeArrayIntoDynamic()
         {
@@ -3589,7 +3592,7 @@ Path '', line 1, position 1.");
                 {
                     ContractResolver = new DefaultContractResolver
                     {
-#if !(PORTABLE || DNXCORE50 || PORTABLE40) || NETSTANDARD1_3 || NETSTANDARD2_0 || NET6_0_OR_GREATER
+#if !(PORTABLE || DNXCORE50 || PORTABLE40 || ENABLE_IL2CPP) || NETSTANDARD1_3 || NETSTANDARD2_0 || NET6_0_OR_GREATER
                         IgnoreSerializableAttribute = true
 #endif
                     }
@@ -3606,7 +3609,7 @@ Path '', line 1, position 1.");
                 {
                     ContractResolver = new DefaultContractResolver
                     {
-#if !(PORTABLE || DNXCORE50 || PORTABLE40) || NETSTANDARD1_3 || NETSTANDARD2_0 || NET6_0_OR_GREATER
+#if !(PORTABLE || DNXCORE50 || PORTABLE40 || ENABLE_IL2CPP) || NETSTANDARD1_3 || NETSTANDARD2_0 || NET6_0_OR_GREATER
                         IgnoreSerializableAttribute = true
 #endif
                     }
@@ -3623,7 +3626,7 @@ Path '', line 1, position 1.");
                 {
                     ContractResolver = new DefaultContractResolver
                     {
-#if !(PORTABLE || DNXCORE50 || PORTABLE40) || NETSTANDARD1_3 || NETSTANDARD2_0 || NET6_0_OR_GREATER
+#if !(PORTABLE || DNXCORE50 || PORTABLE40 || ENABLE_IL2CPP) || NETSTANDARD1_3 || NETSTANDARD2_0 || NET6_0_OR_GREATER
                         IgnoreSerializableAttribute = true
 #endif
                     }
@@ -3640,7 +3643,7 @@ Path '', line 1, position 1.");
                 {
                     ContractResolver = new DefaultContractResolver
                     {
-#if !(PORTABLE || DNXCORE50 || PORTABLE40) || NETSTANDARD1_3 || NETSTANDARD2_0 || NET6_0_OR_GREATER
+#if !(PORTABLE || DNXCORE50 || PORTABLE40 || ENABLE_IL2CPP) || NETSTANDARD1_3 || NETSTANDARD2_0 || NET6_0_OR_GREATER
                         IgnoreSerializableAttribute = true
 #endif
                     }
@@ -4058,7 +4061,7 @@ Path '', line 1, position 1.");
             Assert.AreEqual(123L, item.Value);
         }
 
-#if !(NET20 || NET35)
+#if !(NET20 || NET35 || ENABLE_IL2CPP)
         [Test]
         public void DataContractJsonSerializerTest()
         {
@@ -4793,7 +4796,7 @@ Path '', line 1, position 1.");
 }", json);
         }
 
-#if !(NET35 || NET20 || PORTABLE40)
+#if !(NET35 || NET20 || PORTABLE40 || ENABLE_IL2CPP)
         [Test]
         public void SerializeExpandoObject()
         {
@@ -5121,7 +5124,7 @@ Path '', line 1, position 1.");
             JsonConvert.DeserializeObject<EnumerableArrayPropertyClass>(json);
         }
 
-#if !(NET20)
+#if !(NET20 || ENABLE_IL2CPP)
         [Test]
         public void ChildDataContractTest()
         {

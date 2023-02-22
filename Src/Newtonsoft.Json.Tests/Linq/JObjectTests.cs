@@ -58,7 +58,7 @@ namespace Newtonsoft.Json.Tests.Linq
     [TestFixture]
     public class JObjectTests : TestFixtureBase
     {
-#if !(NET35 || NET20 || PORTABLE40) || NETSTANDARD2_0 || NET6_0_OR_GREATER
+#if !(NET35 || NET20 || PORTABLE40 || ENABLE_IL2CPP) || NETSTANDARD2_0 || NET6_0_OR_GREATER
         [Test]
         public void EmbedJValueStringInNewJObject()
         {
