@@ -43,7 +43,7 @@ using Newtonsoft.Json.Serialization;
 
 namespace Newtonsoft.Json.Utilities
 {
-#if (DOTNET || PORTABLE || PORTABLE40) && !NETSTANDARD2_0
+#if PORTABLE && !NETSTANDARD2_0 && !NET6_0_OR_GREATER
     [Flags]
     internal enum MemberTypes
     {
@@ -52,9 +52,7 @@ namespace Newtonsoft.Json.Utilities
         Method = 8,
         Property = 16
     }
-#endif
 
-#if PORTABLE && !NETSTANDARD2_0
     [Flags]
     internal enum BindingFlags
     {
