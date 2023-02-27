@@ -398,8 +398,8 @@ namespace Newtonsoft.Json.Tests
             if (expectedStart == null || (expectedStart == null && actual == null)) {
                 return;
             }
-            Assert.IsNotNull(actual, "Expected string to start with '{0}', but was null.", expectedStart);
-            Assert.AreEqual(expectedStart, actual.Substring(0, expectedStart.Length), "Expected string to start with '{0}', but did not.", expectedStart);
+            Assert.IsNotNull(actual);
+            Assert.AreEqual(expectedStart, actual.Substring(0, expectedStart.Length), string.Format("Expected string to start with '{0}', but did not.", expectedStart));
         }
     }
 
