@@ -13,6 +13,7 @@ BenchmarkDotNet.Artifacts/
 _ReSharper.*
 *.ReSharper.user
 *.resharper.user
+.idea/
 .vs/
 .vscode/
 *.lock.json
