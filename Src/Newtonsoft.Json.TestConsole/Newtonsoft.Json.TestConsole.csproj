@@ -8,11 +8,18 @@
     <IsPackable>false</IsPackable>
     <!-- Disabled because SourceLink isn't referenced to calculate paths -->
     <DeterministicSourcePaths>false</DeterministicSourcePaths>
+    <Configurations>Debug;Release</Configurations>
+    <Platforms>AnyCPU</Platforms>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="BenchmarkDotNet" Version="$(BenchmarkDotNetPackageVersion)" />
     <None Remove="BenchmarkDotNet.Artifacts\**" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Newtonsoft.Json.Tests\Newtonsoft.Json.Tests.csproj" />
   </ItemGroup>
+<!--  TODO: Determine how to know if Newtonsoft tests' benchmark are available. -->
+<!--  <PropertyGroup Condition="??">-->
+<!--    <DefineConstants>HAVE_BENCHMARKS;$(DefineConstants)</DefineConstants>-->
+<!--  </PropertyGroup>-->
 </Project>

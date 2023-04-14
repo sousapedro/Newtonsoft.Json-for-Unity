@@ -24,22 +24,29 @@
 #endregion
 
 using System;
-using System.Diagnostics;
+#if HAVE_BENCHMARKS
 using BenchmarkDotNet.Running;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Tests.Benchmarks;
+#endif
 using System.Reflection;
 
-namespace Newtonsoft.Json.TestConsole
-{
-    public class Program
-    {
-        public static void Main(string[] args)
-        {
-            var attribute = (AssemblyFileVersionAttribute)typeof(JsonConvert).GetTypeInfo().Assembly.GetCustomAttribute(typeof(AssemblyFileVersionAttribute));
-            Console.WriteLine("Json.NET Version: " + attribute.Version);
+namespace Newtonsoft.Json.TestConsole;
 
-            new BenchmarkSwitcher(new [] { typeof(LowLevelBenchmarks) }).Run(new[] { "*" });
-        }
+public static class Program
+{
+    public static void Main()
+    {
+        var attribute = (AssemblyFileVersionAttribute)typeof(JsonConvert)
+            .GetTypeInfo()
+            .Assembly
+            .GetCustomAttribute(typeof(AssemblyFileVersionAttribute));
+        Console.WriteLine("Json.NET Version: " + attribute.Version);
+
+#if HAVE_BENCHMARKS
+        new BenchmarkSwitcher(new[] { typeof(LowLevelBenchmarks) })
+            .Run(new[] { "*" });
+#else
+        Console.WriteLine("No benchmark is available in this configuration.");
+#endif
     }
 }
