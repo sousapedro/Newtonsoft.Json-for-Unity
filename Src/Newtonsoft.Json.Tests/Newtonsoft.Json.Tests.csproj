@@ -182,11 +182,13 @@
           and fail to retrieve DefineConstants specific to a given target framework.
           Append a ';' to avoid the warning "Only one target framework moniker specified" -->
         <TargetFrameworks>netcoreapp3.1;</TargetFrameworks>
+        <Optimize>true</Optimize>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Configuration)'=='UnityAOT'">
         <!-- Unity AOT (IL2CPP) build -->
         <TargetFrameworks>netcoreapp3.1;</TargetFrameworks>
         <UnityConstants>UNITY_LTS</UnityConstants>
+        <Optimize>true</Optimize>
     </PropertyGroup>
 
     <PropertyGroup Condition="'$(Configuration)'!='UnityAOT' AND '$(Configuration)'!='UnityEditor'">
