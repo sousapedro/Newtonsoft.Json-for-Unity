@@ -1,7 +1,5 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
-        <TargetFrameworks Condition="'$(TestFrameworks)'==''">net46;netcoreapp2.1</TargetFrameworks>
-        <TargetFrameworks Condition="'$(TestFrameworks)'!=''">$(TestFrameworks)</TargetFrameworks>
         <LangVersion>9.0</LangVersion>
         <VersionPrefix>1.0</VersionPrefix>
         <Authors>James Newton-King</Authors>
@@ -20,6 +18,8 @@
         <DeterministicSourcePaths>false</DeterministicSourcePaths>
         <!-- It's ok if a test target has exited support. Disable NETSSDK1138 warning -->
         <CheckEolTargetFramework>false</CheckEolTargetFramework>
+        <Configurations>Debug;Release;UnityAOT;UnityEditor</Configurations>
+        <Platforms>AnyCPU</Platforms>
     </PropertyGroup>
     <ItemGroup>
         <Service Include="{82a7f48d-3b50-4b1e-b82e-3ada8210c358}"/>
@@ -70,6 +70,7 @@
         <PackageReference Include="NUnit" Version="$(NunitPackageVersion)"/>
         <PackageReference Include="NUnit3TestAdapter" Version="$(Nunit3TestAdapterPackageVersion)"/>
         <PackageReference Include="Autofac" Version="$(AutofacPackageVersion)"/>
+        <PackageReference Include="BenchmarkDotNet" Version="$(BenchmarkDotNetPackageVersion)"/>
         <PackageReference Include="FSharp.Core" Version="$(FSharpCorePackageVersion)"/>
         <PackageReference Include="System.Buffers" Version="$(SystemBuffersPackageVersion)"/>
         <PackageReference Include="System.Collections.Immutable" Version="$(SystemCollectionsImmutablePackageVersion)"/>
@@ -83,25 +84,10 @@
         <Reference Include="System.Web.Extensions"/>
         <Reference Include="System.Data.DataSetExtensions"/>
     </ItemGroup>
-    <ItemGroup Condition="'$(TargetFramework)'=='net46' AND '$(UnityBuild)'!='Tests'">
-        <PackageReference Include="BenchmarkDotNet" Version="$(BenchmarkDotNetPackageVersion)"/>
-    </ItemGroup>
-    <PropertyGroup Condition="'$(TargetFramework)'=='net46' AND '$(UnityBuild)'!='Tests'">
+    <PropertyGroup Condition="'$(TargetFramework)'=='net46'">
         <AssemblyTitle>Json.NET Tests</AssemblyTitle>
         <ReferringTargetFrameworkForProjectReferences>.NETFramework,Version=v4.6</ReferringTargetFrameworkForProjectReferences>
-        <DefineConstants>NET46;HAVE_BENCHMARKS;$(AdditionalConstants)</DefineConstants>
-    </PropertyGroup>
-    <ItemGroup Condition="'$(TargetFramework)'=='net46' AND '$(UnityBuild)'=='Tests'">
-        <PackageReference Include="Unity3D.UnityEngine" Version="2018.3.5.1"/>
-        <ProjectReference Include="..\System.Web.Polyfill\System.Web.Polyfill.csproj">
-            <Aliases>SystemWebPolyfill</Aliases>
-        </ProjectReference>
-    </ItemGroup>
-    <PropertyGroup Condition="'$(TargetFramework)'=='net46' AND '$(UnityBuild)'=='Tests'">
-        <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
-        <AssemblyTitle>Json.NET Tests in Unity</AssemblyTitle>
-        <ReferringTargetFrameworkForProjectReferences>.NETFramework,Version=v4.6</ReferringTargetFrameworkForProjectReferences>
-        <DefineConstants>UNITY_LTS;UNITY_5_3_OR_NEWER;NET40;NET46;$(AdditionalConstants)</DefineConstants>
+        <DefineConstants>NET46;HAVE_BENCHMARKS;$(DefineConstants);$(AdditionalConstants)</DefineConstants>
     </PropertyGroup>
 
     <ItemGroup Condition="'$(TargetFramework)'=='net40'">
@@ -118,7 +104,7 @@
     </ItemGroup>
     <PropertyGroup Condition="'$(TargetFramework)'=='net40'">
         <AssemblyTitle>Json.NET Tests .NET 4.0</AssemblyTitle>
-        <DefineConstants>NET40;$(AdditionalConstants)</DefineConstants>
+        <DefineConstants>NET40;$(DefineConstants);$(AdditionalConstants)</DefineConstants>
     </PropertyGroup>
 
     <ItemGroup Condition="'$(TargetFramework)'=='net35'">
@@ -133,7 +119,7 @@
     </ItemGroup>
     <PropertyGroup Condition="'$(TargetFramework)'=='net35'">
         <AssemblyTitle>Json.NET Tests .NET 3.5</AssemblyTitle>
-        <DefineConstants>NET35;$(AdditionalConstants)</DefineConstants>
+        <DefineConstants>NET35;$(DefineConstants);$(AdditionalConstants)</DefineConstants>
     </PropertyGroup>
 
     <ItemGroup Condition="'$(TargetFramework)'=='net20'">
@@ -143,7 +129,7 @@
     </ItemGroup>
     <PropertyGroup Condition="'$(TargetFramework)'=='net20'">
         <AssemblyTitle>Json.NET Tests .NET 2.0</AssemblyTitle>
-        <DefineConstants>NET20;$(AdditionalConstants)</DefineConstants>
+        <DefineConstants>NET20;$(DefineConstants);$(AdditionalConstants)</DefineConstants>
     </PropertyGroup>
 
     <ItemGroup Condition="'$(TargetFramework)'=='netcoreapp3.1'">
@@ -162,9 +148,9 @@
         <PackageReference Include="Microsoft.NET.Test.Sdk" Version="$(MicrosoftNETTestSdkPackageVersion)"/>
     </ItemGroup>
     <PropertyGroup Condition="'$(TargetFramework)'=='netcoreapp3.1'">
-        <AssemblyTitle>Json.NET Tests .NET Standard 1.3</AssemblyTitle>
-        <ReferringTargetFrameworkForProjectReferences>.NETStandard,Version=v1.3</ReferringTargetFrameworkForProjectReferences>
-        <DefineConstants>NETSTANDARD1_3;DNXCORE50;PORTABLE;HAVE_BENCHMARKS;HAVE_REGEX_TIMEOUTS;$(AdditionalConstants)</DefineConstants>
+        <AssemblyTitle>Json.NET Tests .NET Standard 2.0</AssemblyTitle>
+        <ReferringTargetFrameworkForProjectReferences>.NETStandard,Version=v2.0</ReferringTargetFrameworkForProjectReferences>
+        <DefineConstants>NETSTANDARD2_0;NETSTANDARD1_3;DNXCORE50;PORTABLE;HAVE_BENCHMARKS;HAVE_REGEX_TIMEOUTS;$(DefineConstants);$(AdditionalConstants)</DefineConstants>
     </PropertyGroup>
 
     <ItemGroup Condition="'$(TargetFramework)'=='netcoreapp2.1'">
@@ -181,9 +167,32 @@
         <PackageReference Include="xunit.runner.visualstudio" Version="$(XunitRunnerVisualStudioPackageVersion)"/>
         <PackageReference Include="Microsoft.NET.Test.Sdk" Version="$(MicrosoftNETTestSdkPackageVersion)"/>
     </ItemGroup>
+
     <PropertyGroup Condition="'$(TargetFramework)'=='netcoreapp2.1'">
         <AssemblyTitle>Json.NET Tests .NET Standard 1.0</AssemblyTitle>
         <ReferringTargetFrameworkForProjectReferences>.NETStandard,Version=v1.0</ReferringTargetFrameworkForProjectReferences>
-        <DefineConstants>NETSTANDARD1_0;DNXCORE50;PORTABLE;HAVE_REGEX_TIMEOUTS;$(AdditionalConstants)</DefineConstants>
+        <DefineConstants>NETSTANDARD1_0;DNXCORE50;PORTABLE;HAVE_REGEX_TIMEOUTS;$(DefineConstants);$(AdditionalConstants)</DefineConstants>
+    </PropertyGroup>
+
+    <!-- Unity support -->
+    <PropertyGroup Condition="'$(Configuration)'=='UnityEditor'">
+        <!-- Only used in Editor -->
+        <!-- Since this is originally a multi target framework, we have to always use TargetFrameworks tag.
+          Using TargetFramework (without a 's') when targetting a single framework will cause unexpected behaviour,
+          and fail to retrieve DefineConstants specific to a given target framework.
+          Append a ';' to avoid the warning "Only one target framework moniker specified" -->
+        <TargetFrameworks>netcoreapp3.1;</TargetFrameworks>
+        <Optimize>true</Optimize>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Configuration)'=='UnityAOT'">
+        <!-- Unity AOT (IL2CPP) build -->
+        <TargetFrameworks>netcoreapp3.1;</TargetFrameworks>
+        <UnityConstants>UNITY_LTS</UnityConstants>
+        <Optimize>true</Optimize>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="'$(Configuration)'!='UnityAOT' AND '$(Configuration)'!='UnityEditor'">
+        <TargetFrameworks Condition="'$(TestFrameworks)'==''">net46;netcoreapp2.1</TargetFrameworks>
+        <TargetFrameworks Condition="'$(TestFrameworks)'!=''">$(TestFrameworks);</TargetFrameworks>
     </PropertyGroup>
 </Project>
