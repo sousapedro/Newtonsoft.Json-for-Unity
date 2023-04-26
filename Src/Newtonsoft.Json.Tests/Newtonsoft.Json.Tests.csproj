@@ -45,6 +45,28 @@
         <ProjectReference Include="..\Newtonsoft.Json\Newtonsoft.Json.csproj"/>
     </ItemGroup>
 
+    <!-- Unity support -->
+    <!-- Important: PropertyGroup order does matter. Be sure to set UnityConstants before DefineConstants use it. -->
+    <PropertyGroup Condition="'$(Configuration)'=='UnityEditor'">
+        <!-- Only used in Editor -->
+        <!-- Since this is originally a multi target framework, we have to always use TargetFrameworks tag.
+          Using TargetFramework (without a 's') when targetting a single framework will cause unexpected behaviour,
+          and fail to retrieve DefineConstants specific to a given target framework.
+          Append a ';' to avoid the warning "Only one target framework moniker specified" -->
+        <TargetFrameworks>netcoreapp3.1;</TargetFrameworks>
+        <Optimize>true</Optimize>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Configuration)'=='UnityAOT'">
+        <!-- Unity AOT (IL2CPP) build -->
+        <TargetFrameworks>netcoreapp3.1;</TargetFrameworks>
+        <UnityConstants>UNITY_LTS</UnityConstants>
+        <Optimize>true</Optimize>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Configuration)'!='UnityAOT' AND '$(Configuration)'!='UnityEditor'">
+        <TargetFrameworks Condition="'$(TestFrameworks)'==''">net46;netcoreapp2.1</TargetFrameworks>
+        <TargetFrameworks Condition="'$(TestFrameworks)'!=''">$(TestFrameworks);</TargetFrameworks>
+    </PropertyGroup>
+
     <ItemGroup Condition="'$(TargetFramework)'=='net6.0'">
         <PackageReference Include="BenchmarkDotNet" Version="$(BenchmarkDotNetPackageVersion)"/>
         <PackageReference Include="FSharp.Core" Version="$(FSharpCorePackageVersion)"/>
@@ -63,9 +85,9 @@
     <PropertyGroup Condition="'$(TargetFramework)'=='net6.0'">
         <AssemblyTitle>Json.NET Tests .NET 6.0</AssemblyTitle>
         <ReferringTargetFrameworkForProjectReferences>net6.0</ReferringTargetFrameworkForProjectReferences>
-        <DefineConstants>NET6_0;DNXCORE50;PORTABLE;HAVE_BENCHMARKS;HAVE_REGEX_TIMEOUTS;$(AdditionalConstants)</DefineConstants>
+        <DefineConstants>NET6_0;DNXCORE50;PORTABLE;HAVE_BENCHMARKS;HAVE_REGEX_TIMEOUTS;$(UnityConstants);$(AdditionalConstants)</DefineConstants>
     </PropertyGroup>
-    
+
     <ItemGroup Condition="'$(TargetFramework)'=='net46'">
         <PackageReference Include="NUnit" Version="$(NunitPackageVersion)"/>
         <PackageReference Include="NUnit3TestAdapter" Version="$(Nunit3TestAdapterPackageVersion)"/>
@@ -87,7 +109,7 @@
     <PropertyGroup Condition="'$(TargetFramework)'=='net46'">
         <AssemblyTitle>Json.NET Tests</AssemblyTitle>
         <ReferringTargetFrameworkForProjectReferences>.NETFramework,Version=v4.6</ReferringTargetFrameworkForProjectReferences>
-        <DefineConstants>NET46;HAVE_BENCHMARKS;$(DefineConstants);$(AdditionalConstants)</DefineConstants>
+        <DefineConstants>NET46;HAVE_BENCHMARKS;$(UnityConstants);$(DefineConstants);$(AdditionalConstants)</DefineConstants>
     </PropertyGroup>
 
     <ItemGroup Condition="'$(TargetFramework)'=='net40'">
@@ -104,7 +126,7 @@
     </ItemGroup>
     <PropertyGroup Condition="'$(TargetFramework)'=='net40'">
         <AssemblyTitle>Json.NET Tests .NET 4.0</AssemblyTitle>
-        <DefineConstants>NET40;$(DefineConstants);$(AdditionalConstants)</DefineConstants>
+        <DefineConstants>NET40;$(UnityConstants);$(DefineConstants);$(AdditionalConstants)</DefineConstants>
     </PropertyGroup>
 
     <ItemGroup Condition="'$(TargetFramework)'=='net35'">
@@ -119,7 +141,7 @@
     </ItemGroup>
     <PropertyGroup Condition="'$(TargetFramework)'=='net35'">
         <AssemblyTitle>Json.NET Tests .NET 3.5</AssemblyTitle>
-        <DefineConstants>NET35;$(DefineConstants);$(AdditionalConstants)</DefineConstants>
+        <DefineConstants>NET35;$(UnityConstants);$(DefineConstants);$(AdditionalConstants)</DefineConstants>
     </PropertyGroup>
 
     <ItemGroup Condition="'$(TargetFramework)'=='net20'">
@@ -129,7 +151,7 @@
     </ItemGroup>
     <PropertyGroup Condition="'$(TargetFramework)'=='net20'">
         <AssemblyTitle>Json.NET Tests .NET 2.0</AssemblyTitle>
-        <DefineConstants>NET20;$(DefineConstants);$(AdditionalConstants)</DefineConstants>
+        <DefineConstants>NET20;$(UnityConstants);$(DefineConstants);$(AdditionalConstants)</DefineConstants>
     </PropertyGroup>
 
     <ItemGroup Condition="'$(TargetFramework)'=='netcoreapp3.1'">
@@ -150,7 +172,7 @@
     <PropertyGroup Condition="'$(TargetFramework)'=='netcoreapp3.1'">
         <AssemblyTitle>Json.NET Tests .NET Standard 2.0</AssemblyTitle>
         <ReferringTargetFrameworkForProjectReferences>.NETStandard,Version=v2.0</ReferringTargetFrameworkForProjectReferences>
-        <DefineConstants>NETSTANDARD2_0;NETSTANDARD1_3;DNXCORE50;PORTABLE;HAVE_BENCHMARKS;HAVE_REGEX_TIMEOUTS;$(DefineConstants);$(AdditionalConstants)</DefineConstants>
+        <DefineConstants>NETSTANDARD2_0;NETSTANDARD1_3;DNXCORE50;PORTABLE;HAVE_BENCHMARKS;HAVE_REGEX_TIMEOUTS;$(UnityConstants);$(DefineConstants);$(AdditionalConstants)</DefineConstants>
     </PropertyGroup>
 
     <ItemGroup Condition="'$(TargetFramework)'=='netcoreapp2.1'">
@@ -171,28 +193,6 @@
     <PropertyGroup Condition="'$(TargetFramework)'=='netcoreapp2.1'">
         <AssemblyTitle>Json.NET Tests .NET Standard 1.0</AssemblyTitle>
         <ReferringTargetFrameworkForProjectReferences>.NETStandard,Version=v1.0</ReferringTargetFrameworkForProjectReferences>
-        <DefineConstants>NETSTANDARD1_0;DNXCORE50;PORTABLE;HAVE_REGEX_TIMEOUTS;$(DefineConstants);$(AdditionalConstants)</DefineConstants>
-    </PropertyGroup>
-
-    <!-- Unity support -->
-    <PropertyGroup Condition="'$(Configuration)'=='UnityEditor'">
-        <!-- Only used in Editor -->
-        <!-- Since this is originally a multi target framework, we have to always use TargetFrameworks tag.
-          Using TargetFramework (without a 's') when targetting a single framework will cause unexpected behaviour,
-          and fail to retrieve DefineConstants specific to a given target framework.
-          Append a ';' to avoid the warning "Only one target framework moniker specified" -->
-        <TargetFrameworks>netcoreapp3.1;</TargetFrameworks>
-        <Optimize>true</Optimize>
-    </PropertyGroup>
-    <PropertyGroup Condition="'$(Configuration)'=='UnityAOT'">
-        <!-- Unity AOT (IL2CPP) build -->
-        <TargetFrameworks>netcoreapp3.1;</TargetFrameworks>
-        <UnityConstants>UNITY_LTS</UnityConstants>
-        <Optimize>true</Optimize>
-    </PropertyGroup>
-
-    <PropertyGroup Condition="'$(Configuration)'!='UnityAOT' AND '$(Configuration)'!='UnityEditor'">
-        <TargetFrameworks Condition="'$(TestFrameworks)'==''">net46;netcoreapp2.1</TargetFrameworks>
-        <TargetFrameworks Condition="'$(TestFrameworks)'!=''">$(TestFrameworks);</TargetFrameworks>
+        <DefineConstants>NETSTANDARD1_0;DNXCORE50;PORTABLE;HAVE_REGEX_TIMEOUTS;$(UnityConstants);$(DefineConstants);$(AdditionalConstants)</DefineConstants>
     </PropertyGroup>
 </Project>
