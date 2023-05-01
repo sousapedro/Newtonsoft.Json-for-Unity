@@ -36,7 +36,7 @@ using System.Runtime.Serialization;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Serialization;
 using Newtonsoft.Json.Utilities;
-#if PORTABLE && !NETSTANDARD2_0
+#if PORTABLE && !NETSTANDARD2_0 && !NET6_0_OR_GREATER
 using BindingFlags = Newtonsoft.Json.Utilities.BindingFlags;
 #else
 using BindingFlags = System.Reflection.BindingFlags;
@@ -75,13 +75,9 @@ namespace Newtonsoft.Json.Tests.Issues
             Assert.AreEqual(1, properties.Count(p => p.Name == "Mock"));
         }
 
-        public interface IFoo
-        {
-        }
+        public interface IFoo { }
 
-        public class Foo : IFoo
-        {
-        }
+        public class Foo : IFoo { }
 
         public class FooConverter : JsonConverter
         {

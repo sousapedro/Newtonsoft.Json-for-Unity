@@ -36,6 +36,7 @@ using System.Runtime.Serialization.Json;
 #endif
 using System.Text;
 using System.Threading;
+using Newtonsoft.Json.Linq;
 #if DNXCORE50
 using Xunit;
 using Assert = Newtonsoft.Json.Tests.XUnitAssert;
@@ -310,6 +311,21 @@ namespace Newtonsoft.Json.Tests
         {
             return @"@""" + json.Replace(@"""", @"""""") + @"""";
         }
+
+        protected string GetNestedJson(int depth)
+        {
+            JObject root = new JObject();
+            JObject current = root;
+            for (int i = 0; i < depth - 1; i++)
+            {
+                JObject nested = new JObject();
+                current[i.ToString()] = nested;
+
+                current = nested;
+            }
+
+            return root.ToString();
+        }
     }
 
     public static class CustomAssert
@@ -382,8 +398,8 @@ namespace Newtonsoft.Json.Tests
             if (expectedStart == null || (expectedStart == null && actual == null)) {
                 return;
             }
-            Assert.IsNotNull(actual, "Expected string to start with '{0}', but was null.", expectedStart);
-            Assert.AreEqual(expectedStart, actual.Substring(0, expectedStart.Length), "Expected string to start with '{0}', but did not.", expectedStart);
+            Assert.IsNotNull(actual);
+            Assert.AreEqual(expectedStart, actual.Substring(0, expectedStart.Length), string.Format("Expected string to start with '{0}', but did not.", expectedStart));
         }
     }
 

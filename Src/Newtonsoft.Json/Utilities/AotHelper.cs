@@ -69,7 +69,9 @@ namespace Newtonsoft.Json.Utilities
             Ensure(() =>
             {
                 var a = new List<T>();
+#if HAVE_HASH_SET
                 var b = new HashSet<T>();
+#endif
                 var c = new CollectionWrapper<T>((IList)a);
                 var d = new CollectionWrapper<T>((ICollection<T>)a);
             });
